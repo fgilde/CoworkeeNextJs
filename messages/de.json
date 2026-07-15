@@ -66,7 +66,26 @@
     }
   },
   "employees": {
-    "title": "Mitarbeitende"
+    "title": "Mitarbeitende",
+    "newEmployee": "+ Neuer Mitarbeiter",
+    "searchPlaceholder": "Nach Name oder E-Mail suchen…",
+    "filterDepartment": "Abteilung",
+    "filterLocation": "Standort",
+    "filterStatus": "Status",
+    "allDepartments": "Alle Abteilungen",
+    "allLocations": "Alle Standorte",
+    "allStatuses": "Alle Status",
+    "statusActive": "Aktiv",
+    "statusInactive": "Inaktiv",
+    "columnName": "Name",
+    "columnPosition": "Position",
+    "columnDepartment": "Abteilung",
+    "columnLocation": "Standort",
+    "columnStatus": "Status",
+    "noResults": "Keine Mitarbeitenden gefunden.",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "pageOf": "Seite {page} von {total}"
   },
   "settings": {
     "title": "Einstellungen"

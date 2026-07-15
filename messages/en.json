@@ -66,7 +66,26 @@
     }
   },
   "employees": {
-    "title": "Employees"
+    "title": "Employees",
+    "newEmployee": "+ New employee",
+    "searchPlaceholder": "Search by name or email…",
+    "filterDepartment": "Department",
+    "filterLocation": "Location",
+    "filterStatus": "Status",
+    "allDepartments": "All departments",
+    "allLocations": "All locations",
+    "allStatuses": "All statuses",
+    "statusActive": "Active",
+    "statusInactive": "Inactive",
+    "columnName": "Name",
+    "columnPosition": "Position",
+    "columnDepartment": "Department",
+    "columnLocation": "Location",
+    "columnStatus": "Status",
+    "noResults": "No employees found.",
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {page} of {total}"
   },
   "settings": {
     "title": "Settings"
