@@ -71,3 +71,10 @@ test("HR and ADMIN can manage announcements, MANAGER and EMPLOYEE cannot", () =>
   expect(can("MANAGER", "announcement:manage")).toBe(false);
   expect(can("EMPLOYEE", "announcement:manage")).toBe(false);
 });
+
+test("HR and ADMIN can manage onboarding, MANAGER and EMPLOYEE cannot", () => {
+  expect(can("HR", "onboarding:manage")).toBe(true);
+  expect(can("ADMIN", "onboarding:manage")).toBe(true);
+  expect(can("MANAGER", "onboarding:manage")).toBe(false);
+  expect(can("EMPLOYEE", "onboarding:manage")).toBe(false);
+});

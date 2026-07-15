@@ -27,7 +27,8 @@
     "time": "Time tracking",
     "teamTime": "Team time",
     "documents": "Documents",
-    "news": "News"
+    "news": "News",
+    "onboarding": "Onboarding"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -350,5 +351,36 @@
     "readMore": "Read more",
     "confirmDelete": "Delete this announcement? This cannot be undone.",
     "validationError": "Please check the highlighted fields."
+  },
+  "onboarding": {
+    "title": "Onboarding",
+    "templates": "Templates",
+    "template": "Template",
+    "newTemplate": "+ New template",
+    "items": "Tasks",
+    "addItem": "Add task",
+    "itemTitle": "Task title",
+    "startProcess": "Start process",
+    "selectTemplate": "Select template",
+    "selectEmployee": "Select employee",
+    "onboarding": "Onboarding",
+    "offboarding": "Offboarding",
+    "progress": "Progress",
+    "completed": "Completed",
+    "active": "Active",
+    "tasks": "Tasks",
+    "done": "Done",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "noProcesses": "No processes started yet.",
+    "noTemplates": "No templates yet.",
+    "myOnboarding": "My onboarding",
+    "employee": "Employee",
+    "type": "Type",
+    "nameTaken": "This name is already taken.",
+    "validationError": "Please check the highlighted fields.",
+    "confirmDelete": "Delete this process? This cannot be undone.",
+    "confirmDeleteTemplate": "Delete this template? This cannot be undone."
   }
 }

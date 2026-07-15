@@ -27,7 +27,8 @@
     "time": "Zeiterfassung",
     "teamTime": "Team-Zeiten",
     "documents": "Dokumente",
-    "news": "Neuigkeiten"
+    "news": "Neuigkeiten",
+    "onboarding": "Onboarding"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -350,5 +351,36 @@
     "readMore": "Weiterlesen",
     "confirmDelete": "Diese Ankündigung löschen? Dies kann nicht rückgängig gemacht werden.",
     "validationError": "Bitte überprüfen Sie die markierten Felder."
+  },
+  "onboarding": {
+    "title": "Onboarding",
+    "templates": "Vorlagen",
+    "template": "Vorlage",
+    "newTemplate": "+ Neue Vorlage",
+    "items": "Aufgaben",
+    "addItem": "Aufgabe hinzufügen",
+    "itemTitle": "Aufgabentitel",
+    "startProcess": "Prozess starten",
+    "selectTemplate": "Vorlage auswählen",
+    "selectEmployee": "Mitarbeiter auswählen",
+    "onboarding": "Onboarding",
+    "offboarding": "Offboarding",
+    "progress": "Fortschritt",
+    "completed": "Abgeschlossen",
+    "active": "Aktiv",
+    "tasks": "Aufgaben",
+    "done": "Erledigt",
+    "delete": "Löschen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "noProcesses": "Noch keine Prozesse gestartet.",
+    "noTemplates": "Noch keine Vorlagen.",
+    "myOnboarding": "Mein Onboarding",
+    "employee": "Mitarbeiter",
+    "type": "Typ",
+    "nameTaken": "Dieser Name ist bereits vergeben.",
+    "validationError": "Bitte überprüfen Sie die markierten Felder.",
+    "confirmDelete": "Diesen Prozess löschen? Dies kann nicht rückgängig gemacht werden.",
+    "confirmDeleteTemplate": "Diese Vorlage löschen? Dies kann nicht rückgängig gemacht werden."
   }
 }

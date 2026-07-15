@@ -9,6 +9,10 @@ async function main() {
   // --- Idempotent cleanup (FK-safe order) ---
   await db.auditLog.deleteMany();
   await db.announcement.deleteMany();
+  await db.checklistTask.deleteMany();
+  await db.employeeChecklist.deleteMany();
+  await db.checklistTemplateItem.deleteMany();
+  await db.checklistTemplate.deleteMany();
   await db.document.deleteMany();
   await db.timeEntry.deleteMany();
   await db.leaveRequest.deleteMany();
@@ -437,6 +441,64 @@ async function main() {
     })
   );
 
+  // --- Onboarding / offboarding checklist templates ---
+  const onboardingTemplate = await db.checklistTemplate.create({
+    data: {
+      name: "Standard Onboarding",
+      type: "ONBOARDING",
+      items: {
+        create: [
+          { title: "Arbeitsvertrag unterschrieben", sortOrder: 0 },
+          { title: "Laptop erhalten", sortOrder: 1 },
+          { title: "Zugänge eingerichtet", sortOrder: 2 },
+          { title: "Einführungsgespräch", sortOrder: 3 },
+        ],
+      },
+    },
+    include: { items: { orderBy: { sortOrder: "asc" } } },
+  });
+  await db.checklistTemplate.create({
+    data: {
+      name: "Standard Offboarding",
+      type: "OFFBOARDING",
+      items: {
+        create: [
+          { title: "Laptop zurückgegeben", sortOrder: 0 },
+          { title: "Zugänge deaktiviert", sortOrder: 1 },
+          { title: "Abschlussgespräch", sortOrder: 2 },
+          { title: "Arbeitszeugnis ausgestellt", sortOrder: 3 },
+        ],
+      },
+    },
+  });
+
+  // Demo onboarding processes for the two most recently-hired employees, started
+  // from the template above (snapshotted into their own EmployeeChecklist/tasks
+  // so later template edits don't retroactively change active processes).
+  const onboardingRecipients = [
+    { employee: intern, doneCount: 2 },
+    { employee: workingStudent, doneCount: 1 },
+  ];
+  const employeeChecklists = await Promise.all(
+    onboardingRecipients.map(({ employee, doneCount }) =>
+      db.employeeChecklist.create({
+        data: {
+          employeeId: employee.id,
+          type: onboardingTemplate.type,
+          title: onboardingTemplate.name,
+          tasks: {
+            create: onboardingTemplate.items.map((item, idx) => ({
+              title: item.title,
+              sortOrder: item.sortOrder,
+              done: idx < doneCount,
+              doneAt: idx < doneCount ? new Date() : null,
+            })),
+          },
+        },
+      })
+    )
+  );
+
   // --- Leave types ---
   const vacationType = await db.leaveType.create({
     data: { name: "Urlaub", colorHex: "#22c55e", paid: true, defaultDays: 30 },
@@ -546,6 +608,10 @@ async function main() {
     timeEntries: timeEntries.length + 1,
     documents: documents.length,
     announcements: announcements.length,
+    checklistTemplates: await db.checklistTemplate.count(),
+    checklistTemplateItems: await db.checklistTemplateItem.count(),
+    employeeChecklists: employeeChecklists.length,
+    checklistTasks: await db.checklistTask.count(),
   };
 
   console.log("Seed done: ", counts);
