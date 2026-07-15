@@ -64,3 +64,10 @@ test("HR and ADMIN can manage documents", () => {
   expect(can("ADMIN", "document:manage")).toBe(true);
   expect(can("ADMIN", "document:read-own")).toBe(true);
 });
+
+test("HR and ADMIN can manage announcements, MANAGER and EMPLOYEE cannot", () => {
+  expect(can("HR", "announcement:manage")).toBe(true);
+  expect(can("ADMIN", "announcement:manage")).toBe(true);
+  expect(can("MANAGER", "announcement:manage")).toBe(false);
+  expect(can("EMPLOYEE", "announcement:manage")).toBe(false);
+});

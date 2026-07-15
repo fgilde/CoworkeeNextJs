@@ -1,14 +1,17 @@
+import Link from "next/link";
 import { getTranslations, getLocale } from "next-intl/server";
-import { Building2, Briefcase, MapPin, CalendarDays, Clock, FileText, CircleCheck, Users2, Building } from "lucide-react";
+import { Building2, Briefcase, MapPin, CalendarDays, Clock, FileText, CircleCheck, Users2, Building, Megaphone } from "lucide-react";
 import { requireAuth } from "@/lib/rbac";
 import { db } from "@/lib/db";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { StatCard } from "@/components/dashboard/stat-card";
 import { TeamTiles } from "@/components/dashboard/team-tiles";
 
 export default async function DashboardPage() {
   const session = await requireAuth();
   const t = await getTranslations("dashboard");
+  const tNews = await getTranslations("news");
   const locale = await getLocale();
 
   const currentUser = await db.user.findUnique({
@@ -31,6 +34,11 @@ export default async function DashboardPage() {
   const greetingName = employee?.firstName ?? session.user.email ?? "";
 
   const dateFormatter = new Intl.DateTimeFormat(locale, { dateStyle: "long" });
+
+  const latestNews = await db.announcement.findMany({
+    orderBy: [{ pinned: "desc" }, { createdAt: "desc" }, { id: "desc" }],
+    take: 3,
+  });
 
   let companyStats: { total: number; active: number; departments: number } | null = null;
   if (session.user.role === "HR" || session.user.role === "ADMIN") {
@@ -64,6 +72,40 @@ export default async function DashboardPage() {
           <CardContent className="text-sm text-muted-foreground">{t("noEmployeeLinked")}</CardContent>
         </Card>
       )}
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{tNews("latestNews")}</h2>
+        {latestNews.length === 0 ? (
+          <Card>
+            <CardContent className="text-sm text-muted-foreground">{tNews("noAnnouncements")}</CardContent>
+          </Card>
+        ) : (
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {latestNews.map((announcement) => (
+              <Link key={announcement.id} href="/news">
+                <Card className="h-full transition-all hover:-translate-y-0.5 hover:shadow-md">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Megaphone className="size-4 shrink-0 text-muted-foreground" />
+                      <span className="truncate">{announcement.title}</span>
+                      {announcement.pinned && <Badge>{tNews("pinned")}</Badge>}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex flex-col gap-2">
+                    <p className="line-clamp-2 text-sm text-muted-foreground">
+                      {announcement.body.slice(0, 140)}
+                      {announcement.body.length > 140 ? "…" : ""}
+                    </p>
+                    <span className="text-xs text-muted-foreground">
+                      {dateFormatter.format(announcement.createdAt)}
+                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        )}
+      </section>
 
       {session.user.role === "MANAGER" && employee && (
         <section className="flex flex-col gap-3">

@@ -8,6 +8,7 @@ import { ensureStorageDir, safeStoredPath } from "../lib/documents";
 async function main() {
   // --- Idempotent cleanup (FK-safe order) ---
   await db.auditLog.deleteMany();
+  await db.announcement.deleteMany();
   await db.document.deleteMany();
   await db.timeEntry.deleteMany();
   await db.leaveRequest.deleteMany();
@@ -362,6 +363,42 @@ async function main() {
     data: { email: "employee@coworkee.test", passwordHash, role: "EMPLOYEE", locale: "de", employeeId: swe1.id },
   });
 
+  // --- Announcements ---
+  const announcements = await Promise.all([
+    db.announcement.create({
+      data: {
+        title: "Welcome to Coworkee",
+        body: "We're excited to launch our new HR platform. You can find your personal details, absences, time tracking and documents all in one place from now on.\n\nIf you run into any issues, reach out to People & Culture.",
+        pinned: true,
+        authorId: adminUser.id,
+      },
+    }),
+    db.announcement.create({
+      data: {
+        title: "New office in Munich",
+        body: "We're opening a new office in Munich next month! The Sales and Engineering teams will have desks available starting the 1st.\n\nReach out to Facilities if you'd like to relocate.",
+        pinned: false,
+        authorId: hrUser.id,
+      },
+    }),
+    db.announcement.create({
+      data: {
+        title: "Summer party",
+        body: "Save the date: our summer party is happening on August 22nd at the Berlin office rooftop. Food, drinks and games for the whole team.\n\nPlus-ones are welcome — please RSVP by August 10th.",
+        pinned: false,
+        authorId: hrUser.id,
+      },
+    }),
+    db.announcement.create({
+      data: {
+        title: "Updated expense policy",
+        body: "Starting this quarter, expense reports must be submitted within 30 days of the purchase date. See the Finance handbook for details.",
+        pinned: false,
+        authorId: adminUser.id,
+      },
+    }),
+  ]);
+
   // --- Documents (demo placeholders so the guarded download works end to end).
   // Real bytes are written under storage/documents (gitignored, private — not
   // under public/); re-seeding overwrites the same fixed file names, so this
@@ -508,6 +545,7 @@ async function main() {
     leaveRequests: [pendingRequest, approvedRequest].length,
     timeEntries: timeEntries.length + 1,
     documents: documents.length,
+    announcements: announcements.length,
   };
 
   console.log("Seed done: ", counts);

@@ -26,7 +26,8 @@
     "team": "Team-Abwesenheit",
     "time": "Zeiterfassung",
     "teamTime": "Team-Zeiten",
-    "documents": "Dokumente"
+    "documents": "Dokumente",
+    "news": "Neuigkeiten"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -331,5 +332,23 @@
     "allEmployees": "Alle Mitarbeitenden",
     "filterEmployee": "Nach Mitarbeiter filtern",
     "noEmployeeLinked": "Ihrem Konto ist kein Mitarbeiterprofil zugeordnet, daher gibt es keine Dokumente anzuzeigen."
+  },
+  "news": {
+    "title": "Neuigkeiten",
+    "newAnnouncement": "+ Neue Ankündigung",
+    "editAnnouncement": "Bearbeiten",
+    "titleLabel": "Titel",
+    "body": "Nachricht",
+    "pinned": "Angeheftet",
+    "publish": "Veröffentlichen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "author": "Von",
+    "noAnnouncements": "Noch keine Ankündigungen.",
+    "latestNews": "Neuigkeiten",
+    "readMore": "Weiterlesen",
+    "confirmDelete": "Diese Ankündigung löschen? Dies kann nicht rückgängig gemacht werden.",
+    "validationError": "Bitte überprüfen Sie die markierten Felder."
   }
 }

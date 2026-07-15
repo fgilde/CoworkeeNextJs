@@ -189,3 +189,15 @@ model AuditLog {
   changes     Json?
   createdAt   DateTime @default(now())
 }
+
+model Announcement {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  authorId  String
+  pinned    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([pinned, createdAt])
+}

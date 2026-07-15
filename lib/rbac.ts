@@ -12,7 +12,8 @@ export type Action =
   | "time:track"
   | "time:view-team"
   | "document:read-own"
-  | "document:manage";
+  | "document:manage"
+  | "announcement:manage";
 export type Role = "ADMIN" | "HR" | "MANAGER" | "EMPLOYEE";
 
 const PERMISSIONS: Record<Role, Set<Action>> = {
@@ -28,6 +29,7 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "time:view-team",
     "document:read-own",
     "document:manage",
+    "announcement:manage",
   ]),
   HR: new Set([
     "employee:read",
@@ -40,6 +42,7 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "time:view-team",
     "document:read-own",
     "document:manage",
+    "announcement:manage",
   ]),
   MANAGER: new Set([
     "employee:read",

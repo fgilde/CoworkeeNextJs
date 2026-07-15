@@ -26,7 +26,8 @@
     "team": "Team absences",
     "time": "Time tracking",
     "teamTime": "Team time",
-    "documents": "Documents"
+    "documents": "Documents",
+    "news": "News"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -331,5 +332,23 @@
     "allEmployees": "All employees",
     "filterEmployee": "Filter by employee",
     "noEmployeeLinked": "No employee profile is linked to your account, so there are no documents to show."
+  },
+  "news": {
+    "title": "Company news",
+    "newAnnouncement": "+ New announcement",
+    "editAnnouncement": "Edit",
+    "titleLabel": "Title",
+    "body": "Message",
+    "pinned": "Pinned",
+    "publish": "Publish",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "author": "By",
+    "noAnnouncements": "No announcements yet.",
+    "latestNews": "Latest news",
+    "readMore": "Read more",
+    "confirmDelete": "Delete this announcement? This cannot be undone.",
+    "validationError": "Please check the highlighted fields."
   }
 }

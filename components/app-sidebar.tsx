@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, Clock, FileText, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, Clock, FileText, Megaphone, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type NavKey =
@@ -16,6 +16,7 @@ type NavKey =
   | "time"
   | "teamTime"
   | "documents"
+  | "news"
   | "settings"
   | "account";
 
@@ -36,6 +37,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/time", labelKey: "time", icon: Clock, group: "main" },
   { href: "/time/team", labelKey: "teamTime", icon: Clock, group: "main" },
   { href: "/documents", labelKey: "documents", icon: FileText, group: "main" },
+  { href: "/news", labelKey: "news", icon: Megaphone, group: "main" },
   { href: "/settings", labelKey: "settings", icon: Settings, group: "account" },
   { href: "/account", labelKey: "account", icon: CircleUser, group: "account" },
 ];
