@@ -129,7 +129,37 @@
     "fieldInvalid": "Please check this value."
   },
   "settings": {
-    "title": "Settings"
+    "title": "Settings",
+    "departments": "Departments",
+    "positions": "Positions",
+    "locations": "Locations",
+    "fieldName": "Name",
+    "fieldTitle": "Title",
+    "fieldCity": "City",
+    "fieldCountry": "Country",
+    "add": "+ Add",
+    "emptyDepartments": "No departments yet.",
+    "emptyPositions": "No positions yet.",
+    "emptyLocations": "No locations yet.",
+    "validationError": "Please check the highlighted fields.",
+    "nameTaken": "This name is already in use.",
+    "inUse": "This item is still in use and can't be deleted.",
+    "manageUsers": "Manage users",
+    "users": {
+      "title": "Users",
+      "email": "Email",
+      "employee": "Linked employee",
+      "role": "Role",
+      "noEmployeeLinked": "—",
+      "cannotChangeSelf": "You cannot change your own role.",
+      "invalidRole": "Invalid role."
+    },
+    "roles": {
+      "ADMIN": "Admin",
+      "HR": "HR",
+      "MANAGER": "Manager",
+      "EMPLOYEE": "Employee"
+    }
   },
   "account": {
     "title": "Account"

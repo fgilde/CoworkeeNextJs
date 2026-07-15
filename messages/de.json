@@ -129,7 +129,37 @@
     "fieldInvalid": "Bitte überprüfen Sie diesen Wert."
   },
   "settings": {
-    "title": "Einstellungen"
+    "title": "Einstellungen",
+    "departments": "Abteilungen",
+    "positions": "Positionen",
+    "locations": "Standorte",
+    "fieldName": "Name",
+    "fieldTitle": "Titel",
+    "fieldCity": "Stadt",
+    "fieldCountry": "Land",
+    "add": "+ Hinzufügen",
+    "emptyDepartments": "Noch keine Abteilungen.",
+    "emptyPositions": "Noch keine Positionen.",
+    "emptyLocations": "Noch keine Standorte.",
+    "validationError": "Bitte überprüfen Sie die markierten Felder.",
+    "nameTaken": "Dieser Name wird bereits verwendet.",
+    "inUse": "Dieser Eintrag wird noch verwendet und kann nicht gelöscht werden.",
+    "manageUsers": "Benutzer verwalten",
+    "users": {
+      "title": "Benutzer",
+      "email": "E-Mail",
+      "employee": "Verknüpfter Mitarbeiter",
+      "role": "Rolle",
+      "noEmployeeLinked": "—",
+      "cannotChangeSelf": "Sie können Ihre eigene Rolle nicht ändern.",
+      "invalidRole": "Ungültige Rolle."
+    },
+    "roles": {
+      "ADMIN": "Administrator",
+      "HR": "Personal",
+      "MANAGER": "Manager",
+      "EMPLOYEE": "Mitarbeiter"
+    }
   },
   "account": {
     "title": "Konto"
