@@ -1,4 +1,5 @@
 import { requireAuth, can } from "@/lib/rbac";
+import { db } from "@/lib/db";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Topbar } from "@/components/topbar";
 import { ContentTransition } from "@/components/content-transition";
@@ -11,6 +12,15 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const canAnalytics = can(session.user.role, "analytics:view");
   const canRecruiting = can(session.user.role, "recruiting:manage");
 
+  const [notifications, unreadCount] = await Promise.all([
+    db.notification.findMany({
+      where: { userId: session.user.id },
+      orderBy: { createdAt: "desc" },
+      take: 8,
+    }),
+    db.notification.count({ where: { userId: session.user.id, read: false } }),
+  ]);
+
   return (
     <div className="flex min-h-screen bg-background">
       <AppSidebar
@@ -21,7 +31,11 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         canRecruiting={canRecruiting}
       />
       <div className="flex min-w-0 flex-1 flex-col">
-        <Topbar user={{ email: session.user.email ?? "", role: session.user.role }} />
+        <Topbar
+          user={{ email: session.user.email ?? "", role: session.user.role }}
+          notifications={notifications}
+          unreadCount={unreadCount}
+        />
         <main className="flex-1 p-8">
           <ContentTransition>{children}</ContentTransition>
         </main>
