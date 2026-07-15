@@ -71,17 +71,21 @@ export async function createLeaveRequest(
   });
 
   // Best-effort: notify the requester's manager. Never blocks the request.
-  const requester = await db.employee.findUnique({
-    where: { id: user.employeeId },
-    select: { managerId: true, firstName: true, lastName: true },
-  });
-  if (requester?.managerId) {
-    await notifyEmployee(requester.managerId, {
-      type: "leave.requested",
-      titleKey: "notifications.leaveRequested",
-      body: `${requester.firstName} ${requester.lastName}`,
-      link: "/absences/approvals",
+  try {
+    const requester = await db.employee.findUnique({
+      where: { id: user.employeeId },
+      select: { managerId: true, firstName: true, lastName: true },
     });
+    if (requester?.managerId) {
+      await notifyEmployee(requester.managerId, {
+        type: "leave.requested",
+        titleKey: "notifications.leaveRequested",
+        body: `${requester.firstName} ${requester.lastName}`,
+        link: "/absences/approvals",
+      });
+    }
+  } catch (e) {
+    console.error("leave-request notify failed", e);
   }
 
   revalidatePath("/absences");

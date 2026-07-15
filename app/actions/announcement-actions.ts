@@ -45,11 +45,15 @@ export async function createAnnouncement(
   await logAudit(session.user.id, "announcement.create", "Announcement", announcement.id, { title, pinned });
 
   // Best-effort: notify every user of the new announcement (author included).
-  const users = await db.user.findMany({ select: { id: true } });
-  await notifyManyUsers(
-    users.map((u) => u.id),
-    { type: "announcement.created", titleKey: "notifications.newAnnouncement", body: title, link: "/news" }
-  );
+  try {
+    const users = await db.user.findMany({ select: { id: true } });
+    await notifyManyUsers(
+      users.map((u) => u.id),
+      { type: "announcement.created", titleKey: "notifications.newAnnouncement", body: title, link: "/news" }
+    );
+  } catch (e) {
+    console.error("announcement notify failed", e);
+  }
 
   revalidateNews();
   return {};
