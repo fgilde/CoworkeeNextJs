@@ -1,0 +1,50 @@
+{
+  "common": {
+    "appName": "Coworkee",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Create",
+    "search": "Search",
+    "loading": "Loading…",
+    "actions": "Actions",
+    "yes": "Yes",
+    "no": "No",
+    "back": "Back",
+    "confirm": "Confirm"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "employees": "Employees",
+    "orgChart": "Org Chart",
+    "settings": "Settings",
+    "account": "Account",
+    "logout": "Log out"
+  },
+  "auth": {
+    "loginTitle": "Log in",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Log in",
+    "invalidCredentials": "Email or password is incorrect.",
+    "welcome": "Welcome back"
+  },
+  "locale": {
+    "label": "Language",
+    "de": "Deutsch",
+    "en": "English"
+  },
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "employees": {
+    "title": "Employees"
+  },
+  "settings": {
+    "title": "Settings"
+  },
+  "account": {
+    "title": "Account"
+  }
+}
