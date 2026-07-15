@@ -290,6 +290,13 @@
     "validationError": "Bitte überprüfen Sie die markierten Felder.",
     "noEmployee": "Ihr Konto ist mit keinem Mitarbeiterprofil verknüpft, daher gibt es keine Zeiterfassung.",
     "forbidden": "Sie dürfen diesen Eintrag nicht bearbeiten.",
-    "hours": "Stunden"
+    "hours": "Stunden",
+    "inProgress": "Läuft noch",
+    "deleteConfirm": "Diesen Eintrag wirklich löschen?",
+    "employee": "Mitarbeiter",
+    "status": "Status",
+    "clockedInStatus": "Eingestempelt",
+    "clockedOutStatus": "Ausgestempelt",
+    "noTeamEntries": "Keine Mitarbeitenden im Zuständigkeitsbereich."
   }
 }

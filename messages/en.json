@@ -290,6 +290,13 @@
     "validationError": "Please check the highlighted fields.",
     "noEmployee": "Your account is not linked to an employee profile, so there is no time tracking.",
     "forbidden": "You are not allowed to modify this entry.",
-    "hours": "Hours"
+    "hours": "Hours",
+    "inProgress": "In progress",
+    "deleteConfirm": "Really delete this entry?",
+    "employee": "Employee",
+    "status": "Status",
+    "clockedInStatus": "Clocked in",
+    "clockedOutStatus": "Clocked out",
+    "noTeamEntries": "No employees in scope."
   }
 }

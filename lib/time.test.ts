@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { entryHours, sumHours } from "./time";
+import { entryHours, sumHours, startOfWeek } from "./time";
 
 const t = (h: number, m = 0) => new Date(Date.UTC(2026, 6, 13, h, m));
 
@@ -29,4 +29,20 @@ test("open entry (end null) contributes 0 to sumHours", () => {
     { start: t(9), end: null, breakMinutes: 0 },
   ];
   expect(sumHours(entries)).toBe(7);
+});
+
+test("startOfWeek returns the Monday of the same week", () => {
+  // 2026-07-15 is a Wednesday.
+  const monday = startOfWeek(new Date(2026, 6, 15));
+  expect(monday).toEqual(new Date(2026, 6, 13));
+});
+
+test("startOfWeek on a Sunday returns the preceding Monday", () => {
+  const monday = startOfWeek(new Date(2026, 6, 19));
+  expect(monday).toEqual(new Date(2026, 6, 13));
+});
+
+test("startOfWeek on a Monday returns the same date, midnight", () => {
+  const monday = startOfWeek(new Date(2026, 6, 13, 15, 30));
+  expect(monday).toEqual(new Date(2026, 6, 13));
 });

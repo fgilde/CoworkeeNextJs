@@ -12,3 +12,12 @@ export function sumHours(
   );
   return Math.round(total * 100) / 100;
 }
+
+/** Midnight of the Monday that starts the ISO week containing `d`. */
+export function startOfWeek(d: Date): Date {
+  const day = d.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  const monday = new Date(d.getFullYear(), d.getMonth(), d.getDate() + diff);
+  monday.setHours(0, 0, 0, 0);
+  return monday;
+}
