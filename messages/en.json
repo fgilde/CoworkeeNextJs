@@ -36,7 +36,34 @@
     "en": "English"
   },
   "dashboard": {
-    "title": "Dashboard"
+    "title": "Dashboard",
+    "greeting": "Welcome, {name}",
+    "noEmployeeLinked": "No employee profile is linked to your account.",
+    "myDetails": "My details",
+    "department": "Department",
+    "position": "Position",
+    "location": "Location",
+    "hireDate": "Hire date",
+    "workload": "Workload",
+    "contractType": "Contract type",
+    "status": "Status",
+    "notSet": "Not set",
+    "myTeam": "My team",
+    "noReports": "No direct reports yet.",
+    "companyOverview": "Company at a glance",
+    "totalEmployees": "Total employees",
+    "activeEmployees": "Active employees",
+    "departmentsCount": "Departments",
+    "contractTypes": {
+      "PERMANENT": "Permanent",
+      "TEMPORARY": "Temporary",
+      "INTERN": "Intern",
+      "WORKING_STUDENT": "Working student"
+    },
+    "statuses": {
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive"
+    }
   },
   "employees": {
     "title": "Employees"

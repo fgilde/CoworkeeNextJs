@@ -36,7 +36,34 @@
     "en": "English"
   },
   "dashboard": {
-    "title": "Übersicht"
+    "title": "Übersicht",
+    "greeting": "Willkommen, {name}",
+    "noEmployeeLinked": "Ihrem Konto ist kein Mitarbeiterprofil zugeordnet.",
+    "myDetails": "Meine Daten",
+    "department": "Abteilung",
+    "position": "Position",
+    "location": "Standort",
+    "hireDate": "Eintrittsdatum",
+    "workload": "Arbeitspensum",
+    "contractType": "Vertragsart",
+    "status": "Status",
+    "notSet": "Nicht angegeben",
+    "myTeam": "Mein Team",
+    "noReports": "Noch keine direkt unterstellten Mitarbeitenden.",
+    "companyOverview": "Unternehmen im Überblick",
+    "totalEmployees": "Mitarbeitende gesamt",
+    "activeEmployees": "Aktive Mitarbeitende",
+    "departmentsCount": "Abteilungen",
+    "contractTypes": {
+      "PERMANENT": "Unbefristet",
+      "TEMPORARY": "Befristet",
+      "INTERN": "Praktikum",
+      "WORKING_STUDENT": "Werkstudent"
+    },
+    "statuses": {
+      "ACTIVE": "Aktiv",
+      "INACTIVE": "Inaktiv"
+    }
   },
   "employees": {
     "title": "Mitarbeitende"
