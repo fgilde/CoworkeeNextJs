@@ -3,10 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, Clock, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type NavKey = "dashboard" | "employees" | "orgChart" | "absences" | "approvals" | "team" | "settings" | "account";
+type NavKey =
+  | "dashboard"
+  | "employees"
+  | "orgChart"
+  | "absences"
+  | "approvals"
+  | "team"
+  | "time"
+  | "teamTime"
+  | "settings"
+  | "account";
 
 type NavItem = {
   href: string;
@@ -22,6 +32,8 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/absences", labelKey: "absences", icon: CalendarDays, group: "main" },
   { href: "/absences/approvals", labelKey: "approvals", icon: ClipboardCheck, group: "main" },
   { href: "/absences/team", labelKey: "team", icon: CalendarRange, group: "main" },
+  { href: "/time", labelKey: "time", icon: Clock, group: "main" },
+  { href: "/time/team", labelKey: "teamTime", icon: Clock, group: "main" },
   { href: "/settings", labelKey: "settings", icon: Settings, group: "account" },
   { href: "/account", labelKey: "account", icon: CircleUser, group: "account" },
 ];
@@ -50,7 +62,15 @@ function NavLink({ href, labelKey, icon: Icon, active, label }: NavItem & { acti
   );
 }
 
-export function AppSidebar({ canSettings, canApprove }: { canSettings: boolean; canApprove: boolean }) {
+export function AppSidebar({
+  canSettings,
+  canApprove,
+  canViewTeamTime,
+}: {
+  canSettings: boolean;
+  canApprove: boolean;
+  canViewTeamTime: boolean;
+}) {
   const t = useTranslations("nav");
   const tCommon = useTranslations("common");
   const pathname = usePathname();
@@ -59,15 +79,16 @@ export function AppSidebar({ canSettings, canApprove }: { canSettings: boolean; 
     (item) =>
       (item.labelKey !== "settings" || canSettings) &&
       (item.labelKey !== "approvals" || canApprove) &&
-      (item.labelKey !== "team" || canApprove)
+      (item.labelKey !== "team" || canApprove) &&
+      (item.labelKey !== "teamTime" || canViewTeamTime)
   );
   const mainItems = items.filter((item) => item.group === "main");
   const accountItems = items.filter((item) => item.group === "account");
 
-  // "/absences" is a prefix of "/absences/approvals" — match it exactly so both
-  // nav entries don't highlight at once on the approvals page.
+  // "/absences" and "/time" are prefixes of their own sub-routes (e.g. "/absences/approvals",
+  // "/time/team") — match them exactly so both nav entries don't highlight at once.
   const isActive = (href: string) =>
-    href === "/" || href === "/absences" ? pathname === href : pathname.startsWith(href);
+    href === "/" || href === "/absences" || href === "/time" ? pathname === href : pathname.startsWith(href);
 
   return (
     <aside className="flex w-[260px] shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground">

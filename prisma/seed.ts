@@ -6,6 +6,7 @@ import { computeWorkingDays } from "../lib/leave";
 async function main() {
   // --- Idempotent cleanup (FK-safe order) ---
   await db.auditLog.deleteMany();
+  await db.timeEntry.deleteMany();
   await db.leaveRequest.deleteMany();
   await db.leaveEntitlement.deleteMany();
   await db.leaveType.deleteMany();
@@ -409,6 +410,52 @@ async function main() {
     },
   });
 
+  // --- Time entries (swe1, swe2, engManager over the last few weekdays) ---
+  const workDay = (daysAgo: number, h: number, m = 0) => {
+    const d = new Date();
+    d.setDate(d.getDate() - daysAgo);
+    d.setHours(h, m, 0, 0);
+    return d;
+  };
+  const dayStart = (daysAgo: number) => {
+    const d = workDay(daysAgo, 0, 0);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  };
+
+  // Last 3 weekdays (skip weekends) for swe1, swe2 and engManager, 09:00-17:00, 30 min break.
+  const recentWeekdays: number[] = [];
+  for (let daysAgo = 1; recentWeekdays.length < 3; daysAgo++) {
+    const d = workDay(daysAgo, 0);
+    if (d.getDay() !== 0 && d.getDay() !== 6) recentWeekdays.push(daysAgo);
+  }
+
+  const timeEntries = await Promise.all(
+    [swe1, swe2, engManager].flatMap((emp) =>
+      recentWeekdays.map((daysAgo) =>
+        db.timeEntry.create({
+          data: {
+            employeeId: emp.id,
+            date: dayStart(daysAgo),
+            start: workDay(daysAgo, 9),
+            end: workDay(daysAgo, 17),
+            breakMinutes: 30,
+          },
+        })
+      )
+    )
+  );
+
+  // Demo: swe3 currently clocked in (open entry).
+  await db.timeEntry.create({
+    data: {
+      employeeId: swe3.id,
+      date: dayStart(0),
+      start: workDay(0, 9),
+      end: null,
+    },
+  });
+
   const counts = {
     locations: 2,
     departments: 4,
@@ -418,6 +465,7 @@ async function main() {
     leaveTypes: 3,
     leaveEntitlements: entitlements.length,
     leaveRequests: [pendingRequest, approvedRequest].length,
+    timeEntries: timeEntries.length + 1,
   };
 
   console.log("Seed done: ", counts);

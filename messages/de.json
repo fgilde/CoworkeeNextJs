@@ -23,7 +23,9 @@
     "logout": "Abmelden",
     "absences": "Abwesenheit",
     "approvals": "Genehmigungen",
-    "team": "Team-Abwesenheit"
+    "team": "Team-Abwesenheit",
+    "time": "Zeiterfassung",
+    "teamTime": "Team-Zeiten"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -259,5 +261,35 @@
     "paid": "Bezahlt",
     "unpaidLabel": "Unbezahlt",
     "days": "Tage"
+  },
+  "time": {
+    "title": "Zeiterfassung",
+    "clockIn": "Einstempeln",
+    "clockOut": "Ausstempeln",
+    "clockedInSince": "Eingestempelt seit {time}",
+    "today": "Heute",
+    "thisWeek": "Diese Woche",
+    "totalHours": "Gesamtstunden",
+    "date": "Datum",
+    "start": "Beginn",
+    "end": "Ende",
+    "break": "Pause",
+    "breakMinutes": "Pause (Minuten)",
+    "note": "Notiz",
+    "addEntry": "+ Eintrag hinzufügen",
+    "manualEntry": "Manueller Eintrag",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "teamTime": "Team-Zeiten",
+    "noEntries": "Noch keine Zeiteinträge.",
+    "alreadyClockedIn": "Sie sind bereits eingestempelt.",
+    "notClockedIn": "Sie sind derzeit nicht eingestempelt.",
+    "invalidRange": "Die Endzeit muss nach der Startzeit liegen.",
+    "validationError": "Bitte überprüfen Sie die markierten Felder.",
+    "noEmployee": "Ihr Konto ist mit keinem Mitarbeiterprofil verknüpft, daher gibt es keine Zeiterfassung.",
+    "forbidden": "Sie dürfen diesen Eintrag nicht bearbeiten.",
+    "hours": "Stunden"
   }
 }

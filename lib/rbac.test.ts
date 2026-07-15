@@ -39,3 +39,14 @@ test("HR can manage leave", () => {
 test("ADMIN can manage leave", () => {
   expect(can("ADMIN", "leave:manage")).toBe(true);
 });
+
+test("EMPLOYEE can track time but not view team time", () => {
+  expect(can("EMPLOYEE", "time:track")).toBe(true);
+  expect(can("EMPLOYEE", "time:view-team")).toBe(false);
+});
+
+test("MANAGER, HR, ADMIN can view team time", () => {
+  expect(can("MANAGER", "time:view-team")).toBe(true);
+  expect(can("HR", "time:view-team")).toBe(true);
+  expect(can("ADMIN", "time:view-team")).toBe(true);
+});

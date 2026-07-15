@@ -23,7 +23,9 @@
     "logout": "Log out",
     "absences": "Absence",
     "approvals": "Approvals",
-    "team": "Team absences"
+    "team": "Team absences",
+    "time": "Time tracking",
+    "teamTime": "Team time"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -259,5 +261,35 @@
     "paid": "Paid",
     "unpaidLabel": "Unpaid",
     "days": "Days"
+  },
+  "time": {
+    "title": "Time tracking",
+    "clockIn": "Clock in",
+    "clockOut": "Clock out",
+    "clockedInSince": "Clocked in since {time}",
+    "today": "Today",
+    "thisWeek": "This week",
+    "totalHours": "Total hours",
+    "date": "Date",
+    "start": "Start",
+    "end": "End",
+    "break": "Break",
+    "breakMinutes": "Break (minutes)",
+    "note": "Note",
+    "addEntry": "+ Add entry",
+    "manualEntry": "Manual entry",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "teamTime": "Team time",
+    "noEntries": "No time entries yet.",
+    "alreadyClockedIn": "You are already clocked in.",
+    "notClockedIn": "You are not currently clocked in.",
+    "invalidRange": "The end time must be after the start time.",
+    "validationError": "Please check the highlighted fields.",
+    "noEmployee": "Your account is not linked to an employee profile, so there is no time tracking.",
+    "forbidden": "You are not allowed to modify this entry.",
+    "hours": "Hours"
   }
 }
