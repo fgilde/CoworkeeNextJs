@@ -112,7 +112,20 @@
       "TEMPORARY": "Befristet",
       "INTERN": "Praktikum",
       "WORKING_STUDENT": "Werkstudent"
-    }
+    },
+    "newEmployeeTitle": "Neuer Mitarbeiter",
+    "editEmployeeTitle": "Mitarbeiter bearbeiten",
+    "street": "Straße",
+    "city": "Stadt",
+    "country": "Land",
+    "status": "Status",
+    "department": "Abteilung",
+    "position": "Position",
+    "location": "Standort",
+    "noneOption": "—",
+    "validationError": "Bitte überprüfen Sie die markierten Felder.",
+    "emailTaken": "Diese E-Mail-Adresse wird bereits verwendet.",
+    "fieldInvalid": "Bitte überprüfen Sie diesen Wert."
   },
   "settings": {
     "title": "Einstellungen"

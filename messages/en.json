@@ -112,7 +112,20 @@
       "TEMPORARY": "Temporary",
       "INTERN": "Intern",
       "WORKING_STUDENT": "Working student"
-    }
+    },
+    "newEmployeeTitle": "New employee",
+    "editEmployeeTitle": "Edit employee",
+    "street": "Street",
+    "city": "City",
+    "country": "Country",
+    "status": "Status",
+    "department": "Department",
+    "position": "Position",
+    "location": "Location",
+    "noneOption": "—",
+    "validationError": "Please check the highlighted fields.",
+    "emailTaken": "This email address is already in use.",
+    "fieldInvalid": "Please check this value."
   },
   "settings": {
     "title": "Settings"
