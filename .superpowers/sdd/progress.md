@@ -15,3 +15,4 @@ Task 8: complete (login/logout end-to-end verified, commit 33773e0)
 Task 9: complete (role-aware dashboard, verified manager+admin, commit a1a1452)
   NOTE: session.user lacks employeeId; pages do extra db.user lookup for current employee. Consider lib/session helper in later tasks.
 Task 10: complete (employee directory list/search/filter/paginate, verified counts, commit b58f680)
+Task 11: complete (employee profile detail — person/employment/team tabs, RBAC edit gate, 404, verified, commit 3fba6f0)
