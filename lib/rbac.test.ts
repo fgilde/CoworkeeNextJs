@@ -90,3 +90,10 @@ test("MANAGER, HR, ADMIN can manage goals and reviews, EMPLOYEE cannot", () => {
   expect(can("ADMIN", "review:manage")).toBe(true);
   expect(can("EMPLOYEE", "review:manage")).toBe(false);
 });
+
+test("HR and ADMIN can view analytics, MANAGER and EMPLOYEE cannot", () => {
+  expect(can("HR", "analytics:view")).toBe(true);
+  expect(can("ADMIN", "analytics:view")).toBe(true);
+  expect(can("MANAGER", "analytics:view")).toBe(false);
+  expect(can("EMPLOYEE", "analytics:view")).toBe(false);
+});

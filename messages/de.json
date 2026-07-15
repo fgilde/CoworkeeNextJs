@@ -29,7 +29,8 @@
     "documents": "Dokumente",
     "news": "Neuigkeiten",
     "onboarding": "Onboarding",
-    "performance": "Leistung"
+    "performance": "Leistung",
+    "analytics": "Analysen"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -443,5 +444,24 @@
       "veryGood": "Sehr gut",
       "excellent": "Ausgezeichnet"
     }
+  },
+  "analytics": {
+    "title": "Analysen",
+    "totalEmployees": "Mitarbeitende gesamt",
+    "activeEmployees": "Aktive Mitarbeitende",
+    "departments": "Abteilungen",
+    "avgTenure": "Ø Betriebszugehörigkeit",
+    "pendingRequests": "Offene Abwesenheitsanträge",
+    "openGoals": "Offene Ziele",
+    "headcountByDept": "Mitarbeitende nach Abteilung",
+    "contractTypes": "Verteilung der Vertragsarten",
+    "newHiresByYear": "Neueinstellungen pro Jahr",
+    "leaveDaysByType": "Genehmigte Abwesenheitstage nach Art (dieses Jahr)",
+    "years": "Jahre",
+    "showTable": "Datentabelle anzeigen",
+    "category": "Kategorie",
+    "value": "Wert",
+    "employees": "Mitarbeitende",
+    "noData": "Noch keine Daten verfügbar."
   }
 }

@@ -8,10 +8,16 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const canSettings = can(session.user.role, "settings:write");
   const canApprove = can(session.user.role, "leave:approve");
   const canViewTeamTime = can(session.user.role, "time:view-team");
+  const canAnalytics = can(session.user.role, "analytics:view");
 
   return (
     <div className="flex min-h-screen bg-background">
-      <AppSidebar canSettings={canSettings} canApprove={canApprove} canViewTeamTime={canViewTeamTime} />
+      <AppSidebar
+        canSettings={canSettings}
+        canApprove={canApprove}
+        canViewTeamTime={canViewTeamTime}
+        canAnalytics={canAnalytics}
+      />
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar user={{ email: session.user.email ?? "", role: session.user.role }} />
         <main className="flex-1 p-8">

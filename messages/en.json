@@ -29,7 +29,8 @@
     "documents": "Documents",
     "news": "News",
     "onboarding": "Onboarding",
-    "performance": "Performance"
+    "performance": "Performance",
+    "analytics": "Analytics"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -443,5 +444,24 @@
       "veryGood": "Very good",
       "excellent": "Excellent"
     }
+  },
+  "analytics": {
+    "title": "Analytics",
+    "totalEmployees": "Total employees",
+    "activeEmployees": "Active employees",
+    "departments": "Departments",
+    "avgTenure": "Avg. tenure",
+    "pendingRequests": "Pending leave requests",
+    "openGoals": "Open goals",
+    "headcountByDept": "Headcount by department",
+    "contractTypes": "Contract type distribution",
+    "newHiresByYear": "New hires by year",
+    "leaveDaysByType": "Approved leave days by type (this year)",
+    "years": "years",
+    "showTable": "Show data table",
+    "category": "Category",
+    "value": "Value",
+    "employees": "Employees",
+    "noData": "No data available yet."
   }
 }
