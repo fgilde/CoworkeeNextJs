@@ -5,7 +5,6 @@ import { revalidatePath } from "next/cache";
 import { Prisma } from "@prisma/client";
 import { requireRole } from "@/lib/rbac";
 import { db } from "@/lib/db";
-import { logAudit } from "@/lib/audit";
 import { employeeSchema } from "@/lib/employee-schema";
 
 export type EmployeeFormState = {
@@ -65,9 +64,19 @@ export async function createEmployee(
 
   let employeeId: string;
   try {
-    const emp = await db.employee.create({ data });
-    employeeId = emp.id;
-    await logAudit(session.user.id, "employee.create", "Employee", emp.id, data);
+    employeeId = await db.$transaction(async (tx) => {
+      const emp = await tx.employee.create({ data });
+      await tx.auditLog.create({
+        data: {
+          actorUserId: session.user.id,
+          action: "employee.create",
+          entity: "Employee",
+          entityId: emp.id,
+          changes: data as any,
+        },
+      });
+      return emp.id;
+    });
   } catch (error) {
     if (isUniqueEmailError(error)) return { error: "emailTaken" };
     throw error;
@@ -90,14 +99,29 @@ export async function updateEmployee(
   }
   const data = toEmployeeData(parsed.data);
 
+  if (data.managerId === id) {
+    return { error: "managerSelf" };
+  }
+
   try {
-    await db.employee.update({ where: { id }, data });
-    await logAudit(session.user.id, "employee.update", "Employee", id, data);
+    await db.$transaction(async (tx) => {
+      await tx.employee.update({ where: { id }, data });
+      await tx.auditLog.create({
+        data: {
+          actorUserId: session.user.id,
+          action: "employee.update",
+          entity: "Employee",
+          entityId: id,
+          changes: data as any,
+        },
+      });
+    });
   } catch (error) {
     if (isUniqueEmailError(error)) return { error: "emailTaken" };
     throw error;
   }
 
+  revalidatePath("/employees");
   revalidatePath(`/employees/${id}`);
   redirect(`/employees/${id}`);
 }

@@ -125,6 +125,7 @@
     "noneOption": "—",
     "validationError": "Please check the highlighted fields.",
     "emailTaken": "This email address is already in use.",
+    "managerSelf": "An employee cannot be their own manager.",
     "fieldInvalid": "Please check this value."
   },
   "settings": {

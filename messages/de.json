@@ -125,6 +125,7 @@
     "noneOption": "—",
     "validationError": "Bitte überprüfen Sie die markierten Felder.",
     "emailTaken": "Diese E-Mail-Adresse wird bereits verwendet.",
+    "managerSelf": "Ein Mitarbeiter kann nicht sein eigener Vorgesetzter sein.",
     "fieldInvalid": "Bitte überprüfen Sie diesen Wert."
   },
   "settings": {
