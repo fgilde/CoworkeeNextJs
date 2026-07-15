@@ -85,7 +85,34 @@
     "noResults": "No employees found.",
     "previous": "Previous",
     "next": "Next",
-    "pageOf": "Page {page} of {total}"
+    "pageOf": "Page {page} of {total}",
+    "edit": "Edit",
+    "notFoundTitle": "Employee not found",
+    "notFoundDescription": "This employee profile does not exist.",
+    "backToList": "Back to employees",
+    "tabPerson": "Person",
+    "tabEmployment": "Employment",
+    "tabTeam": "Team",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "birthDate": "Date of birth",
+    "address": "Address",
+    "hireDate": "Hire date",
+    "exitDate": "Exit date",
+    "contractType": "Contract type",
+    "workload": "Workload",
+    "manager": "Manager",
+    "noManager": "No manager assigned.",
+    "directReports": "Direct reports",
+    "noReports": "No direct reports.",
+    "contractTypes": {
+      "PERMANENT": "Permanent",
+      "TEMPORARY": "Temporary",
+      "INTERN": "Intern",
+      "WORKING_STUDENT": "Working student"
+    }
   },
   "settings": {
     "title": "Settings"

@@ -85,7 +85,34 @@
     "noResults": "Keine Mitarbeitenden gefunden.",
     "previous": "Zurück",
     "next": "Weiter",
-    "pageOf": "Seite {page} von {total}"
+    "pageOf": "Seite {page} von {total}",
+    "edit": "Bearbeiten",
+    "notFoundTitle": "Mitarbeiter nicht gefunden",
+    "notFoundDescription": "Dieses Mitarbeiterprofil existiert nicht.",
+    "backToList": "Zurück zur Übersicht",
+    "tabPerson": "Person",
+    "tabEmployment": "Beschäftigung",
+    "tabTeam": "Team",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "birthDate": "Geburtsdatum",
+    "address": "Adresse",
+    "hireDate": "Eintrittsdatum",
+    "exitDate": "Austrittsdatum",
+    "contractType": "Vertragsart",
+    "workload": "Arbeitsumfang",
+    "manager": "Führungskraft",
+    "noManager": "Keine Führungskraft zugewiesen.",
+    "directReports": "Direkt unterstellte Mitarbeitende",
+    "noReports": "Keine direkt unterstellten Mitarbeitenden.",
+    "contractTypes": {
+      "PERMANENT": "Unbefristet",
+      "TEMPORARY": "Befristet",
+      "INTERN": "Praktikum",
+      "WORKING_STUDENT": "Werkstudent"
+    }
   },
   "settings": {
     "title": "Einstellungen"

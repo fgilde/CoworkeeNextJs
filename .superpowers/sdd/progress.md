@@ -10,3 +10,8 @@ Task 4: complete (auth.js credentials + edge-safe split, review clean, commit 5c
 Task 5: complete (rbac can-matrix + guards, tests 3/3, commit 72924a4)
 Task 6: complete (next-intl de/en cookie-based, 32-key parity, commit 31cc386)
 Task 7: complete (app shell — sidebar/topbar/theme/locale/user-menu, build+tsc+tests green, commit 660154b)
+Task 7: complete (app shell sidebar/topbar/theme/locale/logout, commits 660154b+12a8f71)
+Task 8: complete (login/logout end-to-end verified, commit 33773e0)
+Task 9: complete (role-aware dashboard, verified manager+admin, commit a1a1452)
+  NOTE: session.user lacks employeeId; pages do extra db.user lookup for current employee. Consider lib/session helper in later tasks.
+Task 10: complete (employee directory list/search/filter/paginate, verified counts, commit b58f680)
