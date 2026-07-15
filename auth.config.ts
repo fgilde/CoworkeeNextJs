@@ -9,7 +9,10 @@ export default {
   pages: { signIn: "/login" },
   providers: [],
   callbacks: {
-    authorized({ auth }) {
+    authorized({ auth, request }) {
+      // Root path is the public marketing page — no page exists yet (404), but it
+      // must never redirect to /login. Every other matched route stays protected.
+      if (request.nextUrl.pathname === "/") return true;
       return !!auth?.user;
     },
   },

@@ -40,7 +40,20 @@
     "password": "Passwort",
     "submit": "Anmelden",
     "invalidCredentials": "E-Mail oder Passwort ist falsch.",
-    "welcome": "Willkommen zurück"
+    "welcome": "Willkommen zurück",
+    "tagline": "Ein Arbeitsplatz für alles Menschliche.",
+    "taglineBody": "Mitarbeitende, Abwesenheiten, Zeiterfassung, Leistung und Recruiting – an einem Ort, klar und schnell.",
+    "demo": {
+      "title": "Demo-Zugänge",
+      "hint": "Zum Ausfüllen anklicken",
+      "passwordLabel": "Passwort (alle Konten)",
+      "roles": {
+        "admin": "Administrator",
+        "hr": "HR",
+        "manager": "Manager",
+        "employee": "Mitarbeiter"
+      }
+    }
   },
   "locale": {
     "label": "Sprache",

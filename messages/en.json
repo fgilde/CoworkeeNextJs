@@ -40,7 +40,20 @@
     "password": "Password",
     "submit": "Log in",
     "invalidCredentials": "Email or password is incorrect.",
-    "welcome": "Welcome back"
+    "welcome": "Welcome back",
+    "tagline": "One workplace for everything human.",
+    "taglineBody": "People, absences, time tracking, performance, and recruiting – in one place, clear and fast.",
+    "demo": {
+      "title": "Demo access",
+      "hint": "Click to fill",
+      "passwordLabel": "Password (all accounts)",
+      "roles": {
+        "admin": "Administrator",
+        "hr": "HR",
+        "manager": "Manager",
+        "employee": "Employee"
+      }
+    }
   },
   "locale": {
     "label": "Language",

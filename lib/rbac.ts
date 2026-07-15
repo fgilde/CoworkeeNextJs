@@ -88,6 +88,6 @@ export async function requireAuth(): Promise<Session> {
 
 export async function requireRole(...roles: Role[]): Promise<Session> {
   const session = await requireAuth();
-  if (!roles.includes(session.user.role)) redirect("/");
+  if (!roles.includes(session.user.role)) redirect("/dashboard");
   return session;
 }

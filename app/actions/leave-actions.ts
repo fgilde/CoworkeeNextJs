@@ -127,7 +127,7 @@ export async function decideLeaveRequest(
   note?: string
 ): Promise<{ error?: string }> {
   const session = await requireRole("MANAGER", "HR", "ADMIN");
-  if (!can(session.user.role, "leave:approve")) redirect("/");
+  if (!can(session.user.role, "leave:approve")) redirect("/dashboard");
 
   const parsed = decisionSchema.safeParse({ decision, note });
   if (!parsed.success) return { error: "validationError" };

@@ -33,7 +33,7 @@ type NavItem = {
 };
 
 const NAV_ITEMS: NavItem[] = [
-  { href: "/", labelKey: "dashboard", icon: LayoutDashboard, group: "main" },
+  { href: "/dashboard", labelKey: "dashboard", icon: LayoutDashboard, group: "main" },
   { href: "/employees", labelKey: "employees", icon: Users, group: "main" },
   { href: "/org", labelKey: "orgChart", icon: Network, group: "main" },
   { href: "/absences", labelKey: "absences", icon: CalendarDays, group: "main" },
@@ -108,7 +108,9 @@ export function AppSidebar({
   // "/absences" and "/time" are prefixes of their own sub-routes (e.g. "/absences/approvals",
   // "/time/team") — match them exactly so both nav entries don't highlight at once.
   const isActive = (href: string) =>
-    href === "/" || href === "/absences" || href === "/time" ? pathname === href : pathname.startsWith(href);
+    href === "/dashboard" || href === "/absences" || href === "/time"
+      ? pathname === href
+      : pathname.startsWith(href);
 
   return (
     <aside className="flex w-[260px] shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
