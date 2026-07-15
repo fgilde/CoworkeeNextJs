@@ -46,3 +46,6 @@ next-env.d.ts
 
 # uploaded documents (private storage, not committed)
 /storage/
+
+# marketing verification captures
+public/marketing/landing-*.png
