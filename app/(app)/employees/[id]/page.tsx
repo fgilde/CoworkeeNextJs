@@ -35,7 +35,13 @@ export default async function EmployeeProfilePage({
     select: { employeeId: true },
   });
   const isOwnProfile = currentUser?.employeeId === employee.id;
-  const canEdit = can(session.user.role, "employee:write") || isOwnProfile;
+  // HR/ADMIN edit via the employee edit page; own profile routes to self-service (/account).
+  const canManage = can(session.user.role, "employee:write");
+  const editHref = canManage
+    ? `/employees/${employee.id}/edit`
+    : isOwnProfile
+      ? "/account"
+      : null;
 
   const dateFormatter = new Intl.DateTimeFormat(locale, { dateStyle: "long" });
 
@@ -92,8 +98,8 @@ export default async function EmployeeProfilePage({
           >
             {employee.status === "ACTIVE" ? t("statusActive") : t("statusInactive")}
           </Badge>
-          {canEdit && (
-            <Link href={`/employees/${employee.id}/edit`} className={buttonVariants({ size: "sm" })}>
+          {editHref && (
+            <Link href={editHref} className={buttonVariants({ size: "sm" })}>
               {t("edit")}
             </Link>
           )}
