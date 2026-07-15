@@ -20,7 +20,9 @@
     "orgChart": "Organigramm",
     "settings": "Einstellungen",
     "account": "Konto",
-    "logout": "Abmelden"
+    "logout": "Abmelden",
+    "absences": "Abwesenheit",
+    "approvals": "Genehmigungen"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -193,5 +195,47 @@
     "empty": "Keine Mitarbeiter gefunden.",
     "expand": "Untergeordnete anzeigen",
     "collapse": "Untergeordnete ausblenden"
+  },
+  "absences": {
+    "title": "Abwesenheit",
+    "myBalance": "Mein Saldo",
+    "allocated": "Anspruch",
+    "used": "Genutzt",
+    "remaining": "Rest",
+    "myRequests": "Meine Anträge",
+    "noRequests": "Noch keine Anträge.",
+    "request": "Antrag stellen",
+    "newRequest": "Neuer Antrag",
+    "from": "Von",
+    "to": "Bis",
+    "type": "Typ",
+    "reason": "Grund",
+    "halfDayStart": "Halber Tag (Beginn)",
+    "halfDayEnd": "Halber Tag (Ende)",
+    "workingDays": "Werktage",
+    "submit": "Absenden",
+    "cancel": "Stornieren",
+    "cancelConfirm": "Diesen Antrag wirklich stornieren?",
+    "approve": "Genehmigen",
+    "reject": "Ablehnen",
+    "decisionNote": "Notiz",
+    "pendingApprovals": "Offene Anträge",
+    "noPendingApprovals": "Keine offenen Anträge.",
+    "teamAbsences": "Team-Abwesenheit",
+    "employee": "Mitarbeiter",
+    "status": {
+      "PENDING": "Ausstehend",
+      "APPROVED": "Genehmigt",
+      "REJECTED": "Abgelehnt",
+      "CANCELLED": "Storniert"
+    }
+  },
+  "leave": {
+    "vacation": "Urlaub",
+    "sick": "Krankheit",
+    "unpaid": "Unbezahlt",
+    "paid": "Bezahlt",
+    "unpaidLabel": "Unbezahlt",
+    "days": "Tage"
   }
 }

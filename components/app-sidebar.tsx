@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { LayoutDashboard, Users, Network, Settings, CircleUser, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type NavKey = "dashboard" | "employees" | "orgChart" | "settings" | "account";
+type NavKey = "dashboard" | "employees" | "orgChart" | "absences" | "approvals" | "settings" | "account";
 
 type NavItem = {
   href: string;
@@ -19,6 +19,8 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/", labelKey: "dashboard", icon: LayoutDashboard, group: "main" },
   { href: "/employees", labelKey: "employees", icon: Users, group: "main" },
   { href: "/org", labelKey: "orgChart", icon: Network, group: "main" },
+  { href: "/absences", labelKey: "absences", icon: CalendarDays, group: "main" },
+  { href: "/absences/approvals", labelKey: "approvals", icon: ClipboardCheck, group: "main" },
   { href: "/settings", labelKey: "settings", icon: Settings, group: "account" },
   { href: "/account", labelKey: "account", icon: CircleUser, group: "account" },
 ];
@@ -47,16 +49,22 @@ function NavLink({ href, labelKey, icon: Icon, active, label }: NavItem & { acti
   );
 }
 
-export function AppSidebar({ canSettings }: { canSettings: boolean }) {
+export function AppSidebar({ canSettings, canApprove }: { canSettings: boolean; canApprove: boolean }) {
   const t = useTranslations("nav");
   const tCommon = useTranslations("common");
   const pathname = usePathname();
 
-  const items = NAV_ITEMS.filter((item) => item.labelKey !== "settings" || canSettings);
+  const items = NAV_ITEMS.filter(
+    (item) =>
+      (item.labelKey !== "settings" || canSettings) && (item.labelKey !== "approvals" || canApprove)
+  );
   const mainItems = items.filter((item) => item.group === "main");
   const accountItems = items.filter((item) => item.group === "account");
 
-  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  // "/absences" is a prefix of "/absences/approvals" — match it exactly so both
+  // nav entries don't highlight at once on the approvals page.
+  const isActive = (href: string) =>
+    href === "/" || href === "/absences" ? pathname === href : pathname.startsWith(href);
 
   return (
     <aside className="flex w-[260px] shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground">

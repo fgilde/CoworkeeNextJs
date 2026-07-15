@@ -20,7 +20,9 @@
     "orgChart": "Org Chart",
     "settings": "Settings",
     "account": "Account",
-    "logout": "Log out"
+    "logout": "Log out",
+    "absences": "Absence",
+    "approvals": "Approvals"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -193,5 +195,47 @@
     "empty": "No employees found.",
     "expand": "Show reports",
     "collapse": "Hide reports"
+  },
+  "absences": {
+    "title": "Absence",
+    "myBalance": "My balance",
+    "allocated": "Allocated",
+    "used": "Used",
+    "remaining": "Remaining",
+    "myRequests": "My requests",
+    "noRequests": "No requests yet.",
+    "request": "Request leave",
+    "newRequest": "New request",
+    "from": "From",
+    "to": "To",
+    "type": "Type",
+    "reason": "Reason",
+    "halfDayStart": "Half day (start)",
+    "halfDayEnd": "Half day (end)",
+    "workingDays": "Working days",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "cancelConfirm": "Really cancel this request?",
+    "approve": "Approve",
+    "reject": "Reject",
+    "decisionNote": "Note",
+    "pendingApprovals": "Pending approvals",
+    "noPendingApprovals": "No pending approvals.",
+    "teamAbsences": "Team absence",
+    "employee": "Employee",
+    "status": {
+      "PENDING": "Pending",
+      "APPROVED": "Approved",
+      "REJECTED": "Rejected",
+      "CANCELLED": "Cancelled"
+    }
+  },
+  "leave": {
+    "vacation": "Vacation",
+    "sick": "Sick",
+    "unpaid": "Unpaid",
+    "paid": "Paid",
+    "unpaidLabel": "Unpaid",
+    "days": "Days"
   }
 }

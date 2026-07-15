@@ -1,10 +1,14 @@
 import "dotenv/config";
 import bcrypt from "bcryptjs";
 import { db } from "../lib/db";
+import { computeWorkingDays } from "../lib/leave";
 
 async function main() {
   // --- Idempotent cleanup (FK-safe order) ---
   await db.auditLog.deleteMany();
+  await db.leaveRequest.deleteMany();
+  await db.leaveEntitlement.deleteMany();
+  await db.leaveType.deleteMany();
   await db.user.deleteMany();
   await db.employee.updateMany({ data: { managerId: null } });
   await db.department.updateMany({ data: { leadId: null } });
@@ -354,12 +358,66 @@ async function main() {
     data: { email: "employee@coworkee.test", passwordHash, role: "EMPLOYEE", locale: "de", employeeId: swe1.id },
   });
 
+  // --- Leave types ---
+  const vacationType = await db.leaveType.create({
+    data: { name: "Urlaub", colorHex: "#22c55e", paid: true, defaultDays: 30 },
+  });
+  const sickType = await db.leaveType.create({
+    data: { name: "Krankheit", colorHex: "#ef4444", paid: true, defaultDays: 10 },
+  });
+  await db.leaveType.create({
+    data: { name: "Unbezahlt", colorHex: "#94a3b8", paid: false, defaultDays: 0 },
+  });
+
+  // --- Entitlements (current year, every employee) ---
+  const year = new Date().getFullYear();
+  const entitlements = await Promise.all(
+    employees.flatMap((e) => [
+      db.leaveEntitlement.create({ data: { employeeId: e.id, typeId: vacationType.id, year, days: 30 } }),
+      db.leaveEntitlement.create({ data: { employeeId: e.id, typeId: sickType.id, year, days: 10 } }),
+    ])
+  );
+
+  // --- Sample requests (swe1 + swe2 report to engManager, so approvals demo works) ---
+  const pendingStart = new Date(Date.UTC(year, 7, 3)); // Mon
+  const pendingEnd = new Date(Date.UTC(year, 7, 7)); // Fri
+  const approvedStart = new Date(Date.UTC(year, 5, 1)); // Mon
+  const approvedEnd = new Date(Date.UTC(year, 5, 5)); // Fri
+
+  const pendingRequest = await db.leaveRequest.create({
+    data: {
+      employeeId: swe1.id,
+      typeId: vacationType.id,
+      startDate: pendingStart,
+      endDate: pendingEnd,
+      workingDays: computeWorkingDays(pendingStart, pendingEnd),
+      reason: "Sommerurlaub",
+      status: "PENDING",
+    },
+  });
+
+  const approvedRequest = await db.leaveRequest.create({
+    data: {
+      employeeId: swe2.id,
+      typeId: vacationType.id,
+      startDate: approvedStart,
+      endDate: approvedEnd,
+      workingDays: computeWorkingDays(approvedStart, approvedEnd),
+      status: "APPROVED",
+      approverId: engManager.id,
+      decidedAt: new Date(),
+    },
+  });
+
   const counts = {
     locations: 2,
     departments: 4,
     positions: 9,
     employees: employees.length,
     users: [adminUser, hrUser, managerUser, employeeUser].length,
+    leaveTypes: 3,
+    leaveEntitlements: entitlements.length,
+    leaveRequests: [pendingRequest, approvedRequest].length,
   };
 
   console.log("Seed done: ", counts);

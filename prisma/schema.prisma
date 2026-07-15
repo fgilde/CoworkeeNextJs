@@ -25,6 +25,13 @@ enum EmployeeStatus {
   INACTIVE
 }
 
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -62,6 +69,9 @@ model Employee {
   reports      Employee[]  @relation("Reports")
   user         User?
   ledDepartments Department[] @relation("DeptLead")
+  leaveRequests LeaveRequest[] @relation("EmployeeLeaves")
+  leaveApprovals LeaveRequest[] @relation("LeaveApprovals")
+  leaveEntitlements LeaveEntitlement[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -86,6 +96,48 @@ model Location {
   city    String?
   country String?
   employees Employee[]
+}
+
+model LeaveType {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  colorHex    String
+  paid        Boolean  @default(true)
+  defaultDays Int      @default(0)
+  requests     LeaveRequest[]
+  entitlements LeaveEntitlement[]
+}
+
+model LeaveRequest {
+  id           String      @id @default(cuid())
+  employee     Employee    @relation("EmployeeLeaves", fields: [employeeId], references: [id])
+  employeeId   String
+  type         LeaveType   @relation(fields: [typeId], references: [id])
+  typeId       String
+  startDate    DateTime
+  endDate      DateTime
+  halfDayStart Boolean     @default(false)
+  halfDayEnd   Boolean     @default(false)
+  workingDays  Float
+  reason       String?
+  status       LeaveStatus @default(PENDING)
+  approver     Employee?   @relation("LeaveApprovals", fields: [approverId], references: [id])
+  approverId   String?
+  decisionNote String?
+  decidedAt    DateTime?
+  createdAt    DateTime    @default(now())
+}
+
+model LeaveEntitlement {
+  id         String    @id @default(cuid())
+  employee   Employee  @relation(fields: [employeeId], references: [id])
+  employeeId String
+  type       LeaveType @relation(fields: [typeId], references: [id])
+  typeId     String
+  year       Int
+  days       Float
+
+  @@unique([employeeId, typeId, year])
 }
 
 model AuditLog {

@@ -1,14 +1,36 @@
 import { redirect } from "next/navigation";
 import type { Session } from "next-auth";
 
-export type Action = "employee:read" | "employee:write" | "settings:write" | "users:manage";
+export type Action =
+  | "employee:read"
+  | "employee:write"
+  | "settings:write"
+  | "users:manage"
+  | "leave:request"
+  | "leave:approve"
+  | "leave:manage";
 export type Role = "ADMIN" | "HR" | "MANAGER" | "EMPLOYEE";
 
 const PERMISSIONS: Record<Role, Set<Action>> = {
-  ADMIN: new Set(["employee:read", "employee:write", "settings:write", "users:manage"]),
-  HR: new Set(["employee:read", "employee:write", "settings:write"]),
-  MANAGER: new Set(["employee:read"]),
-  EMPLOYEE: new Set(["employee:read"]),
+  ADMIN: new Set([
+    "employee:read",
+    "employee:write",
+    "settings:write",
+    "users:manage",
+    "leave:request",
+    "leave:approve",
+    "leave:manage",
+  ]),
+  HR: new Set([
+    "employee:read",
+    "employee:write",
+    "settings:write",
+    "leave:request",
+    "leave:approve",
+    "leave:manage",
+  ]),
+  MANAGER: new Set(["employee:read", "leave:request", "leave:approve"]),
+  EMPLOYEE: new Set(["employee:read", "leave:request"]),
 };
 
 export function can(role: Role, action: Action): boolean {
