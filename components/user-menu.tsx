@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -32,10 +33,12 @@ export function UserMenu({ user }: { user: { email: string; role: string } }) {
         }
       />
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel className="flex flex-col gap-0.5">
-          <span className="font-medium">{user.email}</span>
-          <span className="text-xs font-normal text-muted-foreground">{user.role}</span>
-        </DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="flex flex-col gap-0.5">
+            <span className="font-medium">{user.email}</span>
+            <span className="text-xs font-normal text-muted-foreground">{user.role}</span>
+          </DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => logoutAction()}>
           <LogOut className="size-4" />
