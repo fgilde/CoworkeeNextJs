@@ -9,4 +9,4 @@ Task 4: complete (auth.js credentials + edge-safe split, review clean, commit 5c
   MINOR-4b: middleware matcher prefix imprecise (login(?:/$) boundary) — fix if more routes added.
 Task 5: complete (rbac can-matrix + guards, tests 3/3, commit 72924a4)
 Task 6: complete (next-intl de/en cookie-based, 32-key parity, commit 31cc386)
-Task 7: complete (app shell — sidebar/topbar/theme/locale/user-menu, build+tsc+tests green, commit PENDING)
+Task 7: complete (app shell — sidebar/topbar/theme/locale/user-menu, build+tsc+tests green, commit 660154b)

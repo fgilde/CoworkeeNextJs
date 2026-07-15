@@ -34,4 +34,4 @@
 - Could not do a logged-in visual smoke test (no login page yet — Task 8) and deliberately did not weaken auth to fake one, per the task's explicit instruction.
 
 ## Commit
-`feat: app shell (sidebar/topbar/theme/locale/user-menu)` — see hash in final report line.
+`660154b` — "feat: app shell (sidebar/topbar/theme/locale/user-menu)"
