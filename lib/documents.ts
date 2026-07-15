@@ -25,6 +25,13 @@ export function safeStoredPath(storedName: string): string {
   return resolved;
 }
 
+// Human-readable file size (KB/MB), used wherever Document.sizeBytes is displayed.
+export function formatFileSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
 // Whitelist of extension characters; anything else (or no match) => no extension.
 const EXT_RE = /\.([a-zA-Z0-9]{1,8})$/;
 

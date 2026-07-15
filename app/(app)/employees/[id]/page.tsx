@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, getLocale } from "next-intl/server";
 import { requireAuth, can } from "@/lib/rbac";
 import { db } from "@/lib/db";
+import { formatFileSize } from "@/lib/documents";
 import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ProfileTabs } from "@/components/employees/profile-tabs";
@@ -35,6 +36,13 @@ export default async function EmployeeProfilePage({
     select: { employeeId: true },
   });
   const isOwnProfile = currentUser?.employeeId === employee.id;
+  const canViewDocuments = can(session.user.role, "document:manage") || isOwnProfile;
+  const documents = canViewDocuments
+    ? await db.document.findMany({
+        where: { employeeId: employee.id },
+        orderBy: { uploadedAt: "desc" },
+      })
+    : [];
   // HR/ADMIN edit via the employee edit page; own profile routes to self-service (/account).
   const canManage = can(session.user.role, "employee:write");
   const editHref = canManage
@@ -78,6 +86,17 @@ export default async function EmployeeProfilePage({
     })),
   };
 
+  const documentsDto = canViewDocuments
+    ? documents.map((doc) => ({
+        id: doc.id,
+        title: doc.title,
+        category: doc.category,
+        originalName: doc.originalName,
+        size: formatFileSize(doc.sizeBytes),
+        uploadedAt: dateFormatter.format(doc.uploadedAt),
+      }))
+    : null;
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
@@ -106,7 +125,7 @@ export default async function EmployeeProfilePage({
         </div>
       </div>
 
-      <ProfileTabs employee={profile} />
+      <ProfileTabs employee={profile} documents={documentsDto} />
     </div>
   );
 }

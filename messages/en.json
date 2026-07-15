@@ -99,6 +99,7 @@
     "tabPerson": "Person",
     "tabEmployment": "Employment",
     "tabTeam": "Team",
+    "tabDocuments": "Documents",
     "firstName": "First name",
     "lastName": "Last name",
     "email": "Email",
@@ -303,6 +304,7 @@
   "documents": {
     "title": "Documents",
     "upload": "Upload document",
+    "category": "Category",
     "categories": {
       "CONTRACT": "Contract",
       "PAYSLIP": "Payslip",
@@ -322,6 +324,12 @@
     "fileType": "This file type is not allowed.",
     "selectFile": "Select file",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "validationError": "Please check the highlighted fields.",
+    "notFound": "Document not found.",
+    "deleteConfirm": "Delete this document? This cannot be undone.",
+    "allEmployees": "All employees",
+    "filterEmployee": "Filter by employee",
+    "noEmployeeLinked": "No employee profile is linked to your account, so there are no documents to show."
   }
 }

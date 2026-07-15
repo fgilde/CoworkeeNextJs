@@ -99,6 +99,7 @@
     "tabPerson": "Person",
     "tabEmployment": "Beschäftigung",
     "tabTeam": "Team",
+    "tabDocuments": "Dokumente",
     "firstName": "Vorname",
     "lastName": "Nachname",
     "email": "E-Mail",
@@ -303,6 +304,7 @@
   "documents": {
     "title": "Dokumente",
     "upload": "Dokument hochladen",
+    "category": "Kategorie",
     "categories": {
       "CONTRACT": "Vertrag",
       "PAYSLIP": "Gehaltsabrechnung",
@@ -322,6 +324,12 @@
     "fileType": "Dieser Dateityp ist nicht erlaubt.",
     "selectFile": "Datei auswählen",
     "save": "Speichern",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "validationError": "Bitte überprüfen Sie die markierten Felder.",
+    "notFound": "Dokument nicht gefunden.",
+    "deleteConfirm": "Dieses Dokument löschen? Dies kann nicht rückgängig gemacht werden.",
+    "allEmployees": "Alle Mitarbeitenden",
+    "filterEmployee": "Nach Mitarbeiter filtern",
+    "noEmployeeLinked": "Ihrem Konto ist kein Mitarbeiterprofil zugeordnet, daher gibt es keine Dokumente anzuzeigen."
   }
 }

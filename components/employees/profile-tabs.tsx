@@ -4,8 +4,18 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TeamTiles } from "@/components/dashboard/team-tiles";
+
+export type ProfileDocument = {
+  id: string;
+  title: string;
+  category: "CONTRACT" | "PAYSLIP" | "CERTIFICATE" | "ID" | "OTHER";
+  originalName: string;
+  size: string;
+  uploadedAt: string;
+};
 
 type PersonLink = {
   id: string;
@@ -44,8 +54,15 @@ function Field({ label, value }: { label: string; value: string | null | undefin
   );
 }
 
-export function ProfileTabs({ employee }: { employee: EmployeeProfile }) {
+export function ProfileTabs({
+  employee,
+  documents,
+}: {
+  employee: EmployeeProfile;
+  documents: ProfileDocument[] | null;
+}) {
   const t = useTranslations("employees");
+  const td = useTranslations("documents");
 
   const address = [employee.street, employee.city, employee.country].filter(Boolean).join(", ");
 
@@ -55,6 +72,7 @@ export function ProfileTabs({ employee }: { employee: EmployeeProfile }) {
         <TabsTrigger value="person">{t("tabPerson")}</TabsTrigger>
         <TabsTrigger value="employment">{t("tabEmployment")}</TabsTrigger>
         <TabsTrigger value="team">{t("tabTeam")}</TabsTrigger>
+        {documents && <TabsTrigger value="documents">{t("tabDocuments")}</TabsTrigger>}
       </TabsList>
 
       <TabsContent value="person">
@@ -120,6 +138,51 @@ export function ProfileTabs({ employee }: { employee: EmployeeProfile }) {
           </div>
         </div>
       </TabsContent>
+
+      {documents && (
+        <TabsContent value="documents">
+          {documents.length === 0 ? (
+            <Card>
+              <CardContent className="text-sm text-muted-foreground">{td("noDocuments")}</CardContent>
+            </Card>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{td("fileName")}</TableHead>
+                  <TableHead>{td("category")}</TableHead>
+                  <TableHead>{td("size")}</TableHead>
+                  <TableHead>{td("uploadedAt")}</TableHead>
+                  <TableHead />
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {documents.map((doc) => (
+                  <TableRow key={doc.id}>
+                    <TableCell>
+                      <div className="font-medium">{doc.title}</div>
+                      <div className="text-xs text-muted-foreground">{doc.originalName}</div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="outline">{td(`categories.${doc.category}`)}</Badge>
+                    </TableCell>
+                    <TableCell className="tabular-nums">{doc.size}</TableCell>
+                    <TableCell>{doc.uploadedAt}</TableCell>
+                    <TableCell>
+                      <a
+                        href={`/api/documents/${doc.id}`}
+                        className="text-sm font-medium text-primary hover:underline"
+                      >
+                        {td("download")}
+                      </a>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
+        </TabsContent>
+      )}
     </Tabs>
   );
 }
