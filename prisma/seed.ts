@@ -1,11 +1,14 @@
 import "dotenv/config";
 import bcrypt from "bcryptjs";
+import { writeFile } from "fs/promises";
 import { db } from "../lib/db";
 import { computeWorkingDays } from "../lib/leave";
+import { ensureStorageDir, safeStoredPath } from "../lib/documents";
 
 async function main() {
   // --- Idempotent cleanup (FK-safe order) ---
   await db.auditLog.deleteMany();
+  await db.document.deleteMany();
   await db.timeEntry.deleteMany();
   await db.leaveRequest.deleteMany();
   await db.leaveEntitlement.deleteMany();
@@ -359,6 +362,44 @@ async function main() {
     data: { email: "employee@coworkee.test", passwordHash, role: "EMPLOYEE", locale: "de", employeeId: swe1.id },
   });
 
+  // --- Documents (demo placeholders so the guarded download works end to end).
+  // Real bytes are written under storage/documents (gitignored, private — not
+  // under public/); re-seeding overwrites the same fixed file names, so this
+  // stays idempotent on disk as well as in the DB.
+  await ensureStorageDir();
+  const seedDocSpecs = [
+    {
+      storedName: "seed-employment-contract.txt",
+      title: "Arbeitsvertrag",
+      category: "CONTRACT" as const,
+      content: "Demo placeholder – employment contract for Emily Krüger.\n",
+    },
+    {
+      storedName: "seed-payslip.txt",
+      title: "Gehaltsabrechnung",
+      category: "PAYSLIP" as const,
+      content: "Demo placeholder – payslip for Emily Krüger.\n",
+    },
+  ];
+  const documents = await Promise.all(
+    seedDocSpecs.map(async (spec) => {
+      const bytes = Buffer.from(spec.content, "utf-8");
+      await writeFile(safeStoredPath(spec.storedName), bytes);
+      return db.document.create({
+        data: {
+          employeeId: swe1.id,
+          title: spec.title,
+          category: spec.category,
+          originalName: spec.storedName.replace(/^seed-/, ""),
+          storedName: spec.storedName,
+          mimeType: "text/plain",
+          sizeBytes: bytes.byteLength,
+          uploadedById: hrUser.id,
+        },
+      });
+    })
+  );
+
   // --- Leave types ---
   const vacationType = await db.leaveType.create({
     data: { name: "Urlaub", colorHex: "#22c55e", paid: true, defaultDays: 30 },
@@ -466,6 +507,7 @@ async function main() {
     leaveEntitlements: entitlements.length,
     leaveRequests: [pendingRequest, approvedRequest].length,
     timeEntries: timeEntries.length + 1,
+    documents: documents.length,
   };
 
   console.log("Seed done: ", counts);

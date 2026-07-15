@@ -25,7 +25,8 @@
     "approvals": "Approvals",
     "team": "Team absences",
     "time": "Time tracking",
-    "teamTime": "Team time"
+    "teamTime": "Team time",
+    "documents": "Documents"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -298,5 +299,29 @@
     "clockedInStatus": "Clocked in",
     "clockedOutStatus": "Clocked out",
     "noTeamEntries": "No employees in scope."
+  },
+  "documents": {
+    "title": "Documents",
+    "upload": "Upload document",
+    "categories": {
+      "CONTRACT": "Contract",
+      "PAYSLIP": "Payslip",
+      "CERTIFICATE": "Certificate",
+      "ID": "ID document",
+      "OTHER": "Other"
+    },
+    "fileName": "File name",
+    "size": "Size",
+    "uploadedAt": "Uploaded at",
+    "uploadedBy": "Uploaded by",
+    "employee": "Employee",
+    "download": "Download",
+    "delete": "Delete",
+    "noDocuments": "No documents yet.",
+    "fileTooLarge": "The file exceeds the 10 MB size limit.",
+    "fileType": "This file type is not allowed.",
+    "selectFile": "Select file",
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }

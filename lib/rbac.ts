@@ -10,7 +10,9 @@ export type Action =
   | "leave:approve"
   | "leave:manage"
   | "time:track"
-  | "time:view-team";
+  | "time:view-team"
+  | "document:read-own"
+  | "document:manage";
 export type Role = "ADMIN" | "HR" | "MANAGER" | "EMPLOYEE";
 
 const PERMISSIONS: Record<Role, Set<Action>> = {
@@ -24,6 +26,8 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "leave:manage",
     "time:track",
     "time:view-team",
+    "document:read-own",
+    "document:manage",
   ]),
   HR: new Set([
     "employee:read",
@@ -34,9 +38,18 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "leave:manage",
     "time:track",
     "time:view-team",
+    "document:read-own",
+    "document:manage",
   ]),
-  MANAGER: new Set(["employee:read", "leave:request", "leave:approve", "time:track", "time:view-team"]),
-  EMPLOYEE: new Set(["employee:read", "leave:request", "time:track"]),
+  MANAGER: new Set([
+    "employee:read",
+    "leave:request",
+    "leave:approve",
+    "time:track",
+    "time:view-team",
+    "document:read-own",
+  ]),
+  EMPLOYEE: new Set(["employee:read", "leave:request", "time:track", "document:read-own"]),
 };
 
 export function can(role: Role, action: Action): boolean {

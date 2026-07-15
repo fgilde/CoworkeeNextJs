@@ -43,3 +43,6 @@ next-env.d.ts
 
 # SDD scratch/ledger
 .superpowers/
+
+# uploaded documents (private storage, not committed)
+/storage/

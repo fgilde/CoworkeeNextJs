@@ -32,6 +32,14 @@ enum LeaveStatus {
   CANCELLED
 }
 
+enum DocumentCategory {
+  CONTRACT
+  PAYSLIP
+  CERTIFICATE
+  ID
+  OTHER
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -73,6 +81,7 @@ model Employee {
   leaveApprovals LeaveRequest[] @relation("LeaveApprovals")
   leaveEntitlements LeaveEntitlement[]
   timeEntries  TimeEntry[] @relation("EmployeeTime")
+  documents    Document[] @relation("EmployeeDocs")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -153,6 +162,22 @@ model TimeEntry {
   createdAt    DateTime  @default(now())
 
   @@index([employeeId, date])
+}
+
+model Document {
+  id           String           @id @default(cuid())
+  employee     Employee         @relation("EmployeeDocs", fields: [employeeId], references: [id])
+  employeeId   String
+  title        String
+  category     DocumentCategory @default(OTHER)
+  originalName String
+  storedName   String           @unique
+  mimeType     String
+  sizeBytes    Int
+  uploadedById String
+  uploadedAt   DateTime         @default(now())
+
+  @@index([employeeId])
 }
 
 model AuditLog {

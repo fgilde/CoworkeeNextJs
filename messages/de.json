@@ -25,7 +25,8 @@
     "approvals": "Genehmigungen",
     "team": "Team-Abwesenheit",
     "time": "Zeiterfassung",
-    "teamTime": "Team-Zeiten"
+    "teamTime": "Team-Zeiten",
+    "documents": "Dokumente"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -298,5 +299,29 @@
     "clockedInStatus": "Eingestempelt",
     "clockedOutStatus": "Ausgestempelt",
     "noTeamEntries": "Keine Mitarbeitenden im Zuständigkeitsbereich."
+  },
+  "documents": {
+    "title": "Dokumente",
+    "upload": "Dokument hochladen",
+    "categories": {
+      "CONTRACT": "Vertrag",
+      "PAYSLIP": "Gehaltsabrechnung",
+      "CERTIFICATE": "Zertifikat",
+      "ID": "Ausweisdokument",
+      "OTHER": "Sonstiges"
+    },
+    "fileName": "Dateiname",
+    "size": "Größe",
+    "uploadedAt": "Hochgeladen am",
+    "uploadedBy": "Hochgeladen von",
+    "employee": "Mitarbeiter",
+    "download": "Herunterladen",
+    "delete": "Löschen",
+    "noDocuments": "Noch keine Dokumente.",
+    "fileTooLarge": "Die Datei überschreitet das Größenlimit von 10 MB.",
+    "fileType": "Dieser Dateityp ist nicht erlaubt.",
+    "selectFile": "Datei auswählen",
+    "save": "Speichern",
+    "cancel": "Abbrechen"
   }
 }

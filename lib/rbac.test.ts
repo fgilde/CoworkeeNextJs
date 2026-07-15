@@ -50,3 +50,17 @@ test("MANAGER, HR, ADMIN can view team time", () => {
   expect(can("HR", "time:view-team")).toBe(true);
   expect(can("ADMIN", "time:view-team")).toBe(true);
 });
+
+test("EMPLOYEE and MANAGER can read own documents but not manage", () => {
+  expect(can("EMPLOYEE", "document:read-own")).toBe(true);
+  expect(can("EMPLOYEE", "document:manage")).toBe(false);
+  expect(can("MANAGER", "document:read-own")).toBe(true);
+  expect(can("MANAGER", "document:manage")).toBe(false);
+});
+
+test("HR and ADMIN can manage documents", () => {
+  expect(can("HR", "document:manage")).toBe(true);
+  expect(can("HR", "document:read-own")).toBe(true);
+  expect(can("ADMIN", "document:manage")).toBe(true);
+  expect(can("ADMIN", "document:read-own")).toBe(true);
+});
