@@ -8,6 +8,8 @@ import { ensureStorageDir, safeStoredPath } from "../lib/documents";
 async function main() {
   // --- Idempotent cleanup (FK-safe order) ---
   await db.auditLog.deleteMany();
+  await db.application.deleteMany();
+  await db.jobPosting.deleteMany();
   await db.review.deleteMany();
   await db.goal.deleteMany();
   await db.announcement.deleteMany();
@@ -501,6 +503,115 @@ async function main() {
     )
   );
 
+  // --- Recruiting: job postings & applications ---
+  const jobBackend = await db.jobPosting.create({
+    data: {
+      title: "Senior Backend Engineer",
+      description: "Own the core services platform and mentor mid-level engineers.",
+      employmentType: "Full-time",
+      status: "OPEN",
+      departmentId: engineering.id,
+      locationId: berlin.id,
+      createdById: hrUser.id,
+    },
+  });
+  const jobSales = await db.jobPosting.create({
+    data: {
+      title: "Account Executive",
+      description: "Drive new business in the DACH region.",
+      employmentType: "Full-time",
+      status: "OPEN",
+      departmentId: sales.id,
+      locationId: munich.id,
+      createdById: hrUser.id,
+    },
+  });
+  const jobRecruiter = await db.jobPosting.create({
+    data: {
+      title: "Working Student Recruiting",
+      description: "Support the People & Culture team with sourcing and interview coordination.",
+      employmentType: "Working student",
+      status: "DRAFT",
+      departmentId: peopleCulture.id,
+      locationId: berlin.id,
+      createdById: adminUser.id,
+    },
+  });
+
+  const applications = await Promise.all([
+    db.application.create({
+      data: {
+        jobPostingId: jobBackend.id,
+        firstName: "Max",
+        lastName: "Mustermann",
+        email: "max.mustermann@example.com",
+        stage: "APPLIED",
+      },
+    }),
+    db.application.create({
+      data: {
+        jobPostingId: jobBackend.id,
+        firstName: "Erika",
+        lastName: "Beispiel",
+        email: "erika.beispiel@example.com",
+        stage: "SCREENING",
+        rating: 3,
+      },
+    }),
+    db.application.create({
+      data: {
+        jobPostingId: jobBackend.id,
+        firstName: "Peter",
+        lastName: "Schmidt",
+        email: "peter.schmidt@example.com",
+        stage: "INTERVIEW",
+        rating: 4,
+        notes: "Strong systems design round, second interview scheduled.",
+      },
+    }),
+    db.application.create({
+      data: {
+        jobPostingId: jobBackend.id,
+        firstName: "Lisa",
+        lastName: "Meier",
+        email: "lisa.meier@example.com",
+        stage: "HIRED",
+        rating: 5,
+        notes: "Offer accepted, start date TBD.",
+      },
+    }),
+    db.application.create({
+      data: {
+        jobPostingId: jobBackend.id,
+        firstName: "Tom",
+        lastName: "Fischer",
+        email: "tom.fischer@example.com",
+        stage: "REJECTED",
+        rating: 2,
+        notes: "Not enough backend depth for this role.",
+      },
+    }),
+    db.application.create({
+      data: {
+        jobPostingId: jobSales.id,
+        firstName: "Anna",
+        lastName: "Keller",
+        email: "anna.keller@example.com",
+        stage: "APPLIED",
+      },
+    }),
+    db.application.create({
+      data: {
+        jobPostingId: jobSales.id,
+        firstName: "Jonas",
+        lastName: "Bauer",
+        email: "jonas.bauer@example.com",
+        stage: "SCREENING",
+        rating: 3,
+      },
+    }),
+  ]);
+
   // --- Leave types ---
   const vacationType = await db.leaveType.create({
     data: { name: "Urlaub", colorHex: "#22c55e", paid: true, defaultDays: 30 },
@@ -700,6 +811,8 @@ async function main() {
     goals: goals.length,
     reviews: reviews.length,
     checklistTasks: await db.checklistTask.count(),
+    jobPostings: await db.jobPosting.count(),
+    applications: applications.length,
   };
 
   console.log("Seed done: ", counts);

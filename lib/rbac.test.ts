@@ -97,3 +97,10 @@ test("HR and ADMIN can view analytics, MANAGER and EMPLOYEE cannot", () => {
   expect(can("MANAGER", "analytics:view")).toBe(false);
   expect(can("EMPLOYEE", "analytics:view")).toBe(false);
 });
+
+test("HR and ADMIN can manage recruiting, MANAGER and EMPLOYEE cannot", () => {
+  expect(can("HR", "recruiting:manage")).toBe(true);
+  expect(can("ADMIN", "recruiting:manage")).toBe(true);
+  expect(can("MANAGER", "recruiting:manage")).toBe(false);
+  expect(can("EMPLOYEE", "recruiting:manage")).toBe(false);
+});

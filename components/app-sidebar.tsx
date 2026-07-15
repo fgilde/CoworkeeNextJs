@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, Clock, FileText, Megaphone, ListChecks, Target, BarChart3, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, Clock, FileText, Megaphone, ListChecks, Target, BarChart3, Briefcase, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type NavKey =
@@ -20,6 +20,7 @@ type NavKey =
   | "onboarding"
   | "performance"
   | "analytics"
+  | "recruiting"
   | "settings"
   | "account";
 
@@ -44,6 +45,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/onboarding", labelKey: "onboarding", icon: ListChecks, group: "main" },
   { href: "/performance", labelKey: "performance", icon: Target, group: "main" },
   { href: "/analytics", labelKey: "analytics", icon: BarChart3, group: "main" },
+  { href: "/recruiting", labelKey: "recruiting", icon: Briefcase, group: "main" },
   { href: "/settings", labelKey: "settings", icon: Settings, group: "account" },
   { href: "/account", labelKey: "account", icon: CircleUser, group: "account" },
 ];
@@ -77,11 +79,13 @@ export function AppSidebar({
   canApprove,
   canViewTeamTime,
   canAnalytics,
+  canRecruiting,
 }: {
   canSettings: boolean;
   canApprove: boolean;
   canViewTeamTime: boolean;
   canAnalytics: boolean;
+  canRecruiting: boolean;
 }) {
   const t = useTranslations("nav");
   const tCommon = useTranslations("common");
@@ -93,7 +97,8 @@ export function AppSidebar({
       (item.labelKey !== "approvals" || canApprove) &&
       (item.labelKey !== "team" || canApprove) &&
       (item.labelKey !== "teamTime" || canViewTeamTime) &&
-      (item.labelKey !== "analytics" || canAnalytics)
+      (item.labelKey !== "analytics" || canAnalytics) &&
+      (item.labelKey !== "recruiting" || canRecruiting)
   );
   const mainItems = items.filter((item) => item.group === "main");
   const accountItems = items.filter((item) => item.group === "account");

@@ -30,7 +30,8 @@
     "news": "News",
     "onboarding": "Onboarding",
     "performance": "Performance",
-    "analytics": "Analytics"
+    "analytics": "Analytics",
+    "recruiting": "Recruiting"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -463,5 +464,51 @@
     "value": "Value",
     "employees": "Employees",
     "noData": "No data available yet."
+  },
+  "recruiting": {
+    "title": "Recruiting",
+    "jobPostings": "Job postings",
+    "newPosting": "+ New posting",
+    "editPosting": "Edit posting",
+    "jobTitle": "Job title",
+    "description": "Description",
+    "employmentType": "Employment type",
+    "status": "Status",
+    "department": "Department",
+    "location": "Location",
+    "applications": "Applications",
+    "applicant": "Applicant",
+    "newApplication": "+ New application",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "stage": "Stage",
+    "rating": "Rating",
+    "notes": "Notes",
+    "appliedAt": "Applied",
+    "pipeline": "Pipeline",
+    "moveStage": "Move stage",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "noPostings": "No job postings yet.",
+    "noApplications": "No applications yet.",
+    "validationError": "Please check the highlighted fields.",
+    "confirmDeletePosting": "Delete this job posting? This cannot be undone.",
+    "confirmDeleteApplication": "Delete this application? This cannot be undone.",
+    "jobStatus": {
+      "DRAFT": "Draft",
+      "OPEN": "Open",
+      "CLOSED": "Closed"
+    },
+    "applicationStage": {
+      "APPLIED": "Applied",
+      "SCREENING": "Screening",
+      "INTERVIEW": "Interview",
+      "OFFER": "Offer",
+      "HIRED": "Hired",
+      "REJECTED": "Rejected"
+    }
   }
 }

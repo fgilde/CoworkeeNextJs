@@ -58,6 +58,21 @@ enum ReviewStatus {
   ACKNOWLEDGED
 }
 
+enum JobStatus {
+  DRAFT
+  OPEN
+  CLOSED
+}
+
+enum ApplicationStage {
+  APPLIED
+  SCREENING
+  INTERVIEW
+  OFFER
+  HIRED
+  REJECTED
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -114,6 +129,7 @@ model Department {
   lead     Employee? @relation("DeptLead", fields: [leadId], references: [id])
   leadId   String?
   employees Employee[]
+  jobPostings JobPosting[]
 }
 
 model Position {
@@ -128,6 +144,7 @@ model Location {
   city    String?
   country String?
   employees Employee[]
+  jobPostings JobPosting[]
 }
 
 model LeaveType {
@@ -294,4 +311,37 @@ model Review {
   submittedAt  DateTime?
 
   @@index([employeeId])
+}
+
+model JobPosting {
+  id             String       @id @default(cuid())
+  title          String
+  description    String
+  employmentType String?
+  status         JobStatus    @default(DRAFT)
+  department     Department?  @relation(fields: [departmentId], references: [id])
+  departmentId   String?
+  location       Location?    @relation(fields: [locationId], references: [id])
+  locationId     String?
+  createdById    String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  applications   Application[]
+}
+
+model Application {
+  id           String           @id @default(cuid())
+  jobPosting   JobPosting       @relation(fields: [jobPostingId], references: [id], onDelete: Cascade)
+  jobPostingId String
+  firstName    String
+  lastName     String
+  email        String
+  phone        String?
+  stage        ApplicationStage @default(APPLIED)
+  rating       Int?
+  notes        String?
+  appliedAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  @@index([jobPostingId, stage])
 }

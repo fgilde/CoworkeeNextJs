@@ -30,7 +30,8 @@
     "news": "Neuigkeiten",
     "onboarding": "Onboarding",
     "performance": "Leistung",
-    "analytics": "Analysen"
+    "analytics": "Analysen",
+    "recruiting": "Recruiting"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -463,5 +464,51 @@
     "value": "Wert",
     "employees": "Mitarbeitende",
     "noData": "Noch keine Daten verfügbar."
+  },
+  "recruiting": {
+    "title": "Recruiting",
+    "jobPostings": "Stellenausschreibungen",
+    "newPosting": "+ Neue Stelle",
+    "editPosting": "Stelle bearbeiten",
+    "jobTitle": "Stellenbezeichnung",
+    "description": "Beschreibung",
+    "employmentType": "Beschäftigungsart",
+    "status": "Status",
+    "department": "Abteilung",
+    "location": "Standort",
+    "applications": "Bewerbungen",
+    "applicant": "Bewerber:in",
+    "newApplication": "+ Neue Bewerbung",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "stage": "Phase",
+    "rating": "Bewertung",
+    "notes": "Notizen",
+    "appliedAt": "Beworben am",
+    "pipeline": "Pipeline",
+    "moveStage": "Phase ändern",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "noPostings": "Noch keine Stellenausschreibungen.",
+    "noApplications": "Noch keine Bewerbungen.",
+    "validationError": "Bitte überprüfe die markierten Felder.",
+    "confirmDeletePosting": "Diese Stellenausschreibung löschen? Dies kann nicht rückgängig gemacht werden.",
+    "confirmDeleteApplication": "Diese Bewerbung löschen? Dies kann nicht rückgängig gemacht werden.",
+    "jobStatus": {
+      "DRAFT": "Entwurf",
+      "OPEN": "Offen",
+      "CLOSED": "Geschlossen"
+    },
+    "applicationStage": {
+      "APPLIED": "Beworben",
+      "SCREENING": "Sichtung",
+      "INTERVIEW": "Interview",
+      "OFFER": "Angebot",
+      "HIRED": "Eingestellt",
+      "REJECTED": "Abgelehnt"
+    }
   }
 }
