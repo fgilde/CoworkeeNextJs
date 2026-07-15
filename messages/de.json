@@ -190,6 +190,8 @@
   "orgChart": {
     "title": "Organigramm",
     "noPosition": "—",
-    "empty": "Keine Mitarbeiter gefunden."
+    "empty": "Keine Mitarbeiter gefunden.",
+    "expand": "Untergeordnete anzeigen",
+    "collapse": "Untergeordnete ausblenden"
   }
 }

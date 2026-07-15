@@ -44,11 +44,11 @@ export default async function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="text-2xl font-semibold">{t("greeting", { name: greetingName })}</h1>
+      <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{t("greeting", { name: greetingName })}</h1>
 
       {employee ? (
         <section className="flex flex-col gap-3">
-          <h2 className="text-sm font-medium text-muted-foreground">{t("myDetails")}</h2>
+          <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t("myDetails")}</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <StatCard label={t("department")} value={employee.department?.name ?? t("notSet")} icon={Building2} />
             <StatCard label={t("position")} value={employee.position?.title ?? t("notSet")} icon={Briefcase} />
@@ -67,7 +67,7 @@ export default async function DashboardPage() {
 
       {session.user.role === "MANAGER" && employee && (
         <section className="flex flex-col gap-3">
-          <h2 className="text-sm font-medium text-muted-foreground">{t("myTeam")}</h2>
+          <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t("myTeam")}</h2>
           {employee.reports.length > 0 ? (
             <TeamTiles reports={employee.reports} />
           ) : (
@@ -80,7 +80,7 @@ export default async function DashboardPage() {
 
       {companyStats && (
         <section className="flex flex-col gap-3">
-          <h2 className="text-sm font-medium text-muted-foreground">{t("companyOverview")}</h2>
+          <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t("companyOverview")}</h2>
           <div className="grid gap-3 sm:grid-cols-3">
             <StatCard label={t("totalEmployees")} value={companyStats.total} icon={Users2} />
             <StatCard label={t("activeEmployees")} value={companyStats.active} icon={CircleCheck} />

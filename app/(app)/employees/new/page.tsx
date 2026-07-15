@@ -19,7 +19,7 @@ export default async function NewEmployeePage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-2xl font-semibold">{t("newEmployeeTitle")}</h1>
+      <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{t("newEmployeeTitle")}</h1>
       <EmployeeForm
         mode="create"
         options={{

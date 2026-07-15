@@ -30,7 +30,7 @@ export default async function SettingsUsersPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-2xl font-semibold">{t("users.title")}</h1>
+      <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{t("users.title")}</h1>
 
       <Table>
         <TableHeader>

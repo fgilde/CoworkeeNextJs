@@ -13,7 +13,7 @@ export function TeamTiles({ reports }: { reports: TeamReport[] }) {
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {reports.map((report) => (
         <Link key={report.id} href={`/employees/${report.id}`}>
-          <Card className="transition-colors hover:bg-accent/50">
+          <Card className="transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md">
             <CardContent>
               <div className="font-medium">
                 {report.firstName} {report.lastName}

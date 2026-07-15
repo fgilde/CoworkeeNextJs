@@ -38,7 +38,7 @@ export type EmployeeProfile = {
 function Field({ label, value }: { label: string; value: string | null | undefined }) {
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-xs text-muted-foreground">{label}</span>
+      <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">{label}</span>
       <span className="text-sm">{value || "—"}</span>
     </div>
   );
@@ -92,7 +92,7 @@ export function ProfileTabs({ employee }: { employee: EmployeeProfile }) {
         <div className="flex flex-col gap-4">
           <Card>
             <CardContent className="flex flex-col gap-2">
-              <span className="text-xs text-muted-foreground">{t("manager")}</span>
+              <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">{t("manager")}</span>
               {employee.manager ? (
                 <Link href={`/employees/${employee.manager.id}`} className="hover:underline">
                   <div className="text-sm font-medium">
@@ -109,7 +109,7 @@ export function ProfileTabs({ employee }: { employee: EmployeeProfile }) {
           </Card>
 
           <div className="flex flex-col gap-2">
-            <span className="text-xs text-muted-foreground">{t("directReports")}</span>
+            <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">{t("directReports")}</span>
             {employee.reports.length > 0 ? (
               <TeamTiles reports={employee.reports} />
             ) : (

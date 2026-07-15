@@ -11,16 +11,16 @@ export function StatCard({
   icon?: LucideIcon;
 }) {
   return (
-    <Card>
+    <Card className="transition-all hover:-translate-y-0.5 hover:shadow-md">
       <CardContent className="flex items-center gap-3">
         {Icon && (
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-muted">
-            <Icon className="size-4 text-muted-foreground" />
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent">
+            <Icon className="size-4 text-accent-foreground" />
           </div>
         )}
         <div className="min-w-0">
-          <div className="text-xs text-muted-foreground">{label}</div>
-          <div className="truncate text-base font-medium">{value}</div>
+          <div className="text-xs font-medium tracking-wide text-muted-foreground uppercase">{label}</div>
+          <div className="truncate text-base font-medium tabular-nums">{value}</div>
         </div>
       </CardContent>
     </Card>

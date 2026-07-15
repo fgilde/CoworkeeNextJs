@@ -55,7 +55,7 @@ export default async function SettingsPage() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">{t("title")}</h1>
+        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{t("title")}</h1>
         {can(session.user.role, "users:manage") && (
           <Link href="/settings/users" className={buttonVariants({ variant: "outline", size: "sm" })}>
             {t("manageUsers")}

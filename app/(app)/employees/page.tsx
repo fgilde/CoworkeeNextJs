@@ -74,7 +74,7 @@ export default async function EmployeesPage({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">{t("title")}</h1>
+        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{t("title")}</h1>
         {canWrite && (
           <Link href="/employees/new" className={buttonVariants({ size: "sm" })}>
             {t("newEmployee")}
@@ -97,7 +97,7 @@ export default async function EmployeesPage({
         >
           {t("previous")}
         </Link>
-        <span className="text-sm text-muted-foreground">
+        <span className="text-sm tabular-nums text-muted-foreground">
           {t("pageOf", { page, total: totalPages })}
         </span>
         <Link

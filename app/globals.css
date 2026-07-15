@@ -50,71 +50,71 @@
 
 :root {
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --foreground: oklch(0.16 0.012 265);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.16 0.012 265);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.16 0.012 265);
+  --primary: oklch(0.545 0.22 275);
+  --primary-foreground: oklch(0.98 0.01 275);
+  --secondary: oklch(0.968 0.006 265);
+  --secondary-foreground: oklch(0.22 0.02 265);
+  --muted: oklch(0.968 0.006 265);
+  --muted-foreground: oklch(0.522 0.014 265);
+  --accent: oklch(0.955 0.025 275);
+  --accent-foreground: oklch(0.34 0.15 275);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --border: oklch(0.914 0.008 265);
+  --input: oklch(0.914 0.008 265);
+  --ring: oklch(0.545 0.22 275);
+  --chart-1: oklch(0.545 0.22 275);
+  --chart-2: oklch(0.62 0.19 300);
+  --chart-3: oklch(0.7 0.15 230);
+  --chart-4: oklch(0.65 0.18 190);
+  --chart-5: oklch(0.6 0.2 330);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.99 0.004 265);
+  --sidebar-foreground: oklch(0.16 0.012 265);
+  --sidebar-primary: oklch(0.545 0.22 275);
+  --sidebar-primary-foreground: oklch(0.98 0.01 275);
+  --sidebar-accent: oklch(0.955 0.025 275);
+  --sidebar-accent-foreground: oklch(0.34 0.15 275);
+  --sidebar-border: oklch(0.914 0.008 265);
+  --sidebar-ring: oklch(0.545 0.22 275);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: oklch(0.155 0.014 265);
+  --foreground: oklch(0.96 0.006 265);
+  --card: oklch(0.205 0.016 265);
+  --card-foreground: oklch(0.96 0.006 265);
+  --popover: oklch(0.205 0.016 265);
+  --popover-foreground: oklch(0.96 0.006 265);
+  --primary: oklch(0.755 0.18 275);
+  --primary-foreground: oklch(0.16 0.03 275);
+  --secondary: oklch(0.269 0.016 265);
+  --secondary-foreground: oklch(0.96 0.006 265);
+  --muted: oklch(0.269 0.016 265);
+  --muted-foreground: oklch(0.685 0.014 265);
+  --accent: oklch(0.3 0.05 275);
+  --accent-foreground: oklch(0.9 0.07 275);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.755 0.18 275);
+  --chart-1: oklch(0.755 0.18 275);
+  --chart-2: oklch(0.78 0.16 300);
+  --chart-3: oklch(0.78 0.13 230);
+  --chart-4: oklch(0.78 0.15 190);
+  --chart-5: oklch(0.75 0.17 330);
+  --sidebar: oklch(0.185 0.016 265);
+  --sidebar-foreground: oklch(0.96 0.006 265);
+  --sidebar-primary: oklch(0.755 0.18 275);
+  --sidebar-primary-foreground: oklch(0.16 0.03 275);
+  --sidebar-accent: oklch(0.3 0.05 275);
+  --sidebar-accent-foreground: oklch(0.9 0.07 275);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-ring: oklch(0.755 0.18 275);
 }
 
 @layer base {
@@ -126,5 +126,86 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+/* Classic pure-CSS "family tree" connectors for the org chart. Scoped under
+   .org-tree so it can't leak into other lists. */
+@layer components {
+  .org-tree ul {
+    position: relative;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    gap: 2rem;
+    padding-top: 1.5rem;
+  }
+  .org-tree > ul {
+    padding-top: 0;
+  }
+  .org-tree li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding-top: 1.5rem;
+  }
+  .org-tree > ul > li {
+    padding-top: 0;
+  }
+  .org-tree li::before,
+  .org-tree li::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 51%;
+    width: 50%;
+    height: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .org-tree li::after {
+    right: auto;
+    left: 51%;
+    border-left: 1px solid var(--border);
+  }
+  .org-tree > ul > li::before,
+  .org-tree > ul > li::after {
+    display: none;
+  }
+  .org-tree li:only-child::before,
+  .org-tree li:only-child::after {
+    display: none;
+  }
+  .org-tree li:first-child::before,
+  .org-tree li:last-child::after {
+    border-color: transparent;
+  }
+  .org-tree li:last-child::before {
+    border-right: 1px solid var(--border);
+    border-radius: 0 0.5rem 0 0;
+  }
+  .org-tree li:first-child::after {
+    border-radius: 0.5rem 0 0 0;
+  }
+  .org-tree ul ul::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 1.5rem;
+    border-left: 1px solid var(--border);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

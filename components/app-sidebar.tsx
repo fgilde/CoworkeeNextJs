@@ -12,15 +12,40 @@ type NavItem = {
   href: string;
   labelKey: NavKey;
   icon: LucideIcon;
+  group: "main" | "account";
 };
 
 const NAV_ITEMS: NavItem[] = [
-  { href: "/", labelKey: "dashboard", icon: LayoutDashboard },
-  { href: "/employees", labelKey: "employees", icon: Users },
-  { href: "/org", labelKey: "orgChart", icon: Network },
-  { href: "/settings", labelKey: "settings", icon: Settings },
-  { href: "/account", labelKey: "account", icon: CircleUser },
+  { href: "/", labelKey: "dashboard", icon: LayoutDashboard, group: "main" },
+  { href: "/employees", labelKey: "employees", icon: Users, group: "main" },
+  { href: "/org", labelKey: "orgChart", icon: Network, group: "main" },
+  { href: "/settings", labelKey: "settings", icon: Settings, group: "account" },
+  { href: "/account", labelKey: "account", icon: CircleUser, group: "account" },
 ];
+
+function NavLink({ href, labelKey, icon: Icon, active, label }: NavItem & { active: boolean; label: string }) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "group relative flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200",
+        active
+          ? "bg-sidebar-accent text-sidebar-accent-foreground"
+          : "text-sidebar-foreground/70 hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground"
+      )}
+    >
+      <span
+        aria-hidden
+        className={cn(
+          "absolute inset-y-1 left-0 w-0.5 rounded-full bg-primary transition-all duration-200",
+          active ? "opacity-100" : "opacity-0"
+        )}
+      />
+      <Icon className="size-4 shrink-0" />
+      <span className="truncate">{label}</span>
+    </Link>
+  );
+}
 
 export function AppSidebar({ canSettings }: { canSettings: boolean }) {
   const t = useTranslations("nav");
@@ -28,30 +53,31 @@ export function AppSidebar({ canSettings }: { canSettings: boolean }) {
   const pathname = usePathname();
 
   const items = NAV_ITEMS.filter((item) => item.labelKey !== "settings" || canSettings);
+  const mainItems = items.filter((item) => item.group === "main");
+  const accountItems = items.filter((item) => item.group === "account");
+
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
-    <aside className="flex w-[260px] shrink-0 flex-col border-r border-border bg-sidebar text-sidebar-foreground">
-      <div className="px-5 py-5 text-lg font-semibold tracking-tight">{tCommon("appName")}</div>
+    <aside className="flex w-[260px] shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
+      <div className="flex items-center gap-2 px-5 py-5">
+        <div className="flex size-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
+          {tCommon("appName").charAt(0)}
+        </div>
+        <span className="text-lg font-semibold tracking-tight">{tCommon("appName")}</span>
+      </div>
       <nav className="flex flex-col gap-1 px-3">
-        {items.map(({ href, labelKey, icon: Icon }) => {
-          const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
-          return (
-            <Link
-              key={href}
-              href={href}
-              className={cn(
-                "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                active
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                  : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-              )}
-            >
-              <Icon className="size-4" />
-              {t(labelKey)}
-            </Link>
-          );
-        })}
+        {mainItems.map((item) => (
+          <NavLink key={item.href} {...item} active={isActive(item.href)} label={t(item.labelKey)} />
+        ))}
       </nav>
+      {accountItems.length > 0 && (
+        <nav className="mt-auto flex flex-col gap-1 border-t border-sidebar-border px-3 py-3">
+          {accountItems.map((item) => (
+            <NavLink key={item.href} {...item} active={isActive(item.href)} label={t(item.labelKey)} />
+          ))}
+        </nav>
+      )}
     </aside>
   );
 }

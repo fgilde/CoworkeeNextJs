@@ -33,7 +33,7 @@ export default async function EditEmployeePage({
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-2xl font-semibold">{t("editEmployeeTitle")}</h1>
+      <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{t("editEmployeeTitle")}</h1>
       <EmployeeForm
         mode="edit"
         id={employee.id}

@@ -190,6 +190,8 @@
   "orgChart": {
     "title": "Org Chart",
     "noPosition": "—",
-    "empty": "No employees found."
+    "empty": "No employees found.",
+    "expand": "Show reports",
+    "collapse": "Hide reports"
   }
 }
