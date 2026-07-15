@@ -14,7 +14,9 @@ export type Action =
   | "document:read-own"
   | "document:manage"
   | "announcement:manage"
-  | "onboarding:manage";
+  | "onboarding:manage"
+  | "goal:manage"
+  | "review:manage";
 export type Role = "ADMIN" | "HR" | "MANAGER" | "EMPLOYEE";
 
 const PERMISSIONS: Record<Role, Set<Action>> = {
@@ -32,6 +34,8 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "document:manage",
     "announcement:manage",
     "onboarding:manage",
+    "goal:manage",
+    "review:manage",
   ]),
   HR: new Set([
     "employee:read",
@@ -46,6 +50,8 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "document:manage",
     "announcement:manage",
     "onboarding:manage",
+    "goal:manage",
+    "review:manage",
   ]),
   MANAGER: new Set([
     "employee:read",
@@ -54,6 +60,8 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "time:track",
     "time:view-team",
     "document:read-own",
+    "goal:manage",
+    "review:manage",
   ]),
   EMPLOYEE: new Set(["employee:read", "leave:request", "time:track", "document:read-own"]),
 };

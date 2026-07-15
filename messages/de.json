@@ -28,7 +28,8 @@
     "teamTime": "Team-Zeiten",
     "documents": "Dokumente",
     "news": "Neuigkeiten",
-    "onboarding": "Onboarding"
+    "onboarding": "Onboarding",
+    "performance": "Leistung"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -383,5 +384,53 @@
     "validationError": "Bitte überprüfen Sie die markierten Felder.",
     "confirmDelete": "Diesen Prozess löschen? Dies kann nicht rückgängig gemacht werden.",
     "confirmDeleteTemplate": "Diese Vorlage löschen? Dies kann nicht rückgängig gemacht werden."
+  },
+  "performance": {
+    "title": "Leistung",
+    "goals": "Ziele",
+    "reviews": "Beurteilungen",
+    "newGoal": "+ Neues Ziel",
+    "editGoal": "Ziel bearbeiten",
+    "goalTitle": "Titel",
+    "description": "Beschreibung",
+    "status": "Status",
+    "progress": "Fortschritt",
+    "dueDate": "Fällig am",
+    "newReview": "+ Neue Beurteilung",
+    "editReview": "Beurteilung bearbeiten",
+    "period": "Zeitraum",
+    "rating": "Bewertung",
+    "strengths": "Stärken",
+    "improvements": "Verbesserungspotenzial",
+    "comments": "Kommentare",
+    "submit": "Absenden",
+    "acknowledge": "Bestätigen",
+    "acknowledged": "Bestätigt",
+    "draft": "Entwurf",
+    "submitted": "Eingereicht",
+    "reviewer": "Beurteiler",
+    "myGoals": "Meine Ziele",
+    "myReviews": "Meine Beurteilungen",
+    "teamGoals": "Team-Ziele",
+    "teamReviews": "Team-Beurteilungen",
+    "noGoals": "Noch keine Ziele.",
+    "noReviews": "Noch keine Beurteilungen.",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "goalStatus": {
+      "OPEN": "Offen",
+      "IN_PROGRESS": "In Bearbeitung",
+      "DONE": "Erledigt",
+      "CANCELLED": "Abgebrochen"
+    },
+    "ratingLabels": {
+      "unrated": "Unbewertet",
+      "poor": "Schwach",
+      "fair": "Ausreichend",
+      "good": "Gut",
+      "veryGood": "Sehr gut",
+      "excellent": "Ausgezeichnet"
+    }
   }
 }

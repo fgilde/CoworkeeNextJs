@@ -8,6 +8,8 @@ import { ensureStorageDir, safeStoredPath } from "../lib/documents";
 async function main() {
   // --- Idempotent cleanup (FK-safe order) ---
   await db.auditLog.deleteMany();
+  await db.review.deleteMany();
+  await db.goal.deleteMany();
   await db.announcement.deleteMany();
   await db.checklistTask.deleteMany();
   await db.employeeChecklist.deleteMany();
@@ -596,6 +598,90 @@ async function main() {
     },
   });
 
+  // --- Goals (a few per employee across teams, varied status/progress) ---
+  const inDays = (n: number) => {
+    const d = new Date();
+    d.setDate(d.getDate() + n);
+    return d;
+  };
+  const goals = await Promise.all([
+    db.goal.create({
+      data: {
+        employeeId: swe1.id,
+        title: "Ship v2 API",
+        description: "Deliver the versioned public API and migrate internal callers.",
+        status: "IN_PROGRESS",
+        progress: 60,
+        dueDate: inDays(30),
+        createdById: managerUser.id,
+      },
+    }),
+    db.goal.create({
+      data: {
+        employeeId: swe2.id,
+        title: "Improve test coverage",
+        description: "Raise unit test coverage on the payments module above 80%.",
+        status: "OPEN",
+        progress: 0,
+        dueDate: inDays(60),
+        createdById: managerUser.id,
+      },
+    }),
+    db.goal.create({
+      data: {
+        employeeId: swe3.id,
+        title: "Mentor new hire",
+        status: "DONE",
+        progress: 100,
+        createdById: managerUser.id,
+      },
+    }),
+    db.goal.create({
+      data: {
+        employeeId: ae1.id,
+        title: "Close 5 new deals this quarter",
+        status: "IN_PROGRESS",
+        progress: 40,
+        dueDate: inDays(45),
+        createdById: hrUser.id,
+      },
+    }),
+    db.goal.create({
+      data: {
+        employeeId: recruiter.id,
+        title: "Complete recruiting certification",
+        status: "CANCELLED",
+        progress: 20,
+        createdById: hrUser.id,
+      },
+    }),
+  ]);
+
+  // --- Reviews (reviewer is the employee's manager) ---
+  const reviews = await Promise.all([
+    db.review.create({
+      data: {
+        employeeId: swe1.id,
+        reviewerId: engManager.id,
+        period: "2026 H1",
+        status: "DRAFT",
+      },
+    }),
+    db.review.create({
+      data: {
+        employeeId: swe2.id,
+        reviewerId: engManager.id,
+        period: "2025 H2",
+        status: "SUBMITTED",
+        rating: 4,
+        strengths: "Reliable delivery, strong ownership of the payments module.",
+        improvements: "Could share knowledge more proactively in team reviews.",
+        comments: "Solid half, keep it up.",
+        submittedAt: new Date(),
+      },
+    }),
+  ]);
+
   const counts = {
     locations: 2,
     departments: 4,
@@ -611,6 +697,8 @@ async function main() {
     checklistTemplates: await db.checklistTemplate.count(),
     checklistTemplateItems: await db.checklistTemplateItem.count(),
     employeeChecklists: employeeChecklists.length,
+    goals: goals.length,
+    reviews: reviews.length,
     checklistTasks: await db.checklistTask.count(),
   };
 

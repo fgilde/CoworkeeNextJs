@@ -45,6 +45,19 @@ enum ChecklistType {
   OFFBOARDING
 }
 
+enum GoalStatus {
+  OPEN
+  IN_PROGRESS
+  DONE
+  CANCELLED
+}
+
+enum ReviewStatus {
+  DRAFT
+  SUBMITTED
+  ACKNOWLEDGED
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -88,6 +101,9 @@ model Employee {
   timeEntries  TimeEntry[] @relation("EmployeeTime")
   documents    Document[] @relation("EmployeeDocs")
   employeeChecklists EmployeeChecklist[] @relation("EmployeeChecklists")
+  goals        Goal[]      @relation("EmployeeGoals")
+  reviews      Review[]    @relation("EmployeeReviews")
+  reviewsGiven Review[]    @relation("ReviewerReviews")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -244,4 +260,38 @@ model Announcement {
   updatedAt DateTime @updatedAt
 
   @@index([pinned, createdAt])
+}
+
+model Goal {
+  id          String     @id @default(cuid())
+  employee    Employee   @relation("EmployeeGoals", fields: [employeeId], references: [id])
+  employeeId  String
+  title       String
+  description String?
+  status      GoalStatus @default(OPEN)
+  progress    Int        @default(0)
+  dueDate     DateTime?
+  createdById String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([employeeId])
+}
+
+model Review {
+  id           String       @id @default(cuid())
+  employee     Employee     @relation("EmployeeReviews", fields: [employeeId], references: [id])
+  employeeId   String
+  reviewer     Employee     @relation("ReviewerReviews", fields: [reviewerId], references: [id])
+  reviewerId   String
+  period       String
+  status       ReviewStatus @default(DRAFT)
+  rating       Int?
+  strengths    String?
+  improvements String?
+  comments     String?
+  createdAt    DateTime     @default(now())
+  submittedAt  DateTime?
+
+  @@index([employeeId])
 }

@@ -28,7 +28,8 @@
     "teamTime": "Team time",
     "documents": "Documents",
     "news": "News",
-    "onboarding": "Onboarding"
+    "onboarding": "Onboarding",
+    "performance": "Performance"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -383,5 +384,53 @@
     "validationError": "Please check the highlighted fields.",
     "confirmDelete": "Delete this process? This cannot be undone.",
     "confirmDeleteTemplate": "Delete this template? This cannot be undone."
+  },
+  "performance": {
+    "title": "Performance",
+    "goals": "Goals",
+    "reviews": "Reviews",
+    "newGoal": "+ New goal",
+    "editGoal": "Edit goal",
+    "goalTitle": "Title",
+    "description": "Description",
+    "status": "Status",
+    "progress": "Progress",
+    "dueDate": "Due date",
+    "newReview": "+ New review",
+    "editReview": "Edit review",
+    "period": "Period",
+    "rating": "Rating",
+    "strengths": "Strengths",
+    "improvements": "Areas for improvement",
+    "comments": "Comments",
+    "submit": "Submit",
+    "acknowledge": "Acknowledge",
+    "acknowledged": "Acknowledged",
+    "draft": "Draft",
+    "submitted": "Submitted",
+    "reviewer": "Reviewer",
+    "myGoals": "My goals",
+    "myReviews": "My reviews",
+    "teamGoals": "Team goals",
+    "teamReviews": "Team reviews",
+    "noGoals": "No goals yet.",
+    "noReviews": "No reviews yet.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "goalStatus": {
+      "OPEN": "Open",
+      "IN_PROGRESS": "In progress",
+      "DONE": "Done",
+      "CANCELLED": "Cancelled"
+    },
+    "ratingLabels": {
+      "unrated": "Unrated",
+      "poor": "Poor",
+      "fair": "Fair",
+      "good": "Good",
+      "veryGood": "Very good",
+      "excellent": "Excellent"
+    }
   }
 }

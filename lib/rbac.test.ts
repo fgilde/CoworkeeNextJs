@@ -78,3 +78,15 @@ test("HR and ADMIN can manage onboarding, MANAGER and EMPLOYEE cannot", () => {
   expect(can("MANAGER", "onboarding:manage")).toBe(false);
   expect(can("EMPLOYEE", "onboarding:manage")).toBe(false);
 });
+
+test("MANAGER, HR, ADMIN can manage goals and reviews, EMPLOYEE cannot", () => {
+  expect(can("MANAGER", "goal:manage")).toBe(true);
+  expect(can("HR", "goal:manage")).toBe(true);
+  expect(can("ADMIN", "goal:manage")).toBe(true);
+  expect(can("EMPLOYEE", "goal:manage")).toBe(false);
+
+  expect(can("MANAGER", "review:manage")).toBe(true);
+  expect(can("HR", "review:manage")).toBe(true);
+  expect(can("ADMIN", "review:manage")).toBe(true);
+  expect(can("EMPLOYEE", "review:manage")).toBe(false);
+});
