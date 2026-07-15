@@ -228,7 +228,13 @@
       "APPROVED": "Approved",
       "REJECTED": "Rejected",
       "CANCELLED": "Cancelled"
-    }
+    },
+    "statusColumn": "Status",
+    "noEmployee": "Your account is not linked to an employee profile, so there is no absence management.",
+    "invalidRange": "The end date cannot be before the start date.",
+    "zeroDays": "The selected period contains no working days.",
+    "validationError": "Please check your inputs.",
+    "cancelError": "The request could not be cancelled."
   },
   "leave": {
     "vacation": "Vacation",

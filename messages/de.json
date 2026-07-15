@@ -228,7 +228,13 @@
       "APPROVED": "Genehmigt",
       "REJECTED": "Abgelehnt",
       "CANCELLED": "Storniert"
-    }
+    },
+    "statusColumn": "Status",
+    "noEmployee": "Ihr Konto ist mit keinem Mitarbeiterprofil verknüpft, daher gibt es keine Abwesenheitsverwaltung.",
+    "invalidRange": "Das Enddatum darf nicht vor dem Startdatum liegen.",
+    "zeroDays": "Der gewählte Zeitraum enthält keine Werktage.",
+    "validationError": "Bitte überprüfen Sie die Eingaben.",
+    "cancelError": "Der Antrag konnte nicht storniert werden."
   },
   "leave": {
     "vacation": "Urlaub",
