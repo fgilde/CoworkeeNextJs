@@ -4,7 +4,7 @@
 Done.
 
 ## Commit
-(filled in after commit — see final report message)
+`31cc386` — "feat: i18n de/en via next-intl (cookie-based, user-persisted)"
 
 ## Files
 - `C:\dev\privat\github\Coworkee_NEXTJS\i18n\request.ts` — `getRequestConfig`, reads `NEXT_LOCALE` cookie via `next/headers` `cookies()`, validates against `["de","en"]`, falls back to `"de"`, loads `messages/${locale}.json`. Also exports `locales`, `Locale`, `defaultLocale` for reuse.
