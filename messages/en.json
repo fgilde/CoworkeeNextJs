@@ -133,5 +133,10 @@
   },
   "account": {
     "title": "Account"
+  },
+  "orgChart": {
+    "title": "Org Chart",
+    "noPosition": "—",
+    "empty": "No employees found."
   }
 }

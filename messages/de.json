@@ -133,5 +133,10 @@
   },
   "account": {
     "title": "Konto"
+  },
+  "orgChart": {
+    "title": "Organigramm",
+    "noPosition": "—",
+    "empty": "Keine Mitarbeiter gefunden."
   }
 }
