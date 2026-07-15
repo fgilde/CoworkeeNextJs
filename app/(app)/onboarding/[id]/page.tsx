@@ -4,7 +4,12 @@ import { requireAuth, can } from "@/lib/rbac";
 import { db } from "@/lib/db";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TaskToggle, ChecklistProgressBadge, DeleteChecklistButton } from "@/components/onboarding/checklist-controls";
+import {
+  TaskToggle,
+  ChecklistProgressBadge,
+  ChecklistTypeBadge,
+  DeleteChecklistButton,
+} from "@/components/onboarding/checklist-controls";
 
 export default async function ChecklistDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -31,6 +36,7 @@ export default async function ChecklistDetailPage({ params }: { params: Promise<
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{checklist.title}</h1>
+          <ChecklistTypeBadge type={checklist.type} />
           {checklist.completedAt && <Badge>{t("completed")}</Badge>}
         </div>
         {canManage && <DeleteChecklistButton id={checklist.id} />}

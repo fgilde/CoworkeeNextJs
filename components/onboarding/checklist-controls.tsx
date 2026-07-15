@@ -123,13 +123,29 @@ export function TaskToggle({ task }: { task: { id: string; title: string; done: 
 }
 
 export function ChecklistProgressBadge({ tasks }: { tasks: { done: boolean }[] }) {
-  const t = useTranslations("onboarding");
   const { done, total, percent } = checklistProgress(tasks);
   return (
-    <Badge variant="outline">
-      {done}/{total} · {percent}%
-    </Badge>
+    <div className="flex items-center gap-2">
+      <div className="h-2 w-28 overflow-hidden rounded-full bg-muted">
+        <div
+          className="h-full rounded-full bg-primary transition-all"
+          style={{ width: `${percent}%` }}
+          role="progressbar"
+          aria-valuenow={percent}
+          aria-valuemin={0}
+          aria-valuemax={100}
+        />
+      </div>
+      <span className="text-xs whitespace-nowrap text-muted-foreground tabular-nums">
+        {done}/{total} · {percent}%
+      </span>
+    </div>
   );
+}
+
+export function ChecklistTypeBadge({ type }: { type: "ONBOARDING" | "OFFBOARDING" }) {
+  const t = useTranslations("onboarding");
+  return <Badge variant={type === "ONBOARDING" ? "default" : "secondary"}>{t(type.toLowerCase())}</Badge>;
 }
 
 export function ChecklistLink({ id, children }: { id: string; children: React.ReactNode }) {

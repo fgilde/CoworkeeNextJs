@@ -9,6 +9,7 @@ import {
   DeleteChecklistButton,
   TaskToggle,
   ChecklistProgressBadge,
+  ChecklistTypeBadge,
   ChecklistLink,
 } from "@/components/onboarding/checklist-controls";
 
@@ -34,7 +35,11 @@ export default async function OnboardingPage() {
     return (
       <div className="flex flex-col gap-6">
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{t("myOnboarding")}</h1>
-        {checklists.length === 0 ? (
+        {!user?.employeeId ? (
+          <Card>
+            <CardContent className="text-sm text-muted-foreground">{t("noEmployeeLinked")}</CardContent>
+          </Card>
+        ) : checklists.length === 0 ? (
           <Card>
             <CardContent className="text-sm text-muted-foreground">{t("noProcesses")}</CardContent>
           </Card>
@@ -46,6 +51,7 @@ export default async function OnboardingPage() {
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex items-center gap-2">
                       <h2 className="text-lg font-semibold tracking-tight">{checklist.title}</h2>
+                      <ChecklistTypeBadge type={checklist.type} />
                       {checklist.completedAt && <Badge>{t("completed")}</Badge>}
                     </div>
                     <ChecklistProgressBadge tasks={checklist.tasks} />
@@ -124,6 +130,7 @@ export default async function OnboardingPage() {
                     <ChecklistLink id={checklist.id}>
                       {checklist.employee.firstName} {checklist.employee.lastName} · {checklist.title}
                     </ChecklistLink>
+                    <ChecklistTypeBadge type={checklist.type} />
                     {checklist.completedAt && <Badge>{t("completed")}</Badge>}
                   </div>
                   <div className="flex items-center gap-3">

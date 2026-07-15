@@ -375,6 +375,7 @@
     "cancel": "Abbrechen",
     "noProcesses": "Noch keine Prozesse gestartet.",
     "noTemplates": "Noch keine Vorlagen.",
+    "noEmployeeLinked": "Ihr Konto ist noch keinem Mitarbeiterdatensatz zugeordnet.",
     "myOnboarding": "Mein Onboarding",
     "employee": "Mitarbeiter",
     "type": "Typ",

@@ -375,6 +375,7 @@
     "cancel": "Cancel",
     "noProcesses": "No processes started yet.",
     "noTemplates": "No templates yet.",
+    "noEmployeeLinked": "Your account isn't linked to an employee record yet.",
     "myOnboarding": "My onboarding",
     "employee": "Employee",
     "type": "Type",
