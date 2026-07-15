@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  HR
+  MANAGER
+  EMPLOYEE
+}
+
+enum ContractType {
+  PERMANENT
+  TEMPORARY
+  INTERN
+  WORKING_STUDENT
+}
+
+enum EmployeeStatus {
+  ACTIVE
+  INACTIVE
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(EMPLOYEE)
+  locale       String   @default("de")
+  employee     Employee? @relation(fields: [employeeId], references: [id])
+  employeeId   String?  @unique
+  createdAt    DateTime @default(now())
+}
+
+model Employee {
+  id           String   @id @default(cuid())
+  firstName    String
+  lastName     String
+  email        String   @unique
+  phone        String?
+  birthDate    DateTime?
+  street       String?
+  city         String?
+  country      String?
+  hireDate     DateTime
+  exitDate     DateTime?
+  contractType ContractType @default(PERMANENT)
+  workload     Int      @default(100)
+  status       EmployeeStatus @default(ACTIVE)
+  department   Department? @relation(fields: [departmentId], references: [id])
+  departmentId String?
+  position     Position?   @relation(fields: [positionId], references: [id])
+  positionId   String?
+  location     Location?   @relation(fields: [locationId], references: [id])
+  locationId   String?
+  manager      Employee?   @relation("Reports", fields: [managerId], references: [id])
+  managerId    String?
+  reports      Employee[]  @relation("Reports")
+  user         User?
+  ledDepartments Department[] @relation("DeptLead")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Department {
+  id       String @id @default(cuid())
+  name     String @unique
+  lead     Employee? @relation("DeptLead", fields: [leadId], references: [id])
+  leadId   String?
+  employees Employee[]
+}
+
+model Position {
+  id    String @id @default(cuid())
+  title String @unique
+  employees Employee[]
+}
+
+model Location {
+  id      String @id @default(cuid())
+  name    String @unique
+  city    String?
+  country String?
+  employees Employee[]
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  actorUserId String
+  action      String
+  entity      String
+  entityId    String
+  changes     Json?
+  createdAt   DateTime @default(now())
+}
