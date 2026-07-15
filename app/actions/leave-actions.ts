@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { requireAuth } from "@/lib/rbac";
+import { requireAuth, requireRole, can } from "@/lib/rbac";
 import { db } from "@/lib/db";
 import { logAudit } from "@/lib/audit";
 import { computeWorkingDays } from "@/lib/leave";
@@ -93,6 +93,61 @@ export async function cancelLeaveRequest(id: string): Promise<{ error?: string }
   await db.leaveRequest.update({ where: { id }, data: { status: "CANCELLED" } });
   await logAudit(session.user.id, "leave.cancel", "LeaveRequest", id);
 
+  revalidatePath("/absences");
+  return {};
+}
+
+const decisionSchema = z.object({
+  decision: z.enum(["APPROVED", "REJECTED"]),
+  note: optionalString,
+});
+
+export async function decideLeaveRequest(
+  id: string,
+  decision: "APPROVED" | "REJECTED",
+  note?: string
+): Promise<{ error?: string }> {
+  const session = await requireRole("MANAGER", "HR", "ADMIN");
+  if (!can(session.user.role, "leave:approve")) redirect("/");
+
+  const parsed = decisionSchema.safeParse({ decision, note });
+  if (!parsed.success) return { error: "validationError" };
+
+  const approver = await db.user.findUnique({
+    where: { id: session.user.id },
+    select: { employeeId: true },
+  });
+  if (!approver?.employeeId) return { error: "notYourTeam" };
+
+  const request = await db.leaveRequest.findUnique({
+    where: { id },
+    select: { status: true, employee: { select: { managerId: true } } },
+  });
+  if (!request) return { error: "notYourTeam" };
+
+  // Manager scope guard: a MANAGER may only decide requests from their own reports.
+  // HR/ADMIN may decide any request.
+  if (session.user.role === "MANAGER" && request.employee.managerId !== approver.employeeId) {
+    return { error: "notYourTeam" };
+  }
+  if (request.status !== "PENDING") return { error: "alreadyDecided" };
+
+  await db.leaveRequest.update({
+    where: { id },
+    data: {
+      status: parsed.data.decision,
+      approverId: approver.employeeId,
+      decidedAt: new Date(),
+      decisionNote: parsed.data.note ?? null,
+    },
+  });
+
+  await logAudit(session.user.id, "leave.decide", "LeaveRequest", id, {
+    decision: parsed.data.decision,
+    note: parsed.data.note,
+  });
+
+  revalidatePath("/absences/approvals");
   revalidatePath("/absences");
   return {};
 }

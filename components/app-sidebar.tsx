@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type NavKey = "dashboard" | "employees" | "orgChart" | "absences" | "approvals" | "settings" | "account";
+type NavKey = "dashboard" | "employees" | "orgChart" | "absences" | "approvals" | "team" | "settings" | "account";
 
 type NavItem = {
   href: string;
@@ -21,6 +21,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/org", labelKey: "orgChart", icon: Network, group: "main" },
   { href: "/absences", labelKey: "absences", icon: CalendarDays, group: "main" },
   { href: "/absences/approvals", labelKey: "approvals", icon: ClipboardCheck, group: "main" },
+  { href: "/absences/team", labelKey: "team", icon: CalendarRange, group: "main" },
   { href: "/settings", labelKey: "settings", icon: Settings, group: "account" },
   { href: "/account", labelKey: "account", icon: CircleUser, group: "account" },
 ];
@@ -56,7 +57,9 @@ export function AppSidebar({ canSettings, canApprove }: { canSettings: boolean; 
 
   const items = NAV_ITEMS.filter(
     (item) =>
-      (item.labelKey !== "settings" || canSettings) && (item.labelKey !== "approvals" || canApprove)
+      (item.labelKey !== "settings" || canSettings) &&
+      (item.labelKey !== "approvals" || canApprove) &&
+      (item.labelKey !== "team" || canApprove)
   );
   const mainItems = items.filter((item) => item.group === "main");
   const accountItems = items.filter((item) => item.group === "account");

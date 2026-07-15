@@ -22,7 +22,8 @@
     "account": "Account",
     "logout": "Log out",
     "absences": "Absence",
-    "approvals": "Approvals"
+    "approvals": "Approvals",
+    "team": "Team absences"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -222,6 +223,7 @@
     "pendingApprovals": "Pending approvals",
     "noPendingApprovals": "No pending approvals.",
     "teamAbsences": "Team absence",
+    "noTeamAbsences": "No absences in the current or next month.",
     "employee": "Employee",
     "status": {
       "PENDING": "Pending",
@@ -234,7 +236,9 @@
     "invalidRange": "The end date cannot be before the start date.",
     "zeroDays": "The selected period contains no working days.",
     "validationError": "Please check your inputs.",
-    "cancelError": "The request could not be cancelled."
+    "cancelError": "The request could not be cancelled.",
+    "notYourTeam": "You can only decide requests from your own team.",
+    "alreadyDecided": "This request has already been decided."
   },
   "leave": {
     "vacation": "Vacation",

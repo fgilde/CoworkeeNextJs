@@ -22,7 +22,8 @@
     "account": "Konto",
     "logout": "Abmelden",
     "absences": "Abwesenheit",
-    "approvals": "Genehmigungen"
+    "approvals": "Genehmigungen",
+    "team": "Team-Abwesenheit"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -222,6 +223,7 @@
     "pendingApprovals": "Offene Anträge",
     "noPendingApprovals": "Keine offenen Anträge.",
     "teamAbsences": "Team-Abwesenheit",
+    "noTeamAbsences": "Keine Abwesenheiten im aktuellen oder nächsten Monat.",
     "employee": "Mitarbeiter",
     "status": {
       "PENDING": "Ausstehend",
@@ -234,7 +236,9 @@
     "invalidRange": "Das Enddatum darf nicht vor dem Startdatum liegen.",
     "zeroDays": "Der gewählte Zeitraum enthält keine Werktage.",
     "validationError": "Bitte überprüfen Sie die Eingaben.",
-    "cancelError": "Der Antrag konnte nicht storniert werden."
+    "cancelError": "Der Antrag konnte nicht storniert werden.",
+    "notYourTeam": "Sie können nur Anträge Ihres eigenen Teams entscheiden.",
+    "alreadyDecided": "Über diesen Antrag wurde bereits entschieden."
   },
   "leave": {
     "vacation": "Urlaub",
