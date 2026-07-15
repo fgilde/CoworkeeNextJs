@@ -162,7 +162,30 @@
     }
   },
   "account": {
-    "title": "Konto"
+    "title": "Konto",
+    "myData": "Meine Daten",
+    "name": "Name",
+    "email": "E-Mail",
+    "department": "Abteilung",
+    "position": "Position",
+    "noEmployee": "Ihr Konto ist mit keinem Mitarbeiterprofil verknüpft, daher gibt es keine bearbeitbaren Kontaktdaten.",
+    "phone": "Telefon",
+    "street": "Straße",
+    "city": "Stadt",
+    "country": "Land",
+    "save": "Speichern",
+    "profileSuccess": "Ihre Angaben wurden aktualisiert.",
+    "validationError": "Bitte überprüfen Sie die markierten Felder.",
+    "password": "Passwort",
+    "currentPassword": "Aktuelles Passwort",
+    "newPassword": "Neues Passwort",
+    "confirmPassword": "Neues Passwort bestätigen",
+    "changePassword": "Passwort ändern",
+    "passwordSuccess": "Ihr Passwort wurde geändert.",
+    "wrongPassword": "Das aktuelle Passwort ist falsch.",
+    "passwordMismatch": "Das neue Passwort und die Bestätigung stimmen nicht überein.",
+    "language": "Sprache",
+    "currentLanguage": "Aktuelle Sprache: {lang}"
   },
   "orgChart": {
     "title": "Organigramm",

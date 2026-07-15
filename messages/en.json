@@ -162,7 +162,30 @@
     }
   },
   "account": {
-    "title": "Account"
+    "title": "Account",
+    "myData": "My data",
+    "name": "Name",
+    "email": "Email",
+    "department": "Department",
+    "position": "Position",
+    "noEmployee": "Your account is not linked to an employee profile, so there are no editable contact details.",
+    "phone": "Phone",
+    "street": "Street",
+    "city": "City",
+    "country": "Country",
+    "save": "Save",
+    "profileSuccess": "Your details have been updated.",
+    "validationError": "Please check the highlighted fields.",
+    "password": "Password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "changePassword": "Change password",
+    "passwordSuccess": "Your password has been changed.",
+    "wrongPassword": "The current password is incorrect.",
+    "passwordMismatch": "The new password and confirmation do not match.",
+    "language": "Language",
+    "currentLanguage": "Current language: {lang}"
   },
   "orgChart": {
     "title": "Org Chart",
