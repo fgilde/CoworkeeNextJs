@@ -82,6 +82,7 @@ model User {
   employee     Employee? @relation(fields: [employeeId], references: [id])
   employeeId   String?  @unique
   createdAt    DateTime @default(now())
+  notifications Notification[]
 }
 
 model Employee {
@@ -327,6 +328,25 @@ model JobPosting {
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   applications   Application[]
+}
+
+// `title` stores an i18n KEY (e.g. "notifications.leaveDecided"), not a
+// rendered string — we don't reliably know the recipient's locale at emit
+// time, so the UI translates `title` via the `notifications` namespace using
+// the viewer's current locale. `body` is a short pre-rendered detail string
+// (names/dates), safe to store raw since it's data, not UI chrome.
+model Notification {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  type      String
+  title     String
+  body      String?
+  link      String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId, read, createdAt])
 }
 
 model Application {

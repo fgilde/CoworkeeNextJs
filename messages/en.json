@@ -31,7 +31,8 @@
     "onboarding": "Onboarding",
     "performance": "Performance",
     "analytics": "Analytics",
-    "recruiting": "Recruiting"
+    "recruiting": "Recruiting",
+    "notifications": "Notifications"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -510,5 +511,20 @@
       "HIRED": "Hired",
       "REJECTED": "Rejected"
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "markRead": "Mark as read",
+    "noNotifications": "No notifications yet.",
+    "unread": "Unread",
+    "viewAll": "View all",
+    "justNow": "Just now",
+    "leaveRequested": "New leave request",
+    "leaveApproved": "Your leave request was approved",
+    "leaveRejected": "Your leave request was rejected",
+    "reviewSubmitted": "Your performance review was submitted",
+    "newAnnouncement": "New announcement",
+    "onboardingStarted": "Your onboarding has started"
   }
 }

@@ -31,7 +31,8 @@
     "onboarding": "Onboarding",
     "performance": "Leistung",
     "analytics": "Analysen",
-    "recruiting": "Recruiting"
+    "recruiting": "Recruiting",
+    "notifications": "Benachrichtigungen"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -510,5 +511,20 @@
       "HIRED": "Eingestellt",
       "REJECTED": "Abgelehnt"
     }
+  },
+  "notifications": {
+    "title": "Benachrichtigungen",
+    "markAllRead": "Alle als gelesen markieren",
+    "markRead": "Als gelesen markieren",
+    "noNotifications": "Noch keine Benachrichtigungen.",
+    "unread": "Ungelesen",
+    "viewAll": "Alle anzeigen",
+    "justNow": "Gerade eben",
+    "leaveRequested": "Neuer Abwesenheitsantrag",
+    "leaveApproved": "Ihr Abwesenheitsantrag wurde genehmigt",
+    "leaveRejected": "Ihr Abwesenheitsantrag wurde abgelehnt",
+    "reviewSubmitted": "Ihre Leistungsbeurteilung wurde eingereicht",
+    "newAnnouncement": "Neue Ankündigung",
+    "onboardingStarted": "Ihr Onboarding wurde gestartet"
   }
 }

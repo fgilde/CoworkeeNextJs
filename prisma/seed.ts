@@ -7,6 +7,7 @@ import { ensureStorageDir, safeStoredPath } from "../lib/documents";
 
 async function main() {
   // --- Idempotent cleanup (FK-safe order) ---
+  await db.notification.deleteMany();
   await db.auditLog.deleteMany();
   await db.application.deleteMany();
   await db.jobPosting.deleteMany();
@@ -793,6 +794,40 @@ async function main() {
     }),
   ]);
 
+  // --- Notifications (demo data so the bell/badge shows a count) ---
+  const notifications = await Promise.all([
+    db.notification.create({
+      data: {
+        userId: employeeUser.id,
+        type: "leave.decided",
+        title: "notifications.leaveApproved",
+        body: `${vacationType.name} (${approvedStart.toISOString().slice(0, 10)}–${approvedEnd.toISOString().slice(0, 10)})`,
+        link: "/absences",
+        read: false,
+      },
+    }),
+    db.notification.create({
+      data: {
+        userId: employeeUser.id,
+        type: "announcement.created",
+        title: "notifications.newAnnouncement",
+        body: announcements[0].title,
+        link: "/news",
+        read: true,
+      },
+    }),
+    db.notification.create({
+      data: {
+        userId: managerUser.id,
+        type: "leave.requested",
+        title: "notifications.leaveRequested",
+        body: `${swe1.firstName} ${swe1.lastName}`,
+        link: "/absences/approvals",
+        read: false,
+      },
+    }),
+  ]);
+
   const counts = {
     locations: 2,
     departments: 4,
@@ -813,6 +848,7 @@ async function main() {
     checklistTasks: await db.checklistTask.count(),
     jobPostings: await db.jobPosting.count(),
     applications: applications.length,
+    notifications: notifications.length,
   };
 
   console.log("Seed done: ", counts);

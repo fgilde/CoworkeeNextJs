@@ -5,6 +5,7 @@ import { z } from "zod";
 import { requireRole } from "@/lib/rbac";
 import { db } from "@/lib/db";
 import { logAudit } from "@/lib/audit";
+import { notifyManyUsers } from "@/lib/notify";
 
 export type AnnouncementActionState = { error?: string };
 
@@ -42,6 +43,13 @@ export async function createAnnouncement(
   });
 
   await logAudit(session.user.id, "announcement.create", "Announcement", announcement.id, { title, pinned });
+
+  // Best-effort: notify every user of the new announcement (author included).
+  const users = await db.user.findMany({ select: { id: true } });
+  await notifyManyUsers(
+    users.map((u) => u.id),
+    { type: "announcement.created", titleKey: "notifications.newAnnouncement", body: title, link: "/news" }
+  );
 
   revalidateNews();
   return {};

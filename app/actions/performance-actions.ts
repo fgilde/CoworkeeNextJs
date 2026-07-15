@@ -5,6 +5,7 @@ import { z } from "zod";
 import { requireAuth, requireRole, type Role } from "@/lib/rbac";
 import { db } from "@/lib/db";
 import { logAudit } from "@/lib/audit";
+import { notifyEmployee } from "@/lib/notify";
 
 export type PerformanceActionState = { error?: string };
 
@@ -209,7 +210,10 @@ export async function updateReview(
   const actorEmployeeId = await resolveActingEmployeeId(session.user.id);
   if (!actorEmployeeId) return { error: "noEmployee" };
 
-  const review = await db.review.findUnique({ where: { id }, select: { reviewerId: true, status: true } });
+  const review = await db.review.findUnique({
+    where: { id },
+    select: { reviewerId: true, status: true, employeeId: true, period: true },
+  });
   if (!review) return { error: "notFound" };
 
   const isHrOrAdmin = session.user.role === "HR" || session.user.role === "ADMIN";
@@ -233,6 +237,16 @@ export async function updateReview(
   });
 
   await logAudit(session.user.id, "review.update", "Review", id, { status, rating });
+
+  // Best-effort: notify the reviewee only on the DRAFT -> SUBMITTED transition.
+  if (status === "SUBMITTED" && review.status !== "SUBMITTED") {
+    await notifyEmployee(review.employeeId, {
+      type: "review.submitted",
+      titleKey: "notifications.reviewSubmitted",
+      body: review.period,
+      link: "/performance",
+    });
+  }
 
   revalidatePerformance();
   return {};

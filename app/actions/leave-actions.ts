@@ -7,6 +7,7 @@ import { requireAuth, requireRole, can } from "@/lib/rbac";
 import { db } from "@/lib/db";
 import { logAudit } from "@/lib/audit";
 import { computeWorkingDays } from "@/lib/leave";
+import { notifyEmployee } from "@/lib/notify";
 
 export type LeaveRequestFormState = { error?: string };
 
@@ -69,6 +70,20 @@ export async function createLeaveRequest(
     workingDays,
   });
 
+  // Best-effort: notify the requester's manager. Never blocks the request.
+  const requester = await db.employee.findUnique({
+    where: { id: user.employeeId },
+    select: { managerId: true, firstName: true, lastName: true },
+  });
+  if (requester?.managerId) {
+    await notifyEmployee(requester.managerId, {
+      type: "leave.requested",
+      titleKey: "notifications.leaveRequested",
+      body: `${requester.firstName} ${requester.lastName}`,
+      link: "/absences/approvals",
+    });
+  }
+
   revalidatePath("/absences");
   redirect("/absences");
 }
@@ -121,7 +136,14 @@ export async function decideLeaveRequest(
 
   const request = await db.leaveRequest.findUnique({
     where: { id },
-    select: { status: true, employee: { select: { managerId: true } } },
+    select: {
+      status: true,
+      employeeId: true,
+      startDate: true,
+      endDate: true,
+      type: { select: { name: true } },
+      employee: { select: { managerId: true } },
+    },
   });
   if (!request) return { error: "notYourTeam" };
 
@@ -145,6 +167,14 @@ export async function decideLeaveRequest(
   await logAudit(session.user.id, "leave.decide", "LeaveRequest", id, {
     decision: parsed.data.decision,
     note: parsed.data.note,
+  });
+
+  // Best-effort: notify the requester of the decision. Never blocks the decision.
+  await notifyEmployee(request.employeeId, {
+    type: "leave.decided",
+    titleKey: parsed.data.decision === "APPROVED" ? "notifications.leaveApproved" : "notifications.leaveRejected",
+    body: `${request.type.name} (${request.startDate.toISOString().slice(0, 10)}–${request.endDate.toISOString().slice(0, 10)})`,
+    link: "/absences",
   });
 
   revalidatePath("/absences/approvals");

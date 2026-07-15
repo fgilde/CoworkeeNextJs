@@ -6,6 +6,7 @@ import { z } from "zod";
 import { requireAuth, requireRole, can } from "@/lib/rbac";
 import { db } from "@/lib/db";
 import { logAudit } from "@/lib/audit";
+import { notifyEmployee } from "@/lib/notify";
 
 export type OnboardingActionState = { error?: string };
 
@@ -165,6 +166,14 @@ export async function startChecklist(
   await logAudit(session.user.id, "checklist.start", "EmployeeChecklist", checklist.id, {
     employeeId,
     templateId,
+  });
+
+  // Best-effort: notify the employee their checklist has started.
+  await notifyEmployee(employeeId, {
+    type: "onboarding.started",
+    titleKey: "notifications.onboardingStarted",
+    body: template.name,
+    link: "/onboarding",
   });
 
   revalidateOnboarding();
