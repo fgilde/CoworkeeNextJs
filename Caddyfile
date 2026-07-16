@@ -5,3 +5,11 @@ coworkee.de, www.coworkee.de {
 	encode zstd gzip
 	reverse_proxy app:3000
 }
+
+# HaVeWa — second app on the same host. Its container (havewa-app) joins this
+# Caddy's network (coworkee_default) so it is reachable by name. See HaVeWa's
+# docker-compose.shared.yml.
+havewa.app, www.havewa.app {
+	encode zstd gzip
+	reverse_proxy havewa-app:3000
+}
