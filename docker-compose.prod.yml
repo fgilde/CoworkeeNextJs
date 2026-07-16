@@ -29,6 +29,12 @@ services:
         condition: service_healthy
     volumes:
       - storage:/app/storage
+    networks:
+      default:
+        # eindeutiger Alias, damit Caddy NUR diese App trifft (nie ein
+        # fremder Container, der zufällig auch "app" heißt).
+        aliases:
+          - coworkee-app
 
   caddy:
     image: caddy:2

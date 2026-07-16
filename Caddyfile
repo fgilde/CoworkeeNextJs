@@ -3,7 +3,7 @@
 #  - ports 80 + 443 reachable from the internet
 coworkee.de, www.coworkee.de {
 	encode zstd gzip
-	reverse_proxy app:3000
+	reverse_proxy coworkee-app:3000
 }
 
 # HaVeWa — second app on the same host. Its container (havewa-app) joins this

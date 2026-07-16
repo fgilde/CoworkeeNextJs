@@ -381,7 +381,17 @@ export function MarketingFooter() {
         </nav>
 
         <div className="text-center text-sm text-slate-500 sm:text-right">
-          <p>© 2026 Coworkee</p>
+          <p>
+            © 2026 Coworkee · by{" "}
+            <a
+              href="https://www.gilde.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-indigo-600 hover:text-indigo-700 hover:underline"
+            >
+              gilde.org
+            </a>
+          </p>
           <p className="mt-0.5 flex items-center justify-center gap-1 sm:justify-end">
             <Network className="size-3.5" aria-hidden />
             Demo-Instanz
