@@ -6,6 +6,30 @@ Ziel-Domain: **coworkee.de** (+ www).
 
 ---
 
+## Schnell-Deploy (Copy-Paste)
+
+DNS zuerst: A `@` + A `www` → Server-IP (bei Cloudflare: „DNS only" / graue Wolke).
+
+Dann als root auf dem frischen Ubuntu-Server:
+
+```bash
+curl -fsSL https://get.docker.com | sh
+ufw allow 22/tcp && ufw allow 80/tcp && ufw allow 443/tcp && ufw --force enable
+git clone https://github.com/fgilde/CoworkeeNextJs.git /opt/coworkee && cd /opt/coworkee
+cp .env.prod.example .env.prod
+sed -i "s|change-me-strong-password|$(openssl rand -base64 24)|" .env.prod
+sed -i "s|change-me-openssl-rand-base64-32|$(openssl rand -base64 32)|" .env.prod
+docker compose --env-file .env.prod -f docker-compose.prod.yml up -d --build
+docker compose --env-file .env.prod -f docker-compose.prod.yml run --rm app npm run db:seed
+docker compose --env-file .env.prod -f docker-compose.prod.yml ps   # alle 3 "Up"?
+```
+
+Danach → https://coworkee.de (Caddy holt TLS automatisch, sobald DNS zeigt).
+
+Die Einzelschritte + Betrieb (Logs, Update, Backup) stehen unten.
+
+---
+
 ## 0. Voraussetzungen
 
 - Ein VPS mit öffentlicher IPv4 (z.B. Hetzner CX22 ~4 €/Monat, Ubuntu 22.04/24.04). Notiere die **Server-IP**.
