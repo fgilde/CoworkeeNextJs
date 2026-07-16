@@ -17,7 +17,8 @@ curl -fsSL https://get.docker.com | sh
 ufw allow 22/tcp && ufw allow 80/tcp && ufw allow 443/tcp && ufw --force enable
 git clone https://github.com/fgilde/CoworkeeNextJs.git /opt/coworkee && cd /opt/coworkee
 cp .env.prod.example .env.prod
-sed -i "s|change-me-strong-password|$(openssl rand -base64 24)|" .env.prod
+# POSTGRES_PASSWORD MUSS URL-sicher sein (steckt in DATABASE_URL) -> hex, keine / + =
+sed -i "s|change-me-strong-password|$(openssl rand -hex 24)|" .env.prod
 sed -i "s|change-me-openssl-rand-base64-32|$(openssl rand -base64 32)|" .env.prod
 docker compose --env-file .env.prod -f docker-compose.prod.yml up -d --build
 docker compose --env-file .env.prod -f docker-compose.prod.yml run --rm app npm run db:seed
@@ -74,7 +75,7 @@ cd /opt/coworkee
 ```bash
 cp .env.prod.example .env.prod
 # zwei starke Werte erzeugen:
-echo "POSTGRES_PASSWORD=$(openssl rand -base64 24)" 
+echo "POSTGRES_PASSWORD=$(openssl rand -hex 24)"   # hex: URL-sicher (steckt in DATABASE_URL) 
 echo "AUTH_SECRET=$(openssl rand -base64 32)"
 # beide Werte in .env.prod eintragen (nano .env.prod)
 ```
