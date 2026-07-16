@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.superpowers
+storage
+.env
+.env.*
+!.env.example
+!.env.prod.example
+docs/superpowers
+public/marketing/landing-*.png
+npm-debug.log*

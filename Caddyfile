@@ -1,0 +1,7 @@
+# Automatic HTTPS via Let's Encrypt. Requires:
+#  - coworkee.de (and www) DNS A/AAAA records pointing at this server
+#  - ports 80 + 443 reachable from the internet
+coworkee.de, www.coworkee.de {
+	encode zstd gzip
+	reverse_proxy app:3000
+}
