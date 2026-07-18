@@ -539,5 +539,162 @@
     "reviewSubmitted": "Ihre Leistungsbeurteilung wurde eingereicht",
     "newAnnouncement": "Neue Ankündigung",
     "onboardingStarted": "Ihr Onboarding wurde gestartet"
+  },
+  "marketing": {
+    "nav": {
+      "features": "Funktionen",
+      "modules": "Module",
+      "hosting": "Hosting",
+      "demo": "Demo",
+      "contact": "Kontakt",
+      "login": "Anmelden",
+      "menuOpen": "Menü öffnen",
+      "menuClose": "Menü schließen"
+    },
+    "meta": {
+      "title": "Coworkee — Die HR-Plattform für dein ganzes Team",
+      "description": "Mitarbeiterverwaltung, Abwesenheit, Zeiterfassung, Dokumente, Performance und Recruiting in einer Plattform."
+    },
+    "hero": {
+      "title": "Die HR-Plattform für dein ganzes Team.",
+      "subtitle": "Mitarbeitende, Abwesenheit, Zeiterfassung, Dokumente, Performance und Recruiting — in einem System, statt in zehn Tabs.",
+      "ctaPrimary": "Live-Demo starten",
+      "ctaSecondary": "Funktionen ansehen",
+      "screenshotAlt": "Coworkee Dashboard mit Übersicht über Team, Abwesenheiten und Aufgaben"
+    },
+    "trust": {
+      "modules": "9 Module",
+      "languages": "DE / EN",
+      "theme": "Hell & Dunkel",
+      "rbac": "Rollenbasierte Rechte (RBAC)",
+      "hosting": "DSGVO-freundlich, self-hosted"
+    },
+    "modules": {
+      "heading": "Alles, was HR braucht.",
+      "subheading": "Neun Module, eine Plattform. Kein Zusammensuchen zwischen Tools, die nicht miteinander sprechen.",
+      "items": {
+        "employees": {
+          "title": "Mitarbeiterverwaltung & Org-Chart",
+          "body": "Alle Stammdaten und die Berichtslinie auf einen Blick — immer aktuell."
+        },
+        "absences": {
+          "title": "Abwesenheit & Urlaub",
+          "body": "Anträge, Genehmigungs-Workflow und Resturlaub automatisch berechnet."
+        },
+        "time": {
+          "title": "Zeiterfassung",
+          "body": "Arbeitszeiten erfassen und auswerten, ohne Excel-Chaos."
+        },
+        "documents": {
+          "title": "Dokumente",
+          "body": "Verträge und Nachweise sicher ablegen, rollenbasiert freigegeben."
+        },
+        "onboarding": {
+          "title": "Onboarding-Checklisten",
+          "body": "Neue Teammitglieder strukturiert und ohne Reibungsverluste einarbeiten."
+        },
+        "performance": {
+          "title": "Performance",
+          "body": "Ziele setzen, Reviews durchführen, Fortschritt sichtbar machen."
+        },
+        "analytics": {
+          "title": "Analysen & Reporting",
+          "body": "Kopfzahl, Fluktuation und Abwesenheiten als KPIs und Charts."
+        },
+        "recruiting": {
+          "title": "Recruiting",
+          "body": "Stellen ausschreiben und Bewerbungen per Kanban-Pipeline steuern."
+        },
+        "news": {
+          "title": "Neuigkeiten & Benachrichtigungen",
+          "body": "Ankündigungen und Erinnerungen erreichen das Team, wo es hinschaut."
+        }
+      }
+    },
+    "spotlights": {
+      "heading": "Gebaut, damit HR-Arbeit wieder Spaß macht.",
+      "analytics": {
+        "eyebrow": "Analysen",
+        "title": "Entscheidungen auf Basis von Zahlen, nicht Bauchgefühl.",
+        "body": "Kopfzahl-Entwicklung, Vertragsarten, Neueinstellungen und Fluktuation in Echtzeit-Dashboards — statt verstreuter Tabellen.",
+        "bullets": ["KPI-Kacheln für HR-Kennzahlen", "Verlaufscharts für Headcount & Abgänge", "Export-fähige Auswertungen"],
+        "alt": "Coworkee Analytics-Dashboard mit KPI-Kacheln und Diagrammen"
+      },
+      "orgChart": {
+        "eyebrow": "Org-Chart",
+        "title": "Die Struktur eures Unternehmens, sofort verständlich.",
+        "body": "Berichtslinien, Teams und offene Positionen als interaktiven Organisationsbaum — statt veralteter PowerPoint-Folien.",
+        "bullets": ["Automatisch aus den Mitarbeiterdaten generiert", "Klick-Navigation durch jede Ebene", "Immer synchron mit der Personalakte"],
+        "alt": "Coworkee Org-Chart mit Berichtslinien der Organisation"
+      },
+      "recruiting": {
+        "eyebrow": "Recruiting",
+        "title": "Vom Stellenprofil bis zur Zusage — eine Pipeline.",
+        "body": "Ausschreibungen veröffentlichen und Bewerbungen per Drag-and-Drop-Kanban durch jede Phase führen, ohne den Überblick zu verlieren.",
+        "bullets": ["ATS-Kanban mit klaren Phasen", "Bewerberprofile inkl. Verlauf", "Rollenbasierte Sichtbarkeit für Fachbereiche"],
+        "alt": "Coworkee Recruiting-Pipeline als Kanban-Board"
+      },
+      "absences": {
+        "eyebrow": "Abwesenheit",
+        "title": "Urlaubsanträge, die niemand mehr per E-Mail verschickt.",
+        "body": "Verbleibende Urlaubstage, Anträge und Genehmigungen an einem Ort — transparent für Mitarbeitende und Führungskräfte.",
+        "bullets": ["Resturlaub live berechnet", "Genehmigungs-Workflow für Manager", "Team-Kalender für Abwesenheiten"],
+        "alt": "Coworkee Abwesenheits-Übersicht mit Urlaubssalden"
+      },
+      "employees": {
+        "eyebrow": "Mitarbeiterverzeichnis",
+        "title": "Jede Kollegin, jeder Kollege — durchsuchbar in Sekunden.",
+        "body": "Ein zentrales Verzeichnis mit Filter- und Suchfunktion ersetzt verstreute Kontaktlisten und veraltete Wikis.",
+        "bullets": ["Volltextsuche über die gesamte Belegschaft", "Filter nach Team, Standort und Rolle", "Direkter Sprung zur Personalakte"],
+        "alt": "Coworkee Mitarbeiterverzeichnis als durchsuchbare Tabelle"
+      }
+    },
+    "darkMode": {
+      "badge": "Hell & Dunkel",
+      "heading": "Hell oder dunkel — dein Team entscheidet.",
+      "body": "Jede Person stellt ihr bevorzugtes Theme selbst ein. Coworkee sieht in beiden Fällen gut aus.",
+      "lightAlt": "Coworkee Dashboard im hellen Theme",
+      "darkAlt": "Coworkee Dashboard im dunklen Theme",
+      "lightLabel": "Hell",
+      "darkLabel": "Dunkel"
+    },
+    "hosting": {
+      "heading": "Selbst hosten oder hosten lassen — deine Wahl.",
+      "subheading": "Coworkee läuft überall, wo Docker läuft. Entscheide selbst, wer den Server betreibt.",
+      "selfHost": {
+        "title": "Selbst hosten",
+        "body": "Open Source, läuft per Docker auf deiner eigenen Infrastruktur — VPS, Proxmox/PVE oder Bare-Metal. In Minuten aufgesetzt.",
+        "bullets": ["Volle Kontrolle über deine Daten", "Läuft mit einem docker compose up", "Keine laufenden Lizenzkosten"],
+        "cta": "Zum GitHub-Repo"
+      },
+      "managed": {
+        "title": "Von uns gehostet",
+        "body": "Wir betreiben Coworkee für dich — Updates, Backups und Betrieb übernehmen wir, du nutzt einfach die Plattform.",
+        "bullets": ["Wir kümmern uns um Updates & Backups", "Eigene Domain möglich", "Persönlicher Support per E-Mail"],
+        "cta": "Kontakt aufnehmen"
+      }
+    },
+    "contact": {
+      "heading": "Fragen? Sprich mit uns.",
+      "body": "Ob Feature-Wunsch, Preisfrage oder einfach Hallo sagen — wir antworten persönlich.",
+      "cta": "Schreib uns",
+      "email": "info@coworkee.de"
+    },
+    "demo": {
+      "heading": "Live-Demo, ganz ohne Anmeldeformular.",
+      "body": "Diese Instanz läuft mit realistischen Beispieldaten. Einfach mit einem der folgenden Zugänge anmelden.",
+      "roles": {
+        "admin": "Administrator",
+        "hr": "HR",
+        "manager": "Manager",
+        "employee": "Mitarbeiter"
+      },
+      "passwordLabel": "Passwort (alle):",
+      "cta": "Zur Anmeldung"
+    },
+    "footer": {
+      "by": "by",
+      "demoInstance": "Demo-Instanz"
+    }
   }
 }

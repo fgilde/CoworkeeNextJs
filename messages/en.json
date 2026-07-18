@@ -539,5 +539,162 @@
     "reviewSubmitted": "Your performance review was submitted",
     "newAnnouncement": "New announcement",
     "onboardingStarted": "Your onboarding has started"
+  },
+  "marketing": {
+    "nav": {
+      "features": "Features",
+      "modules": "Modules",
+      "hosting": "Hosting",
+      "demo": "Demo",
+      "contact": "Contact",
+      "login": "Log in",
+      "menuOpen": "Open menu",
+      "menuClose": "Close menu"
+    },
+    "meta": {
+      "title": "Coworkee — The HR platform for your whole team",
+      "description": "Employee management, absences, time tracking, documents, performance, and recruiting in one platform."
+    },
+    "hero": {
+      "title": "The HR platform for your whole team.",
+      "subtitle": "People, absences, time tracking, documents, performance, and recruiting — in one system, instead of ten tabs.",
+      "ctaPrimary": "Start the live demo",
+      "ctaSecondary": "See features",
+      "screenshotAlt": "Coworkee dashboard with an overview of team, absences, and tasks"
+    },
+    "trust": {
+      "modules": "9 modules",
+      "languages": "DE / EN",
+      "theme": "Light & dark",
+      "rbac": "Role-based access (RBAC)",
+      "hosting": "GDPR-friendly, self-hosted"
+    },
+    "modules": {
+      "heading": "Everything HR needs.",
+      "subheading": "Nine modules, one platform. No more piecing things together from tools that don't talk to each other.",
+      "items": {
+        "employees": {
+          "title": "Employee management & org chart",
+          "body": "All core data and reporting lines at a glance — always up to date."
+        },
+        "absences": {
+          "title": "Absence & vacation",
+          "body": "Requests, approval workflow, and remaining leave calculated automatically."
+        },
+        "time": {
+          "title": "Time tracking",
+          "body": "Log and analyze working hours, without the spreadsheet chaos."
+        },
+        "documents": {
+          "title": "Documents",
+          "body": "Store contracts and certificates securely, released role by role."
+        },
+        "onboarding": {
+          "title": "Onboarding checklists",
+          "body": "Bring new team members up to speed, structured and friction-free."
+        },
+        "performance": {
+          "title": "Performance",
+          "body": "Set goals, run reviews, and make progress visible."
+        },
+        "analytics": {
+          "title": "Analytics & reporting",
+          "body": "Headcount, turnover, and absences as KPIs and charts."
+        },
+        "recruiting": {
+          "title": "Recruiting",
+          "body": "Post openings and move applications through a Kanban pipeline."
+        },
+        "news": {
+          "title": "News & notifications",
+          "body": "Announcements and reminders reach the team wherever they look."
+        }
+      }
+    },
+    "spotlights": {
+      "heading": "Built to make HR work enjoyable again.",
+      "analytics": {
+        "eyebrow": "Analytics",
+        "title": "Decisions based on numbers, not gut feeling.",
+        "body": "Headcount trends, contract types, new hires, and turnover in real-time dashboards — instead of scattered spreadsheets.",
+        "bullets": ["KPI tiles for HR metrics", "Trend charts for headcount & departures", "Exportable reports"],
+        "alt": "Coworkee analytics dashboard with KPI tiles and charts"
+      },
+      "orgChart": {
+        "eyebrow": "Org chart",
+        "title": "Your company's structure, instantly clear.",
+        "body": "Reporting lines, teams, and open positions as an interactive org tree — instead of outdated slide decks.",
+        "bullets": ["Generated automatically from employee data", "Click through every level", "Always in sync with the employee record"],
+        "alt": "Coworkee org chart with the company's reporting lines"
+      },
+      "recruiting": {
+        "eyebrow": "Recruiting",
+        "title": "From job profile to offer — one pipeline.",
+        "body": "Publish openings and drag applications through every stage on a Kanban board, without losing track.",
+        "bullets": ["ATS Kanban with clear stages", "Applicant profiles including history", "Role-based visibility for departments"],
+        "alt": "Coworkee recruiting pipeline as a Kanban board"
+      },
+      "absences": {
+        "eyebrow": "Absence",
+        "title": "Leave requests nobody emails around anymore.",
+        "body": "Remaining leave, requests, and approvals in one place — transparent for employees and managers alike.",
+        "bullets": ["Remaining leave calculated live", "Approval workflow for managers", "Team calendar for absences"],
+        "alt": "Coworkee absence overview with leave balances"
+      },
+      "employees": {
+        "eyebrow": "Employee directory",
+        "title": "Every colleague — searchable in seconds.",
+        "body": "One central directory with filtering and search replaces scattered contact lists and outdated wikis.",
+        "bullets": ["Full-text search across the whole workforce", "Filter by team, location, and role", "Jump straight to the employee record"],
+        "alt": "Coworkee employee directory as a searchable table"
+      }
+    },
+    "darkMode": {
+      "badge": "Light & dark",
+      "heading": "Light or dark — your team decides.",
+      "body": "Everyone picks their preferred theme themselves. Coworkee looks good either way.",
+      "lightAlt": "Coworkee dashboard in light theme",
+      "darkAlt": "Coworkee dashboard in dark theme",
+      "lightLabel": "Light",
+      "darkLabel": "Dark"
+    },
+    "hosting": {
+      "heading": "Self-host or let us host it — your call.",
+      "subheading": "Coworkee runs anywhere Docker runs. Decide who operates the server.",
+      "selfHost": {
+        "title": "Self-host",
+        "body": "Open source, runs via Docker on your own infrastructure — VPS, Proxmox/PVE, or bare metal. Set up in minutes.",
+        "bullets": ["Full control over your data", "Runs with a single docker compose up", "No ongoing license fees"],
+        "cta": "View the GitHub repo"
+      },
+      "managed": {
+        "title": "Managed by us",
+        "body": "We run Coworkee for you — updates, backups, and operations are on us, you just use the platform.",
+        "bullets": ["We handle updates & backups", "Custom domain available", "Personal support by email"],
+        "cta": "Get in touch"
+      }
+    },
+    "contact": {
+      "heading": "Questions? Talk to us.",
+      "body": "Feature request, pricing question, or just want to say hi — we reply personally.",
+      "cta": "Email us",
+      "email": "info@coworkee.de"
+    },
+    "demo": {
+      "heading": "A live demo, no signup form required.",
+      "body": "This instance runs with realistic sample data. Just log in with one of the accounts below.",
+      "roles": {
+        "admin": "Administrator",
+        "hr": "HR",
+        "manager": "Manager",
+        "employee": "Employee"
+      },
+      "passwordLabel": "Password (all accounts):",
+      "cta": "Go to login"
+    },
+    "footer": {
+      "by": "by",
+      "demoInstance": "Demo instance"
+    }
   }
 }

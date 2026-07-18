@@ -2,16 +2,21 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Menu, X } from "lucide-react";
-
-const links = [
-  { href: "#funktionen", label: "Funktionen" },
-  { href: "#module", label: "Module" },
-  { href: "#demo", label: "Demo" },
-];
+import { LocaleSwitch } from "@/components/locale-switch";
 
 export function MarketingNav() {
   const [open, setOpen] = useState(false);
+  const t = useTranslations("marketing");
+
+  const links = [
+    { href: "#funktionen", label: t("nav.features") },
+    { href: "#module", label: t("nav.modules") },
+    { href: "#hosting", label: t("nav.hosting") },
+    { href: "#demo", label: t("nav.demo") },
+    { href: "#kontakt", label: t("nav.contact") },
+  ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/70 backdrop-blur-md">
@@ -35,24 +40,28 @@ export function MarketingNav() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-2 md:flex">
+          <LocaleSwitch />
           <Link
             href="/login"
             className="inline-flex items-center rounded-lg bg-linear-to-r from-indigo-600 to-violet-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:shadow-md hover:brightness-110 active:translate-y-px"
           >
-            Anmelden
+            {t("nav.login")}
           </Link>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((o) => !o)}
-          aria-expanded={open}
-          aria-label={open ? "Menü schließen" : "Menü öffnen"}
-          className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 md:hidden"
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
+        <div className="flex items-center gap-1 md:hidden">
+          <LocaleSwitch />
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            aria-label={open ? t("nav.menuClose") : t("nav.menuOpen")}
+            className="rounded-lg p-2 text-slate-600 hover:bg-slate-100"
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -72,7 +81,7 @@ export function MarketingNav() {
               href="/login"
               className="mt-2 inline-flex items-center justify-center rounded-lg bg-linear-to-r from-indigo-600 to-violet-600 px-4 py-2 text-sm font-medium text-white shadow-sm"
             >
-              Anmelden
+              {t("nav.login")}
             </Link>
           </nav>
         </div>
