@@ -12,5 +12,5 @@ export const config = {
   // an anonymous request for those assets 307s to /login — and so does
   // next/image's own internal fetch of the source file, which turns every
   // screenshot into a 400 "not a valid image".
-  matcher: ["/((?!api/auth|login|marketing|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api/auth|login|setup|marketing|_next/static|_next/image|favicon.ico).*)"],
 };

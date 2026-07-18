@@ -60,6 +60,22 @@
     "de": "Deutsch",
     "en": "English"
   },
+  "setup": {
+    "title": "Set up Coworkee",
+    "description": "This instance has no accounts yet. Create the first administrator and set the company name.",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "companyName": "Company name",
+    "defaultLocale": "Default language",
+    "submit": "Finish setup",
+    "validationError": "Please check your input.",
+    "passwordMismatch": "Passwords do not match.",
+    "alreadySetup": "This instance has already been set up.",
+    "loginFailed": "Account created, but automatic login failed. Please log in manually."
+  },
   "dashboard": {
     "title": "Dashboard",
     "greeting": "Welcome, {name}",

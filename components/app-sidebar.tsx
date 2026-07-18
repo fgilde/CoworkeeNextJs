@@ -82,16 +82,19 @@ export function AppSidebar({
   canViewTeamTime,
   canAnalytics,
   canRecruiting,
+  companyName,
 }: {
   canSettings: boolean;
   canApprove: boolean;
   canViewTeamTime: boolean;
   canAnalytics: boolean;
   canRecruiting: boolean;
+  companyName?: string;
 }) {
   const t = useTranslations("nav");
   const tCommon = useTranslations("common");
   const pathname = usePathname();
+  const brandName = companyName || tCommon("appName");
 
   const items = NAV_ITEMS.filter(
     (item) =>
@@ -116,9 +119,9 @@ export function AppSidebar({
     <aside className="flex w-[260px] shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
       <div className="flex items-center gap-2 px-5 py-5">
         <div className="flex size-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
-          {tCommon("appName").charAt(0)}
+          {brandName.charAt(0)}
         </div>
-        <span className="text-lg font-semibold tracking-tight">{tCommon("appName")}</span>
+        <span className="truncate text-lg font-semibold tracking-tight">{brandName}</span>
       </div>
       <nav className="flex flex-col gap-1 px-3">
         {mainItems.map((item) => (

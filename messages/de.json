@@ -60,6 +60,22 @@
     "de": "Deutsch",
     "en": "English"
   },
+  "setup": {
+    "title": "Coworkee einrichten",
+    "description": "Diese Instanz hat noch keine Konten. Lege den ersten Administrator und den Firmennamen fest.",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "companyName": "Firmenname",
+    "defaultLocale": "Standardsprache",
+    "submit": "Einrichtung abschließen",
+    "validationError": "Bitte prüfe deine Eingaben.",
+    "passwordMismatch": "Die Passwörter stimmen nicht überein.",
+    "alreadySetup": "Diese Instanz wurde bereits eingerichtet.",
+    "loginFailed": "Konto wurde erstellt, die automatische Anmeldung ist jedoch fehlgeschlagen. Bitte melde dich manuell an."
+  },
   "dashboard": {
     "title": "Übersicht",
     "greeting": "Willkommen, {name}",

@@ -365,3 +365,11 @@ model Application {
 
   @@index([jobPostingId, stage])
 }
+
+// Singleton row (id is always "singleton") holding org-wide branding set during first-run setup.
+model CompanySettings {
+  id            String   @id @default("singleton")
+  companyName   String
+  defaultLocale String   @default("de")
+  createdAt     DateTime @default(now())
+}

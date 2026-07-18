@@ -1,9 +1,13 @@
+import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Users2, CalendarClock, Target } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { LoginForm } from "@/components/login-form";
+import { needsSetup } from "@/lib/setup";
 
 export default async function LoginPage() {
+  if (await needsSetup()) redirect("/setup");
+
   const t = await getTranslations("auth");
 
   return (

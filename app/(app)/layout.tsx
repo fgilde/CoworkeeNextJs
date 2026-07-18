@@ -12,13 +12,14 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const canAnalytics = can(session.user.role, "analytics:view");
   const canRecruiting = can(session.user.role, "recruiting:manage");
 
-  const [notifications, unreadCount] = await Promise.all([
+  const [notifications, unreadCount, companySettings] = await Promise.all([
     db.notification.findMany({
       where: { userId: session.user.id },
       orderBy: { createdAt: "desc" },
       take: 8,
     }),
     db.notification.count({ where: { userId: session.user.id, read: false } }),
+    db.companySettings.findUnique({ where: { id: "singleton" } }),
   ]);
 
   return (
@@ -29,6 +30,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         canViewTeamTime={canViewTeamTime}
         canAnalytics={canAnalytics}
         canRecruiting={canRecruiting}
+        companyName={companySettings?.companyName}
       />
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar
