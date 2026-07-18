@@ -43,7 +43,11 @@ export function StartChecklistForm({
       <CardContent>
         <form action={formAction} className="flex flex-wrap items-end gap-3">
           <div className="flex flex-col gap-1.5">
-            <Select name="employeeId" defaultValue={employees[0]?.id}>
+            <Select
+              name="employeeId"
+              defaultValue={employees[0]?.id}
+              items={Object.fromEntries(employees.map((employee) => [employee.id, employee.name]))}
+            >
               <SelectTrigger className="w-56">
                 <SelectValue placeholder={t("selectEmployee")} />
               </SelectTrigger>
@@ -57,7 +61,11 @@ export function StartChecklistForm({
             </Select>
           </div>
           <div className="flex flex-col gap-1.5">
-            <Select name="templateId" defaultValue={templates[0]?.id}>
+            <Select
+              name="templateId"
+              defaultValue={templates[0]?.id}
+              items={Object.fromEntries(templates.map((template) => [template.id, template.name]))}
+            >
               <SelectTrigger className="w-56">
                 <SelectValue placeholder={t("selectTemplate")} />
               </SelectTrigger>

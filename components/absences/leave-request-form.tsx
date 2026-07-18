@@ -29,7 +29,11 @@ export function LeaveRequestForm({ types }: { types: LeaveTypeOption[] }) {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="typeId">{t("type")}</Label>
-          <Select name="typeId" defaultValue={types[0]?.id}>
+          <Select
+            name="typeId"
+            defaultValue={types[0]?.id}
+            items={Object.fromEntries(types.map((type) => [type.id, type.name]))}
+          >
             <SelectTrigger id="typeId" className="w-full">
               <SelectValue />
             </SelectTrigger>

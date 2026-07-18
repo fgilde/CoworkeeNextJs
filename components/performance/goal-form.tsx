@@ -49,7 +49,11 @@ export function NewGoalForm({ employees }: { employees: EmployeeOption[] }) {
         <form action={formAction} className="flex flex-wrap items-end gap-3">
           <div className="flex flex-col gap-1.5">
             <Label>{t("employee")}</Label>
-            <Select name="employeeId" defaultValue={employees[0]?.id}>
+            <Select
+              name="employeeId"
+              defaultValue={employees[0]?.id}
+              items={Object.fromEntries(employees.map((employee) => [employee.id, employee.name]))}
+            >
               <SelectTrigger className="w-48">
                 <SelectValue placeholder={t("selectEmployee")} />
               </SelectTrigger>
@@ -116,7 +120,11 @@ export function GoalControls({ goal }: { goal: GoalFormValues }) {
         </div>
         <div className="flex flex-col gap-1.5">
           <Label>{t("status")}</Label>
-          <Select name="status" defaultValue={goal.status}>
+          <Select
+            name="status"
+            defaultValue={goal.status}
+            items={Object.fromEntries(GOAL_STATUSES.map((status) => [status, t(`goalStatus.${status}`)]))}
+          >
             <SelectTrigger className="w-40">
               <SelectValue />
             </SelectTrigger>

@@ -113,7 +113,16 @@ export function EmployeeForm({
         </div>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="contractType">{t("contractType")}</Label>
-          <Select name="contractType" defaultValue={initial?.contractType ?? "PERMANENT"}>
+          <Select
+            name="contractType"
+            defaultValue={initial?.contractType ?? "PERMANENT"}
+            items={{
+              PERMANENT: t("contractTypes.PERMANENT"),
+              TEMPORARY: t("contractTypes.TEMPORARY"),
+              INTERN: t("contractTypes.INTERN"),
+              WORKING_STUDENT: t("contractTypes.WORKING_STUDENT"),
+            }}
+          >
             <SelectTrigger id="contractType" className="w-full">
               <SelectValue />
             </SelectTrigger>
@@ -141,7 +150,11 @@ export function EmployeeForm({
         </div>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="status">{t("status")}</Label>
-          <Select name="status" defaultValue={initial?.status ?? "ACTIVE"}>
+          <Select
+            name="status"
+            defaultValue={initial?.status ?? "ACTIVE"}
+            items={{ ACTIVE: t("statusActive"), INACTIVE: t("statusInactive") }}
+          >
             <SelectTrigger id="status" className="w-full">
               <SelectValue />
             </SelectTrigger>
@@ -153,7 +166,11 @@ export function EmployeeForm({
         </div>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="departmentId">{t("department")}</Label>
-          <Select name="departmentId" defaultValue={initial?.departmentId ?? "none"}>
+          <Select
+            name="departmentId"
+            defaultValue={initial?.departmentId ?? "none"}
+            items={{ none: t("noneOption"), ...Object.fromEntries(options.departments.map((d) => [d.id, d.label])) }}
+          >
             <SelectTrigger id="departmentId" className="w-full">
               <SelectValue />
             </SelectTrigger>
@@ -167,7 +184,11 @@ export function EmployeeForm({
         </div>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="positionId">{t("position")}</Label>
-          <Select name="positionId" defaultValue={initial?.positionId ?? "none"}>
+          <Select
+            name="positionId"
+            defaultValue={initial?.positionId ?? "none"}
+            items={{ none: t("noneOption"), ...Object.fromEntries(options.positions.map((p) => [p.id, p.label])) }}
+          >
             <SelectTrigger id="positionId" className="w-full">
               <SelectValue />
             </SelectTrigger>
@@ -181,7 +202,11 @@ export function EmployeeForm({
         </div>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="locationId">{t("location")}</Label>
-          <Select name="locationId" defaultValue={initial?.locationId ?? "none"}>
+          <Select
+            name="locationId"
+            defaultValue={initial?.locationId ?? "none"}
+            items={{ none: t("noneOption"), ...Object.fromEntries(options.locations.map((l) => [l.id, l.label])) }}
+          >
             <SelectTrigger id="locationId" className="w-full">
               <SelectValue />
             </SelectTrigger>
@@ -195,7 +220,11 @@ export function EmployeeForm({
         </div>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="managerId">{t("manager")}</Label>
-          <Select name="managerId" defaultValue={initial?.managerId ?? "none"}>
+          <Select
+            name="managerId"
+            defaultValue={initial?.managerId ?? "none"}
+            items={{ none: t("noneOption"), ...Object.fromEntries(options.managers.map((m) => [m.id, m.label])) }}
+          >
             <SelectTrigger id="managerId" className="w-full">
               <SelectValue />
             </SelectTrigger>

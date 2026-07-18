@@ -99,7 +99,11 @@ function PostingFields({
       <div className="flex flex-wrap gap-3">
         <div className="flex flex-col gap-1.5">
           <Label htmlFor={`${idPrefix}-departmentId`}>{t("department")}</Label>
-          <Select name="departmentId" defaultValue={posting?.departmentId ?? ""}>
+          <Select
+            name="departmentId"
+            defaultValue={posting?.departmentId ?? ""}
+            items={{ "": "—", ...Object.fromEntries(departments.map((d) => [d.id, d.name])) }}
+          >
             <SelectTrigger id={`${idPrefix}-departmentId`} className="w-48">
               <SelectValue />
             </SelectTrigger>
@@ -115,7 +119,11 @@ function PostingFields({
         </div>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor={`${idPrefix}-locationId`}>{t("location")}</Label>
-          <Select name="locationId" defaultValue={posting?.locationId ?? ""}>
+          <Select
+            name="locationId"
+            defaultValue={posting?.locationId ?? ""}
+            items={{ "": "—", ...Object.fromEntries(locations.map((l) => [l.id, l.name])) }}
+          >
             <SelectTrigger id={`${idPrefix}-locationId`} className="w-48">
               <SelectValue />
             </SelectTrigger>
@@ -131,7 +139,11 @@ function PostingFields({
         </div>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor={`${idPrefix}-status`}>{t("status")}</Label>
-          <Select name="status" defaultValue={posting?.status ?? "DRAFT"}>
+          <Select
+            name="status"
+            defaultValue={posting?.status ?? "DRAFT"}
+            items={Object.fromEntries(JOB_STATUSES.map((status) => [status, t(`jobStatus.${status}`)]))}
+          >
             <SelectTrigger id={`${idPrefix}-status`} className="w-40">
               <SelectValue />
             </SelectTrigger>

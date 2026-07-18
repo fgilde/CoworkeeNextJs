@@ -42,7 +42,11 @@ export function UploadForm({
         <form ref={formRef} action={formAction} className="flex flex-wrap items-end gap-3">
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="employeeId">{t("employee")}</Label>
-            <Select name="employeeId" defaultValue={defaultEmployeeId ?? employees[0]?.id}>
+            <Select
+              name="employeeId"
+              defaultValue={defaultEmployeeId ?? employees[0]?.id}
+              items={Object.fromEntries(employees.map((employee) => [employee.id, employee.name]))}
+            >
               <SelectTrigger id="employeeId" className="w-48">
                 <SelectValue placeholder={t("employee")} />
               </SelectTrigger>
@@ -63,7 +67,11 @@ export function UploadForm({
 
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="category">{t("category")}</Label>
-            <Select name="category" defaultValue="OTHER">
+            <Select
+              name="category"
+              defaultValue="OTHER"
+              items={Object.fromEntries(CATEGORIES.map((category) => [category, t(`categories.${category}`)]))}
+            >
               <SelectTrigger id="category" className="w-40">
                 <SelectValue />
               </SelectTrigger>

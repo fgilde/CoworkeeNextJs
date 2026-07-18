@@ -48,7 +48,11 @@ export function NewReviewForm({ employees }: { employees: EmployeeOption[] }) {
         <form action={formAction} className="flex flex-wrap items-end gap-3">
           <div className="flex flex-col gap-1.5">
             <Label>{t("employee")}</Label>
-            <Select name="employeeId" defaultValue={employees[0]?.id}>
+            <Select
+              name="employeeId"
+              defaultValue={employees[0]?.id}
+              items={Object.fromEntries(employees.map((employee) => [employee.id, employee.name]))}
+            >
               <SelectTrigger className="w-48">
                 <SelectValue placeholder={t("selectEmployee")} />
               </SelectTrigger>
@@ -133,7 +137,16 @@ export function ReviewEditForm({ review }: { review: ReviewEditValues }) {
     <form action={formAction} className="flex flex-col gap-4">
       <div className="flex flex-col gap-1.5">
         <Label>{t("rating")}</Label>
-        <Select name="rating" defaultValue={review.rating ? String(review.rating) : ""}>
+        <Select
+          name="rating"
+          defaultValue={review.rating ? String(review.rating) : ""}
+          items={{
+            "": t("ratingLabels.unrated"),
+            ...Object.fromEntries(
+              RATING_KEYS.map((rating) => [String(rating), `${rating} · ${t(`ratingLabels.${ratingLabel(rating)}`)}`])
+            ),
+          }}
+        >
           <SelectTrigger className="w-48">
             <SelectValue placeholder={t("ratingLabels.unrated")} />
           </SelectTrigger>
@@ -179,7 +192,11 @@ export function ReviewEditForm({ review }: { review: ReviewEditValues }) {
       </div>
       <div className="flex flex-col gap-1.5">
         <Label>{t("status")}</Label>
-        <Select name="status" defaultValue={review.status}>
+        <Select
+          name="status"
+          defaultValue={review.status}
+          items={{ DRAFT: t("draft"), SUBMITTED: t("submitted") }}
+        >
           <SelectTrigger className="w-40">
             <SelectValue />
           </SelectTrigger>

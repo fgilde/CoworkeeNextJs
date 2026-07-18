@@ -29,6 +29,7 @@ function StageSelect({ id, stage }: { id: string; stage: string }) {
       <Select
         value={current}
         disabled={isPending}
+        items={Object.fromEntries(stageOrder.map((s) => [s, t(`applicationStage.${s}`)]))}
         onValueChange={(value) => {
           const previous = current;
           setCurrent(value as string);

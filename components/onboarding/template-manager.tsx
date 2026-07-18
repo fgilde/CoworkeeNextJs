@@ -40,7 +40,11 @@ const initialState: OnboardingActionState = {};
 function TypeSelect({ idPrefix, defaultValue }: { idPrefix: string; defaultValue: string }) {
   const t = useTranslations("onboarding");
   return (
-    <Select name="type" defaultValue={defaultValue}>
+    <Select
+      name="type"
+      defaultValue={defaultValue}
+      items={Object.fromEntries(TYPES.map((type) => [type, t(type.toLowerCase())]))}
+    >
       <SelectTrigger id={`${idPrefix}-type`} className="w-40">
         <SelectValue />
       </SelectTrigger>

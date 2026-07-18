@@ -48,6 +48,7 @@ export function UserRoleRow({
             <Select
               value={currentRole}
               disabled={isPending}
+              items={Object.fromEntries(roles.map((r) => [r.value, r.label]))}
               onValueChange={(value) => {
                 const previous = currentRole;
                 setCurrentRole(value as string);

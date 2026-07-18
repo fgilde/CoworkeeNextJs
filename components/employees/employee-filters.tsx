@@ -58,6 +58,7 @@ export function EmployeeFilters({
       />
       <Select
         value={searchParams.get("department") ?? "all"}
+        items={{ all: t("allDepartments"), ...Object.fromEntries(departments.map((department) => [department.id, department.name])) }}
         onValueChange={(value) => updateParam("department", value as string)}
       >
         <SelectTrigger aria-label={t("filterDepartment")}>
@@ -74,6 +75,7 @@ export function EmployeeFilters({
       </Select>
       <Select
         value={searchParams.get("location") ?? "all"}
+        items={{ all: t("allLocations"), ...Object.fromEntries(locations.map((location) => [location.id, location.name])) }}
         onValueChange={(value) => updateParam("location", value as string)}
       >
         <SelectTrigger aria-label={t("filterLocation")}>
@@ -90,6 +92,7 @@ export function EmployeeFilters({
       </Select>
       <Select
         value={searchParams.get("status") ?? "all"}
+        items={{ all: t("allStatuses"), ACTIVE: t("statusActive"), INACTIVE: t("statusInactive") }}
         onValueChange={(value) => updateParam("status", value as string)}
       >
         <SelectTrigger aria-label={t("filterStatus")}>

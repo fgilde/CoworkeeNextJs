@@ -72,7 +72,11 @@ export function EntitlementsSection({
             <Label htmlFor="ent-employee" className="text-xs text-muted-foreground">
               {labels.employee}
             </Label>
-            <Select name="employeeId" defaultValue={employees[0]?.id}>
+            <Select
+              name="employeeId"
+              defaultValue={employees[0]?.id}
+              items={Object.fromEntries(employees.map((e) => [e.id, e.name]))}
+            >
               <SelectTrigger id="ent-employee" className="w-48">
                 <SelectValue />
               </SelectTrigger>
@@ -89,7 +93,11 @@ export function EntitlementsSection({
             <Label htmlFor="ent-type" className="text-xs text-muted-foreground">
               {labels.type}
             </Label>
-            <Select name="typeId" defaultValue={leaveTypes[0]?.id}>
+            <Select
+              name="typeId"
+              defaultValue={leaveTypes[0]?.id}
+              items={Object.fromEntries(leaveTypes.map((lt) => [lt.id, lt.name]))}
+            >
               <SelectTrigger id="ent-type" className="w-40">
                 <SelectValue />
               </SelectTrigger>

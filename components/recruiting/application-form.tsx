@@ -104,7 +104,11 @@ export function ApplicationEditForm({
       <Input name="lastName" defaultValue={application.lastName} required placeholder={t("lastName")} className="h-8" />
       <Input name="email" type="email" defaultValue={application.email} required placeholder={t("email")} className="h-8" />
       <Input name="phone" defaultValue={application.phone ?? ""} placeholder={t("phone")} className="h-8" />
-      <Select name="rating" defaultValue={application.rating ? String(application.rating) : ""}>
+      <Select
+        name="rating"
+        defaultValue={application.rating ? String(application.rating) : ""}
+        items={{ "": "—", ...Object.fromEntries(RATINGS.map((r) => [String(r), "★".repeat(r)])) }}
+      >
         <SelectTrigger className="h-8 w-full">
           <SelectValue placeholder={t("rating")} />
         </SelectTrigger>
