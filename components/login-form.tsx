@@ -16,7 +16,7 @@ const DEMO_ACCOUNTS = [
   { roleKey: "employee", email: "employee@coworkee.test" },
 ] as const;
 
-export function LoginForm() {
+export function LoginForm({ showDemo }: { showDemo: boolean }) {
   const t = useTranslations("auth");
   const tDemo = useTranslations("auth.demo");
   const [state, formAction, pending] = useActionState(loginAction, {});
@@ -61,7 +61,7 @@ export function LoginForm() {
         </Button>
       </form>
 
-      {process.env.NEXT_PUBLIC_DEMO === "1" && (
+      {showDemo && (
         <div className="rounded-xl border border-dashed border-border bg-muted/40 p-4">
           <div className="flex items-center justify-between">
             <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{tDemo("title")}</p>

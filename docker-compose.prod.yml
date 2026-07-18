@@ -24,6 +24,7 @@ services:
       AUTH_SECRET: ${AUTH_SECRET}
       AUTH_TRUST_HOST: "true"
       NODE_ENV: production
+      DEMO: "1"
     depends_on:
       db:
         condition: service_healthy

@@ -118,6 +118,18 @@ storage/                # hochgeladene Dokumente (nicht im Repo, nicht öffentli
 - `AUTH_SECRET` und ein sicheres DB-Passwort in Produktion setzen.
 - Deployment-Anleitung: siehe `docs/DEPLOYMENT.md`.
 
+## Self-hosting (ein Befehl)
+
+Eigener Server (Domain oder reines LAN/HTTP), Docker vorausgesetzt:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/install.sh | sudo bash
+```
+
+Installiert Docker (falls nötig), klont nach `/opt/coworkee`, fragt nach einer Domain (leer = lokaler HTTP-Betrieb) und startet den Stack mit einer **leeren** Datenbank — kein Demo-Seed. Beim ersten Aufruf zeigt die App den **Setup-Assistenten** zum Anlegen des Admin-Kontos.
+
+Für manuelles Deployment oder die Demo-Variante (mit Caddy-Domain-Fixierung + Seed-Daten) siehe `docs/DEPLOYMENT.md`. Die öffentliche Demo-Instanz setzt zusätzlich `DEMO=1` (zur Laufzeit, kein Rebuild nötig) um die Demo-Logins auf `/login` anzuzeigen, und wird geseedet.
+
 ## Lizenz
 
 Proprietär – © 2026 Coworkee.

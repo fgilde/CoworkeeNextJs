@@ -1,0 +1,59 @@
+# Self-host stack for Coworkee — custom domain + automatic HTTPS via Caddy.
+# Run from the repo root with:
+#   docker compose --env-file deploy/.env -f deploy/docker-compose.selfhost.yml up -d --build
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: coworkee
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: coworkee
+    volumes:
+      - coworkee_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U coworkee"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      AUTH_SECRET: ${AUTH_SECRET}
+      AUTH_TRUST_HOST: "true"
+      NODE_ENV: production
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - coworkee_storage:/app/storage
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - ./Caddyfile.selfhost:/etc/caddy/Caddyfile:ro
+      - coworkee_caddy_data:/data
+      - coworkee_caddy_config:/config
+    depends_on:
+      - app
+
+volumes:
+  coworkee_pgdata:
+    name: coworkee_pgdata
+  coworkee_storage:
+    name: coworkee_storage
+  coworkee_caddy_data:
+    name: coworkee_caddy_data
+  coworkee_caddy_config:
+    name: coworkee_caddy_config

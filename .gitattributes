@@ -1,5 +1,7 @@
 # Shell scripts must stay LF — they run inside Linux containers.
 *.sh text eol=lf
 docker-entrypoint.sh text eol=lf
+install.sh text eol=lf
 Dockerfile text eol=lf
 Caddyfile text eol=lf
+deploy/Caddyfile.selfhost text eol=lf

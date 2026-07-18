@@ -62,7 +62,7 @@ export default async function LoginPage() {
               <CardDescription>{t("welcome")}</CardDescription>
             </CardHeader>
             <CardContent>
-              <LoginForm />
+              <LoginForm showDemo={process.env.DEMO === "1"} />
             </CardContent>
           </Card>
         </div>
