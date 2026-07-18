@@ -13,6 +13,8 @@ RUN npm ci
 
 # --- build: generate Prisma client + build Next ---
 FROM base AS build
+# more heap headroom for `next build` on small/low-RAM hosts (swap-backed)
+ENV NODE_OPTIONS=--max-old-space-size=2048
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npx prisma generate && npm run build
