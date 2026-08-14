@@ -128,7 +128,7 @@ curl -fsSL https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/instal
 
 Installiert Docker (falls nötig), klont nach `/opt/coworkee`, fragt nach einer Domain (leer = lokaler HTTP-Betrieb) und startet den Stack mit einer **leeren** Datenbank — kein Demo-Seed. Beim ersten Aufruf zeigt die App den **Setup-Assistenten** zum Anlegen des Admin-Kontos.
 
-Für manuelles Deployment oder die Demo-Variante (mit Caddy-Domain-Fixierung + Seed-Daten) siehe `docs/DEPLOYMENT.md`. Die öffentliche Demo-Instanz setzt zusätzlich `DEMO=1` (zur Laufzeit, kein Rebuild nötig) um die Demo-Logins auf `/login` anzuzeigen, und wird geseedet.
+Für manuelles Deployment oder die Demo-Variante (mit Caddy-Domain-Fixierung) siehe `docs/DEPLOYMENT.md`. Die öffentliche Demo-Instanz setzt zusätzlich `DEMO=1` (zur Laufzeit, kein Rebuild nötig) — das eine Flag seedet beim ersten Start automatisch die Demo-Daten (nur falls die DB leer ist) **und** zeigt die Demo-Logins auf `/login`. Ohne `DEMO` bleibt die DB leer → Setup-Assistent.
 
 ## Lizenz
 

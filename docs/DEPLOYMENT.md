@@ -21,9 +21,10 @@ cp .env.prod.example .env.prod
 sed -i "s|change-me-strong-password|$(openssl rand -hex 24)|" .env.prod
 sed -i "s|change-me-openssl-rand-base64-32|$(openssl rand -base64 32)|" .env.prod
 docker compose --env-file .env.prod -f docker-compose.prod.yml up -d --build
-docker compose --env-file .env.prod -f docker-compose.prod.yml run --rm app npm run db:seed
 docker compose --env-file .env.prod -f docker-compose.prod.yml ps   # alle 3 "Up"?
 ```
+
+`docker-compose.prod.yml` setzt `DEMO=1` → beim ersten Start (leere DB) werden automatisch die Demo-Daten geseedet **und** die Demo-Logins auf `/login` angezeigt. Kein manueller Seed-Schritt nötig; spätere Neustarts seeden nicht erneut (DB ist dann nicht mehr leer).
 
 Danach → https://coworkee.de (Caddy holt TLS automatisch, sobald DNS zeigt).
 
@@ -88,14 +89,17 @@ docker compose --env-file .env.prod -f docker-compose.prod.yml up -d --build
 ```
 Beim Start des `app`-Containers laufen automatisch die DB-Migrationen (`prisma migrate deploy`).
 
-## 6. Demo-Daten laden (einmalig)
+## 6. Demo-Daten (automatisch bei `DEMO=1`)
 
-Erzeugt Beispiel-Firma + die Demo-Logins (`admin@ / hr@ / manager@ / employee@coworkee.test`, Passwort `coworkee`), die auf der Login-Seite angezeigt werden:
+`docker-compose.prod.yml` setzt `DEMO=1` für die `app` — beim ersten Boot mit leerer DB seedet der Entrypoint automatisch Beispiel-Firma + Demo-Logins (`admin@ / hr@ / manager@ / employee@coworkee.test`, Passwort `coworkee`), die dann auf der Login-Seite angezeigt werden. Läuft nur, wenn die DB leer ist — spätere Neustarts/Deploys reseeden nicht und überschreiben keine Änderungen.
 
+Für eine echte Produktivinstanz `DEMO` einfach **nicht setzen** (Variable entfernen/auskommentieren) — die DB bleibt leer und die App zeigt den Setup-Assistenten zum Anlegen des Admin-Kontos.
+
+Manuelles (Re-)Seed bleibt bei Bedarf möglich:
 ```bash
 docker compose --env-file .env.prod -f docker-compose.prod.yml run --rm app npm run db:seed
 ```
-> Der Seed ist idempotent und **setzt auf den Demo-Stand zurück** (überschreibt Änderungen). Für eine echte Produktivnutzung nur **einmal** ausführen; für eine reine Demo-Instanz ggf. per Cron täglich neu seeden.
+> Der Seed ist idempotent und **setzt auf den Demo-Stand zurück** (überschreibt Änderungen) — nur für Demo-Instanzen, nicht auf einer echten Produktiv-DB ausführen.
 
 ## 7. Fertig
 
