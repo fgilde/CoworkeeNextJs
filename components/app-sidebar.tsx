@@ -83,6 +83,7 @@ export function AppSidebar({
   canAnalytics,
   canRecruiting,
   companyName,
+  version,
 }: {
   canSettings: boolean;
   canApprove: boolean;
@@ -90,6 +91,7 @@ export function AppSidebar({
   canAnalytics: boolean;
   canRecruiting: boolean;
   companyName?: string;
+  version?: string;
 }) {
   const t = useTranslations("nav");
   const tCommon = useTranslations("common");
@@ -134,6 +136,11 @@ export function AppSidebar({
             <NavLink key={item.href} {...item} active={isActive(item.href)} label={t(item.labelKey)} />
           ))}
         </nav>
+      )}
+      {version && (
+        <div className={cn("px-5 py-3 text-xs text-sidebar-foreground/40", accountItems.length === 0 && "mt-auto")}>
+          {version}
+        </div>
       )}
     </aside>
   );

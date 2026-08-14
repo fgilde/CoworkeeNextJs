@@ -13,6 +13,9 @@ RUN npm ci
 
 # --- build: generate Prisma client + build Next ---
 FROM base AS build
+# commit sha for version stamping (optional; a deploy can pass --build-arg GIT_SHA=...)
+ARG GIT_SHA=""
+ENV GIT_SHA=$GIT_SHA
 # more heap headroom for `next build` on small/low-RAM hosts (swap-backed)
 ENV NODE_OPTIONS=--max-old-space-size=2048
 COPY --from=deps /app/node_modules ./node_modules
@@ -21,6 +24,8 @@ RUN npx prisma generate && npm run build
 
 # --- runner ---
 FROM base AS runner
+ARG GIT_SHA=""
+ENV GIT_SHA=$GIT_SHA
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=build /app/node_modules ./node_modules

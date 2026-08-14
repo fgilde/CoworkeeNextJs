@@ -39,10 +39,18 @@
     "email": "E-Mail",
     "password": "Passwort",
     "submit": "Anmelden",
+    "submitting": "Anmeldung läuft …",
     "invalidCredentials": "E-Mail oder Passwort ist falsch.",
     "welcome": "Willkommen zurück",
     "tagline": "Ein Arbeitsplatz für alles Menschliche.",
     "taglineBody": "Mitarbeitende, Abwesenheiten, Zeiterfassung, Leistung und Recruiting – an einem Ort, klar und schnell.",
+    "versionAria": "App-Version",
+    "bullets": {
+      "allInOne": { "title": "Alles an einem Ort", "desc": "Mitarbeitende, Abwesenheiten, Zeit & mehr." },
+      "bilingual": { "title": "Deutsch & Englisch", "desc": "Sprache jederzeit umschaltbar." },
+      "roles": { "title": "Rollen & Rechte", "desc": "Feingranulare Zugriffssteuerung." },
+      "selfHosted": { "title": "Self-hosted", "desc": "Deine Daten, deine Infrastruktur." }
+    },
     "demo": {
       "title": "Demo-Zugänge",
       "hint": "Zum Ausfüllen anklicken",

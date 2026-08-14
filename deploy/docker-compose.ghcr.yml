@@ -1,0 +1,60 @@
+# Pull-based production stack — uses the prebuilt image from GHCR (no local
+# build, so no OOM on small servers). Run from the repo root with:
+#   docker compose --env-file .env.prod -f deploy/docker-compose.ghcr.yml pull
+#   docker compose --env-file .env.prod -f deploy/docker-compose.ghcr.yml up -d
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: coworkee
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: coworkee
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U coworkee"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: ghcr.io/fgilde/coworkeenextjs:latest
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: "postgresql://coworkee:${POSTGRES_PASSWORD}@db:5432/coworkee?schema=public"
+      AUTH_SECRET: ${AUTH_SECRET}
+      AUTH_TRUST_HOST: "true"
+      NODE_ENV: production
+      DEMO: "1"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - storage:/app/storage
+    networks:
+      default:
+        # eindeutiger Alias, damit Caddy NUR diese App trifft (nie ein
+        # fremder Container, der zufällig auch "app" heißt).
+        aliases:
+          - coworkee-app
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # Caddyfile lives at the repo root; this compose file is in deploy/.
+      - ../Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
+volumes:
+  pgdata: {}
+  storage: {}
+  caddy_data: {}
+  caddy_config: {}

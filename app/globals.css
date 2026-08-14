@@ -199,6 +199,23 @@
   }
 }
 
+/* Luminous drifting gradient for the login brand panel.
+   Disabled automatically by the prefers-reduced-motion block below. */
+@keyframes coworkee-aurora {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.login-aurora {
+  background-size: 200% 200%;
+  animation: coworkee-aurora 18s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

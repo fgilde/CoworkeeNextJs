@@ -1,6 +1,7 @@
 import { requireAuth, can } from "@/lib/rbac";
 import { db } from "@/lib/db";
 import { AppSidebar } from "@/components/app-sidebar";
+import { VERSION_LABEL } from "@/lib/version";
 import { Topbar } from "@/components/topbar";
 import { ContentTransition } from "@/components/content-transition";
 
@@ -31,6 +32,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         canAnalytics={canAnalytics}
         canRecruiting={canRecruiting}
         companyName={companySettings?.companyName}
+        version={VERSION_LABEL}
       />
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar

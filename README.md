@@ -130,6 +130,22 @@ Installiert Docker (falls nötig), klont nach `/opt/coworkee`, fragt nach einer 
 
 Für manuelles Deployment oder die Demo-Variante (mit Caddy-Domain-Fixierung) siehe `docs/DEPLOYMENT.md`. Die öffentliche Demo-Instanz setzt zusätzlich `DEMO=1` (zur Laufzeit, kein Rebuild nötig) — das eine Flag seedet beim ersten Start automatisch die Demo-Daten (nur falls die DB leer ist) **und** zeigt die Demo-Logins auf `/login`. Ohne `DEMO` bleibt die DB leer → Setup-Assistent.
 
+### Prebuilt image (GHCR)
+
+CI publishes the Docker image to `ghcr.io/fgilde/coworkeenextjs` on every push to `master`
+(tag `latest`) and on `v*` tags (semver). Small servers (~1 GB RAM) that OOM on a local
+`next build` can deploy by **pulling** this image instead of building — use
+`deploy/docker-compose.ghcr.yml`, run from the repo root:
+
+```bash
+docker compose --env-file .env.prod -f deploy/docker-compose.ghcr.yml pull
+docker compose --env-file .env.prod -f deploy/docker-compose.ghcr.yml up -d
+```
+
+The GHCR package must be set **public** once in GitHub (Packages → the package → Package
+settings → Change visibility → Public) so the server can pull anonymously. Otherwise run
+`docker login ghcr.io` on the server first (with a PAT that has `read:packages`).
+
 ## Lizenz
 
 Proprietär – © 2026 Coworkee.

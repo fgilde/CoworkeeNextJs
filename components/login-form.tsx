@@ -34,6 +34,8 @@ export function LoginForm({ showDemo }: { showDemo: boolean }) {
             type="email"
             autoComplete="email"
             required
+            disabled={pending}
+            aria-invalid={!!state.error}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -46,18 +48,23 @@ export function LoginForm({ showDemo }: { showDemo: boolean }) {
             type="password"
             autoComplete="current-password"
             required
+            disabled={pending}
+            aria-invalid={!!state.error}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         {state.error && (
-          <p className="text-sm text-destructive" role="alert">
+          <p
+            className="rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+            role="alert"
+          >
             {t(state.error)}
           </p>
         )}
         <Button type="submit" disabled={pending} className="w-full">
           {pending && <Loader2 className="size-4 animate-spin" aria-hidden />}
-          {t("submit")}
+          {pending ? t("submitting") : t("submit")}
         </Button>
       </form>
 

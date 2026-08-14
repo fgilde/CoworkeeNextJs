@@ -39,10 +39,18 @@
     "email": "Email",
     "password": "Password",
     "submit": "Log in",
+    "submitting": "Signing in …",
     "invalidCredentials": "Email or password is incorrect.",
     "welcome": "Welcome back",
     "tagline": "One workplace for everything human.",
     "taglineBody": "People, absences, time tracking, performance, and recruiting – in one place, clear and fast.",
+    "versionAria": "App version",
+    "bullets": {
+      "allInOne": { "title": "All in one place", "desc": "People, absences, time & more." },
+      "bilingual": { "title": "German & English", "desc": "Switch language anytime." },
+      "roles": { "title": "Roles & permissions", "desc": "Fine-grained access control." },
+      "selfHosted": { "title": "Self-hosted", "desc": "Your data, your infrastructure." }
+    },
     "demo": {
       "title": "Demo access",
       "hint": "Click to fill",
