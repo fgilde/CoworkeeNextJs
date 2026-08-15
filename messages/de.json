@@ -566,9 +566,11 @@
   },
   "marketing": {
     "nav": {
+      "how": "So funktioniert's",
       "features": "Funktionen",
       "modules": "Module",
       "hosting": "Hosting",
+      "faq": "FAQ",
       "demo": "Demo",
       "contact": "Kontakt",
       "login": "Anmelden",
@@ -580,11 +582,89 @@
       "description": "Mitarbeiterverwaltung, Abwesenheit, Zeiterfassung, Dokumente, Performance und Recruiting in einer Plattform."
     },
     "hero": {
+      "badge": "Open-Source HR · Self-hosted",
       "title": "Die HR-Plattform für dein ganzes Team.",
       "subtitle": "Mitarbeitende, Abwesenheit, Zeiterfassung, Dokumente, Performance und Recruiting — in einem System, statt in zehn Tabs.",
       "ctaPrimary": "Live-Demo starten",
       "ctaSecondary": "Funktionen ansehen",
       "screenshotAlt": "Coworkee Dashboard mit Übersicht über Team, Abwesenheiten und Aufgaben"
+    },
+    "stats": {
+      "modules": "Module",
+      "languages": "Sprachen",
+      "selfHostable": "Self-hostable",
+      "employees": "Mitarbeitende"
+    },
+    "how": {
+      "eyebrow": "In 3 Schritten",
+      "heading": "So funktioniert's",
+      "subheading": "Von null auf startklar — schneller, als du denkst.",
+      "steps": {
+        "install": {
+          "title": "Installieren",
+          "body": "Ein docker compose up auf deinem Server, VPS oder Proxmox — oder ein einziger Install-Befehl. Fertig in Minuten."
+        },
+        "setup": {
+          "title": "Einrichten",
+          "body": "Der Setup-Wizard führt dich beim ersten Start durch Admin-Konto, Firmenname und Sprache. Kein Config-Chaos."
+        },
+        "launch": {
+          "title": "Loslegen",
+          "body": "Team anlegen, Module aktivieren, fertig. Deine Leute melden sich an und arbeiten sofort los."
+        }
+      }
+    },
+    "why": {
+      "heading": "Warum Coworkee?",
+      "subheading": "Ein modernes HR-System, das dir gehört — ohne Kompromisse bei Datenschutz und Bedienung.",
+      "items": {
+        "allInOne": {
+          "title": "Alles an einem Ort",
+          "body": "Neun HR-Module in einer Plattform — Mitarbeitende, Abwesenheit, Zeit, Dokumente, Performance, Recruiting und mehr. Kein Tool-Wildwuchs, keine Datensilos, ein Login."
+        },
+        "gdpr": {
+          "title": "DSGVO & self-hosted",
+          "body": "Deine Daten bleiben auf deiner Infrastruktur. Volle Kontrolle, keine Drittanbieter."
+        },
+        "bilingual": {
+          "title": "Deutsch & Englisch",
+          "body": "Komplett zweisprachig, jederzeit umschaltbar — pro Person, ohne Neustart."
+        },
+        "open": {
+          "title": "Offen & erweiterbar",
+          "body": "Open Source und transparent. Anpassen, erweitern, selbst betreiben — keine Blackbox."
+        },
+        "modern": {
+          "title": "Modern & schnell",
+          "body": "Aufgeräumtes UI, Hell- und Dunkelmodus, spürbar schnell auf jedem Gerät."
+        }
+      }
+    },
+    "faq": {
+      "heading": "Häufige Fragen",
+      "subheading": "Alles, was du vor dem Start wissen willst.",
+      "items": {
+        "selfHost": {
+          "q": "Kann ich Coworkee selbst hosten?",
+          "a": "Ja. Coworkee ist Open Source und läuft überall, wo Docker läuft — VPS, Proxmox/PVE oder Bare-Metal. Ein docker compose up genügt, deine Daten bleiben bei dir."
+        },
+        "cost": {
+          "q": "Was kostet es?",
+          "a": "Selbst gehostet ist Coworkee kostenlos, ohne Lizenzgebühren. Für Managed Hosting mit Betrieb, Updates und Support melde dich einfach per E-Mail."
+        },
+        "gdpr": {
+          "q": "Wie sieht es mit der DSGVO aus?",
+          "a": "Weil du selbst hostest, liegen alle Personaldaten auf deiner eigenen Infrastruktur — keine Übermittlung an Dritte. Beim Managed Hosting hosten wir in der EU."
+        },
+        "domain": {
+          "q": "Kann ich eine eigene Domain verwenden?",
+          "a": "Ja. Self-hosted richtest du deine Domain frei ein; beim Managed Hosting binden wir deine Wunschdomain inklusive HTTPS für dich an."
+        },
+        "managed": {
+          "q": "Bietet ihr auch Managed Hosting an?",
+          "a": "Ja. Wir betreiben Coworkee für dich — inklusive Updates, Backups und persönlichem Support. Schreib uns an info@coworkee.de."
+        }
+      }
     },
     "trust": {
       "modules": "9 Module",

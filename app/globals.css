@@ -216,6 +216,79 @@
   animation: coworkee-aurora 18s ease-in-out infinite;
 }
 
+/* --- Marketing landing motion --- */
+
+/* Animated hero aurora (reuses the drifting-gradient idea from login). */
+.coworkee-aurora {
+  background-size: 200% 200%;
+  animation: coworkee-aurora 20s ease-in-out infinite;
+}
+
+/* Gentle bobbing for the hero browser frame. */
+@keyframes coworkee-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+.coworkee-float {
+  animation: coworkee-float 7s ease-in-out infinite;
+}
+
+/* Slow drifting decorative blobs. */
+@keyframes coworkee-blob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(24px, -32px) scale(1.12);
+  }
+  66% {
+    transform: translate(-20px, 22px) scale(0.94);
+  }
+}
+.coworkee-blob {
+  animation: coworkee-blob 22s ease-in-out infinite;
+}
+
+/* Scroll-reveal. Gated behind .reveal-ready (added by JS on mount) so the
+   content is fully visible when JS is disabled or hasn't run yet. */
+.reveal-ready .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-ready .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Native <details> FAQ chevron rotation. */
+.faq-item > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

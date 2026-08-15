@@ -4,13 +4,18 @@ import { MarketingNav } from "@/components/marketing/nav";
 import {
   Hero,
   TrustBand,
+  StatsBand,
+  HowItWorks,
   ModuleGrid,
+  WhyCoworkee,
   FeatureSpotlights,
   DarkModeShowcase,
   HostingSection,
+  Faq,
   DemoSection,
   ContactSection,
   MarketingFooter,
+  RevealInit,
 } from "@/components/marketing/sections";
 
 // Public marketing landing page at "/". No theme-provider dependency here,
@@ -28,14 +33,19 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white text-slate-900">
+      <RevealInit />
       <MarketingNav />
       <main>
         <Hero />
         <TrustBand />
+        <StatsBand />
+        <HowItWorks />
         <ModuleGrid />
+        <WhyCoworkee />
         <FeatureSpotlights />
         <DarkModeShowcase />
         <HostingSection />
+        <Faq />
         <DemoSection />
         <ContactSection />
       </main>

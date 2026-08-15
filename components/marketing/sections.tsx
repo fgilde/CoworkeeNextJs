@@ -4,23 +4,35 @@ import {
   ArrowRight,
   BarChart3,
   Bell,
+  Blocks,
   Briefcase,
   CalendarClock,
   Check,
+  ChevronDown,
   Clock,
   Cloud,
+  Download,
   FileText,
+  Globe2,
   ListChecks,
   Mail,
   Moon,
   Network,
+  Rocket,
   Server,
+  Settings2,
   ShieldCheck,
+  Sparkles,
   Sun,
   Target,
   Users2,
+  Zap,
 } from "lucide-react";
 import { BrowserFrame } from "@/components/marketing/browser-frame";
+import { RevealInit, StatsBand } from "@/components/marketing/interactive";
+import { VERSION_LABEL } from "@/lib/version";
+
+export { RevealInit, StatsBand };
 
 const CONTACT_EMAIL = "info@coworkee.de";
 const GITHUB_REPO_URL = "https://github.com/fgilde/CoworkeeNextJs";
@@ -58,14 +70,15 @@ export async function Hero() {
   const t = await getTranslations("marketing");
 
   return (
-    <section className="relative overflow-hidden bg-linear-to-br from-indigo-700 via-indigo-600 to-violet-700 pt-20 pb-28 text-white sm:pt-28">
+    <section className="coworkee-aurora relative overflow-hidden bg-linear-to-br from-indigo-700 via-indigo-600 to-violet-700 pt-20 pb-28 text-white sm:pt-28">
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-32 -left-32 size-96 rounded-full bg-white/10 blur-3xl"
+        className="coworkee-blob pointer-events-none absolute -top-32 -left-32 size-96 rounded-full bg-white/10 blur-3xl"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute top-1/3 -right-40 size-[32rem] rounded-full bg-violet-400/20 blur-3xl"
+        className="coworkee-blob pointer-events-none absolute top-1/3 -right-40 size-[32rem] rounded-full bg-violet-400/20 blur-3xl"
+        style={{ animationDelay: "-8s" }}
       />
       <div
         aria-hidden
@@ -74,7 +87,11 @@ export async function Hero() {
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-white/90 uppercase backdrop-blur-sm">
+            <Sparkles className="size-3.5" aria-hidden />
+            {t("hero.badge")}
+          </span>
+          <h1 className="mt-6 text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
             {t("hero.title")}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-indigo-100 text-balance">{t("hero.subtitle")}</p>
@@ -82,7 +99,7 @@ export async function Hero() {
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-indigo-700 shadow-lg transition-all hover:shadow-xl hover:brightness-105 active:translate-y-px"
+              className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-indigo-700 shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:brightness-105 active:translate-y-px"
             >
               {t("hero.ctaPrimary")}
               <ArrowRight className="size-4" aria-hidden />
@@ -101,13 +118,15 @@ export async function Hero() {
             aria-hidden
             className="pointer-events-none absolute inset-0 -z-10 scale-95 rounded-3xl bg-white/20 blur-2xl"
           />
-          <div className="rotate-1 transition-transform duration-500 ease-out hover:rotate-0">
-            <BrowserFrame
-              src="/marketing/screens/dashboard-light.png"
-              alt={t("hero.screenshotAlt")}
-              url="coworkee.app/dashboard"
-              preload
-            />
+          <div className="coworkee-float">
+            <div className="rotate-1 transition-transform duration-500 ease-out hover:rotate-0">
+              <BrowserFrame
+                src="/marketing/screens/dashboard-light.png"
+                alt={t("hero.screenshotAlt")}
+                url="coworkee.app/dashboard"
+                preload
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -138,7 +157,7 @@ export async function ModuleGrid() {
   return (
     <section id="module" className="bg-slate-50 py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="reveal mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
             {t("modules.heading")}
           </h2>
@@ -149,7 +168,7 @@ export async function ModuleGrid() {
           {moduleItems.map(({ key, icon: Icon }) => (
             <div
               key={key}
-              className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+              className="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-500/10"
             >
               <div className="inline-flex size-11 items-center justify-center rounded-xl bg-linear-to-br from-indigo-600 to-violet-600 text-white">
                 <Icon className="size-5" aria-hidden />
@@ -164,13 +183,151 @@ export async function ModuleGrid() {
   );
 }
 
+const howSteps = [
+  { key: "install", icon: Download },
+  { key: "setup", icon: Settings2 },
+  { key: "launch", icon: Rocket },
+] as const;
+
+export async function HowItWorks() {
+  const t = await getTranslations("marketing");
+
+  return (
+    <section id="so-funktionierts" className="bg-white py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="reveal mx-auto max-w-2xl text-center">
+          <span className="text-sm font-semibold tracking-wide text-indigo-600 uppercase">
+            {t("how.eyebrow")}
+          </span>
+          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+            {t("how.heading")}
+          </h2>
+          <p className="mt-4 text-slate-600">{t("how.subheading")}</p>
+        </div>
+
+        <div className="relative mt-16 grid gap-8 sm:grid-cols-3">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute top-7 right-[16%] left-[16%] hidden border-t-2 border-dashed border-indigo-200 sm:block"
+          />
+          {howSteps.map(({ key, icon: Icon }, i) => (
+            <div key={key} className="reveal relative flex flex-col items-center text-center">
+              <div className="relative flex size-14 items-center justify-center rounded-2xl bg-linear-to-br from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/25">
+                <Icon className="size-6" aria-hidden />
+                <span className="absolute -top-2 -right-2 flex size-6 items-center justify-center rounded-full bg-white text-xs font-bold text-indigo-700 shadow-sm ring-1 ring-slate-200">
+                  {i + 1}
+                </span>
+              </div>
+              <h3 className="mt-5 text-lg font-semibold text-slate-900">
+                {t(`how.steps.${key}.title`)}
+              </h3>
+              <p className="mt-2 max-w-xs text-sm text-slate-600">{t(`how.steps.${key}.body`)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const whyItems: { key: string; icon: typeof Blocks; featured?: boolean }[] = [
+  { key: "allInOne", icon: Blocks, featured: true },
+  { key: "gdpr", icon: ShieldCheck },
+  { key: "bilingual", icon: Globe2 },
+  { key: "open", icon: Server },
+  { key: "modern", icon: Zap },
+];
+
+export async function WhyCoworkee() {
+  const t = await getTranslations("marketing");
+
+  return (
+    <section id="warum" className="bg-slate-50 py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="reveal mx-auto max-w-2xl text-center">
+          <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+            {t("why.heading")}
+          </h2>
+          <p className="mt-4 text-slate-600">{t("why.subheading")}</p>
+        </div>
+
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {whyItems.map(({ key, icon: Icon, featured }) => (
+            <div
+              key={key}
+              className={`reveal group flex flex-col rounded-2xl border p-7 transition-all hover:-translate-y-1 hover:shadow-lg ${
+                featured
+                  ? "bg-linear-to-br from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/25 sm:col-span-2 lg:row-span-2"
+                  : "border-slate-200 bg-white text-slate-900 shadow-sm hover:border-indigo-200 hover:shadow-indigo-500/10"
+              }`}
+            >
+              <div
+                className={`inline-flex size-11 items-center justify-center rounded-xl ${
+                  featured
+                    ? "bg-white/20 text-white"
+                    : "bg-linear-to-br from-indigo-600 to-violet-600 text-white"
+                }`}
+              >
+                <Icon className="size-5" aria-hidden />
+              </div>
+              <h3 className={`mt-4 font-semibold ${featured ? "text-xl" : ""}`}>
+                {t(`why.items.${key}.title`)}
+              </h3>
+              <p className={`mt-2 text-sm ${featured ? "text-indigo-100" : "text-slate-600"}`}>
+                {t(`why.items.${key}.body`)}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const faqKeys = ["selfHost", "cost", "gdpr", "domain", "managed"] as const;
+
+export async function Faq() {
+  const t = await getTranslations("marketing");
+
+  return (
+    <section id="faq" className="bg-white py-24">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
+        <div className="reveal mx-auto max-w-2xl text-center">
+          <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+            {t("faq.heading")}
+          </h2>
+          <p className="mt-4 text-slate-600">{t("faq.subheading")}</p>
+        </div>
+
+        <div className="reveal mt-12 flex flex-col gap-3">
+          {faqKeys.map((key) => (
+            <details
+              key={key}
+              className="faq-item group rounded-2xl border border-slate-200 bg-slate-50 px-6 transition-colors open:bg-white open:shadow-sm"
+            >
+              <summary className="flex items-center justify-between gap-4 py-5 text-left font-semibold text-slate-900">
+                {t(`faq.items.${key}.q`)}
+                <ChevronDown
+                  className="faq-chevron size-5 shrink-0 text-indigo-600 transition-transform duration-300"
+                  aria-hidden
+                />
+              </summary>
+              <p className="pb-5 text-sm text-slate-600">{t(`faq.items.${key}.a`)}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export async function FeatureSpotlights() {
   const t = await getTranslations("marketing");
 
   return (
     <section id="funktionen" className="bg-white py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="reveal mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
             {t("spotlights.heading")}
           </h2>
@@ -180,7 +337,7 @@ export async function FeatureSpotlights() {
           {spotlightItems.map(({ key, src }, i) => {
             const bullets = t.raw(`spotlights.${key}.bullets`) as string[];
             return (
-              <div key={key} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+              <div key={key} className="reveal grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
                 <div className={i % 2 === 1 ? "lg:order-2" : undefined}>
                   <span className="text-sm font-semibold tracking-wide text-indigo-600 uppercase">
                     {t(`spotlights.${key}.eyebrow`)}
@@ -216,7 +373,7 @@ export async function DarkModeShowcase() {
   return (
     <section className="bg-slate-950 py-24 text-white">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="reveal mx-auto max-w-2xl text-center">
           <div className="mx-auto flex w-fit items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
             <Sun className="size-3.5" aria-hidden />
             <Moon className="size-3.5" aria-hidden />
@@ -227,7 +384,7 @@ export async function DarkModeShowcase() {
         </div>
 
         <div className="mt-14 grid gap-8 sm:grid-cols-2">
-          <div>
+          <div className="reveal">
             <BrowserFrame
               src="/marketing/screens/dashboard-light.png"
               alt={t("darkMode.lightAlt")}
@@ -235,7 +392,7 @@ export async function DarkModeShowcase() {
             />
             <p className="mt-3 text-center text-sm text-slate-400">{t("darkMode.lightLabel")}</p>
           </div>
-          <div>
+          <div className="reveal">
             <BrowserFrame
               src="/marketing/screens/dashboard-dark.png"
               alt={t("darkMode.darkAlt")}
@@ -257,7 +414,7 @@ export async function HostingSection() {
   return (
     <section id="hosting" className="bg-slate-50 py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="reveal mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
             {t("hosting.heading")}
           </h2>
@@ -265,7 +422,7 @@ export async function HostingSection() {
         </div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2">
-          <div className="flex flex-col rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+          <div className="reveal flex flex-col rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
             <div className="inline-flex size-11 items-center justify-center rounded-xl bg-linear-to-br from-indigo-600 to-violet-600 text-white">
               <Server className="size-5" aria-hidden />
             </div>
@@ -290,7 +447,7 @@ export async function HostingSection() {
             </a>
           </div>
 
-          <div className="flex flex-col rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+          <div className="reveal flex flex-col rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
             <div className="inline-flex size-11 items-center justify-center rounded-xl bg-linear-to-br from-indigo-600 to-violet-600 text-white">
               <Cloud className="size-5" aria-hidden />
             </div>
@@ -324,7 +481,7 @@ export async function DemoSection() {
   return (
     <section id="demo" className="bg-linear-to-br from-indigo-700 via-indigo-600 to-violet-700 py-24 text-white">
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
-        <div className="overflow-hidden rounded-3xl bg-white/10 p-8 backdrop-blur-sm ring-1 ring-white/20 sm:p-12">
+        <div className="reveal overflow-hidden rounded-3xl bg-white/10 p-8 backdrop-blur-sm ring-1 ring-white/20 sm:p-12">
           <div className="text-center">
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">{t("demo.heading")}</h2>
             <p className="mt-3 text-indigo-100">{t("demo.body")}</p>
@@ -365,7 +522,7 @@ export async function ContactSection() {
 
   return (
     <section id="kontakt" className="bg-white py-24">
-      <div className="mx-auto max-w-2xl px-4 text-center sm:px-6">
+      <div className="reveal mx-auto max-w-2xl px-4 text-center sm:px-6">
         <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">{t("contact.heading")}</h2>
         <p className="mt-4 text-slate-600">{t("contact.body")}</p>
         <a
@@ -421,6 +578,7 @@ export async function MarketingFooter() {
             <Network className="size-3.5" aria-hidden />
             {t("footer.demoInstance")}
           </p>
+          <p className="mt-0.5 text-xs text-slate-400">{VERSION_LABEL}</p>
         </div>
       </div>
     </footer>

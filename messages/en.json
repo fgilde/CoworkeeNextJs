@@ -566,9 +566,11 @@
   },
   "marketing": {
     "nav": {
+      "how": "How it works",
       "features": "Features",
       "modules": "Modules",
       "hosting": "Hosting",
+      "faq": "FAQ",
       "demo": "Demo",
       "contact": "Contact",
       "login": "Log in",
@@ -580,11 +582,89 @@
       "description": "Employee management, absences, time tracking, documents, performance, and recruiting in one platform."
     },
     "hero": {
+      "badge": "Open-source HR · Self-hosted",
       "title": "The HR platform for your whole team.",
       "subtitle": "People, absences, time tracking, documents, performance, and recruiting — in one system, instead of ten tabs.",
       "ctaPrimary": "Start the live demo",
       "ctaSecondary": "See features",
       "screenshotAlt": "Coworkee dashboard with an overview of team, absences, and tasks"
+    },
+    "stats": {
+      "modules": "Modules",
+      "languages": "Languages",
+      "selfHostable": "Self-hostable",
+      "employees": "Employees"
+    },
+    "how": {
+      "eyebrow": "In 3 steps",
+      "heading": "How it works",
+      "subheading": "From zero to up and running — faster than you'd think.",
+      "steps": {
+        "install": {
+          "title": "Install",
+          "body": "One docker compose up on your server, VPS, or Proxmox — or a single install command. Done in minutes."
+        },
+        "setup": {
+          "title": "Set up",
+          "body": "The setup wizard walks you through the admin account, company name, and language on first run. No config chaos."
+        },
+        "launch": {
+          "title": "Get going",
+          "body": "Add your team, enable the modules you need, done. Your people log in and start working right away."
+        }
+      }
+    },
+    "why": {
+      "heading": "Why Coworkee?",
+      "subheading": "A modern HR system that's truly yours — no compromises on privacy or usability.",
+      "items": {
+        "allInOne": {
+          "title": "Everything in one place",
+          "body": "Nine HR modules in one platform — people, absence, time, documents, performance, recruiting, and more. No tool sprawl, no data silos, one login."
+        },
+        "gdpr": {
+          "title": "GDPR & self-hosted",
+          "body": "Your data stays on your infrastructure. Full control, no third parties."
+        },
+        "bilingual": {
+          "title": "German & English",
+          "body": "Fully bilingual, switchable anytime — per person, no restart."
+        },
+        "open": {
+          "title": "Open & extensible",
+          "body": "Open source and transparent. Customize, extend, run it yourself — no black box."
+        },
+        "modern": {
+          "title": "Modern & fast",
+          "body": "A clean UI, light and dark mode, noticeably fast on every device."
+        }
+      }
+    },
+    "faq": {
+      "heading": "Frequently asked questions",
+      "subheading": "Everything you want to know before you start.",
+      "items": {
+        "selfHost": {
+          "q": "Can I self-host Coworkee?",
+          "a": "Yes. Coworkee is open source and runs anywhere Docker runs — VPS, Proxmox/PVE, or bare metal. A single docker compose up is enough, and your data stays with you."
+        },
+        "cost": {
+          "q": "What does it cost?",
+          "a": "Self-hosted, Coworkee is free with no license fees. For managed hosting with operations, updates, and support, just reach out by email."
+        },
+        "gdpr": {
+          "q": "What about GDPR?",
+          "a": "Because you self-host, all HR data lives on your own infrastructure — nothing is sent to third parties. With managed hosting we host in the EU."
+        },
+        "domain": {
+          "q": "Can I use my own domain?",
+          "a": "Yes. Self-hosted, you point your domain freely; with managed hosting we connect your preferred domain including HTTPS for you."
+        },
+        "managed": {
+          "q": "Do you offer managed hosting?",
+          "a": "Yes. We run Coworkee for you — including updates, backups, and personal support. Email us at info@coworkee.de."
+        }
+      }
     },
     "trust": {
       "modules": "9 modules",

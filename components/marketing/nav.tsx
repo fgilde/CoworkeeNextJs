@@ -11,9 +11,11 @@ export function MarketingNav() {
   const t = useTranslations("marketing");
 
   const links = [
+    { href: "#so-funktionierts", label: t("nav.how") },
     { href: "#funktionen", label: t("nav.features") },
     { href: "#module", label: t("nav.modules") },
     { href: "#hosting", label: t("nav.hosting") },
+    { href: "#faq", label: t("nav.faq") },
     { href: "#demo", label: t("nav.demo") },
     { href: "#kontakt", label: t("nav.contact") },
   ];
