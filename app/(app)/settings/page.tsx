@@ -22,13 +22,45 @@ import {
   updateLeaveType,
   deleteLeaveType,
 } from "@/app/actions/leave-settings-actions";
+import { AppearanceSection } from "@/components/settings/appearance-section";
+import { THEME_PRESETS, type ThemePreset } from "@/lib/theming";
+import { getBranding } from "@/lib/branding";
 
 export default async function SettingsPage() {
   const session = await requireRole("HR", "ADMIN");
   const t = await getTranslations("settings");
   const tCommon = await getTranslations("common");
+  const tAppearance = await getTranslations("appearance");
   const canManageLeave = can(session.user.role, "leave:manage");
+  const isAdmin = session.user.role === "ADMIN";
   const currentYear = new Date().getFullYear();
+
+  const branding = isAdmin ? await getBranding() : null;
+  const appearanceLabels = branding && {
+    title: tAppearance("title"),
+    description: tAppearance("description"),
+    themePreset: tAppearance("themePreset"),
+    accentColor: tAppearance("accentColor"),
+    logo: tAppearance("logo"),
+    logoHint: tAppearance("logoHint"),
+    uploadLogo: tAppearance("uploadLogo"),
+    removeLogo: tAppearance("removeLogo"),
+    currentLogo: tAppearance("currentLogo"),
+    noLogo: tAppearance("noLogo"),
+    save: tCommon("save"),
+    saved: tAppearance("saved"),
+    presets: Object.fromEntries(
+      THEME_PRESETS.map((p) => [
+        p,
+        { name: tAppearance(`presets.${p}.name`), desc: tAppearance(`presets.${p}.desc`) },
+      ])
+    ) as Record<ThemePreset, { name: string; desc: string }>,
+    errors: {
+      validationError: t("validationError"),
+      fileTooLarge: tAppearance("fileTooLarge"),
+      fileType: tAppearance("fileType"),
+    },
+  };
 
   // Both roles that ever reach this page (RBAC gate above) already carry
   // leave:manage, so this data is fetched unconditionally; `canManageLeave`
@@ -100,6 +132,15 @@ export default async function SettingsPage() {
           </Link>
         )}
       </div>
+
+      {branding && appearanceLabels && (
+        <AppearanceSection
+          currentPreset={branding.themePreset}
+          currentAccent={branding.accentColor}
+          hasLogo={!!branding.logoPath}
+          labels={appearanceLabels}
+        />
+      )}
 
       <CrudSection
         title={t("departments")}

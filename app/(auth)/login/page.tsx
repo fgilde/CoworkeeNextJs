@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { LoginForm } from "@/components/login-form";
 import { needsSetup } from "@/lib/setup";
 import { VERSION_LABEL } from "@/lib/version";
+import { getBranding } from "@/lib/branding";
 
 const BULLETS: { key: string; icon: LucideIcon }[] = [
   { key: "allInOne", icon: LayoutGrid },
@@ -17,6 +18,7 @@ export default async function LoginPage() {
   if (await needsSetup()) redirect("/setup");
 
   const t = await getTranslations("auth");
+  const branding = await getBranding();
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
@@ -62,7 +64,12 @@ export default async function LoginPage() {
 
       {/* Form panel */}
       <div className="flex flex-col items-center justify-center gap-6 p-6 sm:p-10">
-        <span className="font-heading text-2xl font-semibold tracking-tight lg:hidden">Coworkee</span>
+        {branding.logoPath ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src="/api/branding/logo" alt={branding.companyName ?? "Coworkee"} className="h-10 w-auto max-w-[220px] object-contain" />
+        ) : (
+          <span className="font-heading text-2xl font-semibold tracking-tight lg:hidden">Coworkee</span>
+        )}
 
         <div className="w-full max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
           <Card>

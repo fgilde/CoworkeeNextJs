@@ -84,6 +84,27 @@
     "alreadySetup": "Diese Instanz wurde bereits eingerichtet.",
     "loginFailed": "Konto wurde erstellt, die automatische Anmeldung ist jedoch fehlgeschlagen. Bitte melde dich manuell an."
   },
+  "appearance": {
+    "title": "Erscheinungsbild",
+    "description": "Design-Vorlage, Akzentfarbe und Logo Ihres Unternehmens.",
+    "themePreset": "Design-Vorlage",
+    "accentColor": "Akzentfarbe",
+    "logo": "Logo",
+    "logoHint": "PNG, JPG, SVG oder WebP, max. 2 MB. Wird in der Seitenleiste und auf der Anmeldeseite angezeigt.",
+    "uploadLogo": "Logo hochladen",
+    "removeLogo": "Entfernen",
+    "currentLogo": "Aktuelles Logo",
+    "noLogo": "Kein Logo",
+    "saved": "Gespeichert",
+    "fileTooLarge": "Datei ist zu groß (max. 2 MB).",
+    "fileType": "Nicht unterstützter Dateityp.",
+    "presets": {
+      "default": { "name": "Standard", "desc": "Klares SaaS-Indigo" },
+      "material": { "name": "Material", "desc": "Runde Ecken, Elevation" },
+      "github": { "name": "GitHub", "desc": "Neutral, kompakt" },
+      "playful": { "name": "Verspielt", "desc": "Rund, bunt, federnd" }
+    }
+  },
   "dashboard": {
     "title": "Übersicht",
     "greeting": "Willkommen, {name}",

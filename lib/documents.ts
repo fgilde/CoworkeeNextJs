@@ -7,8 +7,29 @@ import { randomUUID } from "crypto";
 // download route, which enforces the access check below.
 export const STORAGE_DIR = path.join(process.cwd(), "storage", "documents");
 
+// Public branding assets (logo). Same private-storage pattern as documents —
+// only served via the guarded /api/branding/logo route (which is public by
+// design, since the logo shows on login/marketing).
+export const BRANDING_DIR = path.join(process.cwd(), "storage", "branding");
+
 export async function ensureStorageDir(): Promise<void> {
   await mkdir(STORAGE_DIR, { recursive: true });
+}
+
+export async function ensureBrandingDir(): Promise<void> {
+  await mkdir(BRANDING_DIR, { recursive: true });
+}
+
+// Path-traversal guard for branding files, mirroring safeStoredPath.
+export function safeBrandingPath(storedName: string): string {
+  if (!storedName || storedName.includes("..") || path.isAbsolute(storedName)) {
+    throw new Error("Invalid stored file name");
+  }
+  const resolved = path.resolve(BRANDING_DIR, storedName);
+  if (resolved !== BRANDING_DIR && !resolved.startsWith(BRANDING_DIR + path.sep)) {
+    throw new Error("Invalid stored file name");
+  }
+  return resolved;
 }
 
 // Guards path traversal: resolves the candidate path and asserts it stays

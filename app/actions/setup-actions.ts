@@ -6,6 +6,7 @@ import { AuthError } from "next-auth";
 import { db } from "@/lib/db";
 import { hashPassword } from "@/lib/password";
 import { signIn } from "@/auth";
+import { THEME_PRESETS, DEFAULT_ACCENT, DEFAULT_PRESET } from "@/lib/theming";
 
 export type SetupFormState = {
   error?: string;
@@ -21,6 +22,11 @@ const setupSchema = z
     confirmPassword: z.string().min(1),
     companyName: z.string().min(1),
     defaultLocale: z.enum(["de", "en"]),
+    themePreset: z.enum(THEME_PRESETS).default(DEFAULT_PRESET),
+    accentColor: z
+      .string()
+      .regex(/^#[0-9a-fA-F]{6}$/)
+      .default(DEFAULT_ACCENT),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "passwordMismatch",
@@ -78,8 +84,19 @@ export async function completeSetup(
 
       await tx.companySettings.upsert({
         where: { id: "singleton" },
-        create: { id: "singleton", companyName: data.companyName, defaultLocale: data.defaultLocale },
-        update: { companyName: data.companyName, defaultLocale: data.defaultLocale },
+        create: {
+          id: "singleton",
+          companyName: data.companyName,
+          defaultLocale: data.defaultLocale,
+          themePreset: data.themePreset,
+          accentColor: data.accentColor,
+        },
+        update: {
+          companyName: data.companyName,
+          defaultLocale: data.defaultLocale,
+          themePreset: data.themePreset,
+          accentColor: data.accentColor,
+        },
       });
     });
   } catch (error) {

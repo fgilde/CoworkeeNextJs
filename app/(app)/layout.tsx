@@ -32,6 +32,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         canAnalytics={canAnalytics}
         canRecruiting={canRecruiting}
         companyName={companySettings?.companyName}
+        hasLogo={!!companySettings?.logoPath}
         version={VERSION_LABEL}
       />
       <div className="flex min-w-0 flex-1 flex-col">

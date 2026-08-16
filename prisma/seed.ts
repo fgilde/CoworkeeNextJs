@@ -31,6 +31,18 @@ async function main() {
   await db.position.deleteMany();
   await db.location.deleteMany();
 
+  // --- Company settings (singleton) — branding/theme for the demo ---
+  await db.companySettings.upsert({
+    where: { id: "singleton" },
+    create: { id: "singleton", companyName: "Coworkee", defaultLocale: "de" },
+    update: {
+      companyName: "Coworkee",
+      accentColor: "#6366f1",
+      themePreset: "default",
+      logoPath: null,
+    },
+  });
+
   // --- Locations ---
   const berlin = await db.location.create({
     data: { name: "Berlin", city: "Berlin", country: "DE" },

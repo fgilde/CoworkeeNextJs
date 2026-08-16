@@ -84,6 +84,27 @@
     "alreadySetup": "This instance has already been set up.",
     "loginFailed": "Account created, but automatic login failed. Please log in manually."
   },
+  "appearance": {
+    "title": "Appearance",
+    "description": "Your company's style preset, accent color and logo.",
+    "themePreset": "Style preset",
+    "accentColor": "Accent color",
+    "logo": "Logo",
+    "logoHint": "PNG, JPG, SVG or WebP, max 2 MB. Shown in the sidebar and on the login page.",
+    "uploadLogo": "Upload logo",
+    "removeLogo": "Remove",
+    "currentLogo": "Current logo",
+    "noLogo": "No logo",
+    "saved": "Saved",
+    "fileTooLarge": "File is too large (max 2 MB).",
+    "fileType": "Unsupported file type.",
+    "presets": {
+      "default": { "name": "Default", "desc": "Clean SaaS indigo" },
+      "material": { "name": "Material", "desc": "Rounded, elevation" },
+      "github": { "name": "GitHub", "desc": "Neutral, compact" },
+      "playful": { "name": "Playful", "desc": "Round, colorful, bouncy" }
+    }
+  },
   "dashboard": {
     "title": "Dashboard",
     "greeting": "Welcome, {name}",

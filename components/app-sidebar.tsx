@@ -83,6 +83,7 @@ export function AppSidebar({
   canAnalytics,
   canRecruiting,
   companyName,
+  hasLogo,
   version,
 }: {
   canSettings: boolean;
@@ -91,6 +92,7 @@ export function AppSidebar({
   canAnalytics: boolean;
   canRecruiting: boolean;
   companyName?: string;
+  hasLogo?: boolean;
   version?: string;
 }) {
   const t = useTranslations("nav");
@@ -120,10 +122,17 @@ export function AppSidebar({
   return (
     <aside className="flex w-[260px] shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
       <div className="flex items-center gap-2 px-5 py-5">
-        <div className="flex size-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
-          {brandName.charAt(0)}
-        </div>
-        <span className="truncate text-lg font-semibold tracking-tight">{brandName}</span>
+        {hasLogo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src="/api/branding/logo" alt={brandName} className="max-h-8 w-auto max-w-[180px] object-contain" />
+        ) : (
+          <>
+            <div className="flex size-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
+              {brandName.charAt(0)}
+            </div>
+            <span className="truncate text-lg font-semibold tracking-tight">{brandName}</span>
+          </>
+        )}
       </div>
       <nav className="flex flex-col gap-1 px-3">
         {mainItems.map((item) => (
