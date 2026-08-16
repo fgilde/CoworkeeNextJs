@@ -27,7 +27,7 @@ const create = (tag: string, summary: string, required: string[], properties: Re
 
 const S = { string: { type: "string" }, int: { type: "integer" }, date: { type: "string", format: "date-time" }, bool: { type: "boolean" } };
 
-const spec = {
+export const spec = {
   openapi: "3.1.0",
   info: {
     title: "Coworkee API",

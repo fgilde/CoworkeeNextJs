@@ -284,7 +284,25 @@
     "tokenActions": "Aktionen",
     "revokeToken": "Widerrufen",
     "nameRequired": "Bitte geben Sie einen Namen an.",
-    "revokeFailed": "Token konnte nicht widerrufen werden."
+    "revokeFailed": "Token konnte nicht widerrufen werden.",
+    "apiReference": "API-Referenz"
+  },
+  "apiDocs": {
+    "title": "API- & MCP-Referenz",
+    "subtitle": "Binden Sie Coworkee mit einem persönlichen API-Token an eigene Tools oder einen KI-Agenten an.",
+    "gettingStarted": "Erste Schritte",
+    "tokenHelp": "Erstellen Sie auf Ihrer Kontoseite einen persönlichen API-Token und senden Sie ihn als \"Authorization: Bearer <token>\"-Header. Jede Anfrage ist auf Ihre Rolle beschränkt (ADMIN / HR / MANAGER / EMPLOYEE).",
+    "manageTokens": "API-Token verwalten",
+    "restBaseUrl": "REST-Basis-URL",
+    "mcpEndpoint": "MCP-Endpunkt",
+    "rbacNote": "Tokens gewähren nie mehr als Ihre Rolle erlaubt — für jeden Aufruf gelten dieselben Berechtigungsprüfungen wie in der App.",
+    "mcpTitle": "MCP-Server (für KI-Agenten)",
+    "mcpHelp": "Richten Sie einen MCP-Client (z. B. Claude) auf den folgenden Endpunkt aus. Es werden nur die Tools bereitgestellt, die Ihre Rolle nutzen darf; Schreib- und Genehmigungs-Tools erfordern die passende Berechtigung.",
+    "mcpConfigTitle": "MCP-Client-Konfiguration",
+    "mcpProbeTitle": "Verfügbare Tools auflisten",
+    "restTitle": "REST-Endpunkte",
+    "restHelp": "Alle Endpunkte liegen unter der Basis-URL und erfordern den Bearer-Token.",
+    "openapiLink": "Vollständiges OpenAPI-Dokument öffnen"
   },
   "orgChart": {
     "title": "Organigramm",

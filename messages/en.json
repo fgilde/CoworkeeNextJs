@@ -284,7 +284,25 @@
     "tokenActions": "Actions",
     "revokeToken": "Revoke",
     "nameRequired": "Please provide a name.",
-    "revokeFailed": "Could not revoke the token."
+    "revokeFailed": "Could not revoke the token.",
+    "apiReference": "API reference"
+  },
+  "apiDocs": {
+    "title": "API & MCP reference",
+    "subtitle": "Integrate Coworkee with your own tools or an AI agent using a personal API token.",
+    "gettingStarted": "Getting started",
+    "tokenHelp": "Create a personal API token on your account page, then send it as an \"Authorization: Bearer <token>\" header. Every request is scoped to your role (ADMIN / HR / MANAGER / EMPLOYEE).",
+    "manageTokens": "Manage API tokens",
+    "restBaseUrl": "REST base URL",
+    "mcpEndpoint": "MCP endpoint",
+    "rbacNote": "Tokens never grant more than your role allows — the same permission checks as the app apply to every call.",
+    "mcpTitle": "MCP server (for AI agents)",
+    "mcpHelp": "Point an MCP client (e.g. Claude) at the endpoint below. Only the tools your role may use are exposed; write and approval tools require the matching permission.",
+    "mcpConfigTitle": "MCP client config",
+    "mcpProbeTitle": "List available tools",
+    "restTitle": "REST endpoints",
+    "restHelp": "All endpoints are under the base URL and require the Bearer token.",
+    "openapiLink": "Open the full OpenAPI document"
   },
   "orgChart": {
     "title": "Org Chart",

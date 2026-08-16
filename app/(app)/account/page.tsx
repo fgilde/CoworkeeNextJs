@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getTranslations, getLocale } from "next-intl/server";
 import { requireAuth } from "@/lib/rbac";
 import { db } from "@/lib/db";
@@ -100,8 +101,11 @@ export default async function AccountPage() {
       </Card>
 
       <Card>
-        <CardHeader>
+        <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>{t("apiTokens")}</CardTitle>
+          <Link href="/settings/api" className="text-sm text-primary underline underline-offset-2">
+            {t("apiReference")}
+          </Link>
         </CardHeader>
         <CardContent>
           <ApiTokens
