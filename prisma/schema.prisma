@@ -83,6 +83,21 @@ model User {
   employeeId   String?  @unique
   createdAt    DateTime @default(now())
   notifications Notification[]
+  apiTokens    ApiToken[]
+}
+
+model ApiToken {
+  id         String    @id @default(cuid())
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  name       String
+  tokenHash  String    @unique
+  prefix     String
+  createdAt  DateTime  @default(now())
+  lastUsedAt DateTime?
+  expiresAt  DateTime?
+
+  @@index([userId])
 }
 
 model Employee {

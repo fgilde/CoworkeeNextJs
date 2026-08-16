@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LocaleSwitch } from "@/components/locale-switch";
 import { AccountForm } from "@/components/account/account-form";
 import { PasswordForm } from "@/components/account/password-form";
+import { ApiTokens } from "@/components/account/api-tokens";
 
 export default async function AccountPage() {
   const session = await requireAuth();
@@ -32,6 +33,12 @@ export default async function AccountPage() {
     },
   });
   const employee = user?.employee ?? null;
+
+  const tokens = await db.apiToken.findMany({
+    where: { userId: session.user.id },
+    select: { id: true, name: true, prefix: true, createdAt: true, lastUsedAt: true },
+    orderBy: { createdAt: "desc" },
+  });
 
   return (
     <div className="flex flex-col gap-6">
@@ -89,6 +96,23 @@ export default async function AccountPage() {
         <CardContent className="flex items-center gap-3 text-sm">
           <span className="text-muted-foreground">{t("currentLanguage", { lang: tLocale(locale as Locale) })}</span>
           <LocaleSwitch />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>{t("apiTokens")}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ApiTokens
+            tokens={tokens.map((tok) => ({
+              id: tok.id,
+              name: tok.name,
+              prefix: tok.prefix,
+              createdAt: tok.createdAt.toISOString(),
+              lastUsedAt: tok.lastUsedAt ? tok.lastUsedAt.toISOString() : null,
+            }))}
+          />
         </CardContent>
       </Card>
     </div>
