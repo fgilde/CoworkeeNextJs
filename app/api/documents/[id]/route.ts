@@ -28,7 +28,9 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     throw err;
   }
 
-  const safeFileName = doc.originalName.replace(/["\\]/g, "_");
+  // Strip quotes, backslashes and CR/LF so originalName can't break out of the
+  // header value or inject extra headers.
+  const safeFileName = doc.originalName.replace(/[\r\n"\\]/g, "_");
   return new Response(new Uint8Array(bytes), {
     headers: {
       "Content-Type": doc.mimeType,

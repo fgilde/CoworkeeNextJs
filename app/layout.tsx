@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Inter, Roboto, Nunito } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme-provider";
-import { accentStyle } from "@/lib/theming";
+import { accentStyle, darkAccentStyleTag } from "@/lib/theming";
 import { getBranding } from "@/lib/branding";
 import "./globals.css";
 
@@ -60,6 +60,9 @@ export default async function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        {/* In dark mode, override the inline light accent with a lightened,
+            legible variant (a dark accent would be low-contrast otherwise). */}
+        <style dangerouslySetInnerHTML={{ __html: darkAccentStyleTag(branding.accentColor) }} />
       </head>
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider messages={messages}>

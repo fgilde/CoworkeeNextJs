@@ -12,5 +12,7 @@ export const config = {
   // an anonymous request for those assets 307s to /login — and so does
   // next/image's own internal fetch of the source file, which turns every
   // screenshot into a 400 "not a valid image".
-  matcher: ["/((?!api/auth|api/v1|api/mcp|api/version|api/branding|login|setup|marketing|_next/static|_next/image|favicon.ico).*)"],
+  // Each excluded path is followed by `(?:/|$)` so the match is segment-precise:
+  // `login` excludes `/login` and `/login/…` but NOT `/loginhelp`.
+  matcher: ["/((?!(?:api/auth|api/v1|api/mcp|api/version|api/branding|login|setup|marketing|_next/static|_next/image|favicon\\.ico)(?:/|$)).*)"],
 };

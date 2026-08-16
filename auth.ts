@@ -10,6 +10,11 @@ const credentialsSchema = z.object({
   password: z.string().min(1),
 });
 
+// A valid bcrypt hash to compare against when no user is found, so an unknown
+// email costs the same as a wrong password — no timing side-channel that leaks
+// whether an email exists.
+const DUMMY_HASH = "$2b$10$FKl3cXEZmU5amWZC9vOKmuVWFMqqRxPVgCqqyOZyLQGf8yMBeFiV.";
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
@@ -24,10 +29,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         const { email, password } = parsed.data;
         const user = await db.user.findUnique({ where: { email } });
-        if (!user) return null;
 
-        const valid = await verifyPassword(password, user.passwordHash);
-        if (!valid) return null;
+        // Always run bcrypt so an unknown email and a wrong password take the
+        // same time. Never reveal which field was wrong.
+        const valid = await verifyPassword(password, user?.passwordHash ?? DUMMY_HASH);
+        if (!user || !valid) return null;
 
         return {
           id: user.id,

@@ -21,7 +21,7 @@
   <Category>Productivity: Tools:</Category>
   <WebUI>http://[IP]:[PORT:3000]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/deploy/unraid/coworkee.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/public/favicon.ico</Icon>
+  <Icon>https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/public/icon.png</Icon>
   <ExtraParams/>
   <PostArgs/>
   <DonateText/>

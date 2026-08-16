@@ -227,6 +227,7 @@
     "validationError": "Please check the highlighted fields.",
     "nameTaken": "This name is already in use.",
     "inUse": "This item is still in use and can't be deleted.",
+    "notFound": "This item no longer exists. It may have been deleted already.",
     "manageUsers": "Manage users",
     "users": {
       "title": "Users",
@@ -235,7 +236,9 @@
       "role": "Role",
       "noEmployeeLinked": "—",
       "cannotChangeSelf": "You cannot change your own role.",
-      "invalidRole": "Invalid role."
+      "invalidRole": "Invalid role.",
+      "invalidUser": "Invalid user.",
+      "notFound": "This user no longer exists."
     },
     "roles": {
       "ADMIN": "Admin",
@@ -266,6 +269,7 @@
     "changePassword": "Change password",
     "passwordSuccess": "Your password has been changed.",
     "wrongPassword": "The current password is incorrect.",
+    "tooManyAttempts": "Too many incorrect attempts. Please try again later.",
     "passwordMismatch": "The new password and confirmation do not match.",
     "language": "Language",
     "currentLanguage": "Current language: {lang}",

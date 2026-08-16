@@ -227,6 +227,7 @@
     "validationError": "Bitte überprüfen Sie die markierten Felder.",
     "nameTaken": "Dieser Name wird bereits verwendet.",
     "inUse": "Dieser Eintrag wird noch verwendet und kann nicht gelöscht werden.",
+    "notFound": "Dieser Eintrag existiert nicht mehr. Möglicherweise wurde er bereits gelöscht.",
     "manageUsers": "Benutzer verwalten",
     "users": {
       "title": "Benutzer",
@@ -235,7 +236,9 @@
       "role": "Rolle",
       "noEmployeeLinked": "—",
       "cannotChangeSelf": "Sie können Ihre eigene Rolle nicht ändern.",
-      "invalidRole": "Ungültige Rolle."
+      "invalidRole": "Ungültige Rolle.",
+      "invalidUser": "Ungültiger Benutzer.",
+      "notFound": "Dieser Benutzer existiert nicht mehr."
     },
     "roles": {
       "ADMIN": "Administrator",
@@ -266,6 +269,7 @@
     "changePassword": "Passwort ändern",
     "passwordSuccess": "Ihr Passwort wurde geändert.",
     "wrongPassword": "Das aktuelle Passwort ist falsch.",
+    "tooManyAttempts": "Zu viele fehlgeschlagene Versuche. Bitte versuchen Sie es später erneut.",
     "passwordMismatch": "Das neue Passwort und die Bestätigung stimmen nicht überein.",
     "language": "Sprache",
     "currentLanguage": "Aktuelle Sprache: {lang}",

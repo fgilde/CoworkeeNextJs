@@ -89,6 +89,7 @@ async function main() {
       contractType: "PERMANENT",
       workload: 100,
       locationId: berlin.id,
+      positionId: posCEO.id,
     },
   });
 

@@ -25,6 +25,8 @@ export default async function SettingsUsersPage() {
   const errorMessages = {
     cannotChangeSelf: t("users.cannotChangeSelf"),
     invalidRole: t("users.invalidRole"),
+    invalidUser: t("users.invalidUser"),
+    notFound: t("users.notFound"),
   };
   const noEmployeeLinked = t("users.noEmployeeLinked");
 
