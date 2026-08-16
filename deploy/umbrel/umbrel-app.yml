@@ -1,0 +1,57 @@
+manifestVersion: 1
+id: coworkee
+category: productivity
+name: Coworkee
+version: "1.0.0"
+tagline: Self-hosted HR software for your company
+description: >-
+  Coworkee is a modern, self-hosted HR platform for a single company (single-tenant),
+  in the spirit of Personio / HR-Works. Fully bilingual (English and German).
+
+
+  Modules:
+
+  - Employees: directory (search / filter), detail profiles, org chart
+
+  - Absence: leave balances, request → approval workflow, team overview
+
+  - Time tracking: clock in/out, weekly hours, manual entries
+
+  - Documents: secure private storage with access-controlled downloads
+
+  - Onboarding: checklist templates + per-employee processes
+
+  - Performance: goals + performance reviews
+
+  - Analytics: HR dashboard with KPIs and charts
+
+  - Recruiting: jobs + application pipeline (Kanban)
+
+  - News: announcement feed + in-app notifications
+
+
+  Role-based access control (ADMIN / HR / MANAGER / EMPLOYEE), light/dark mode and an
+  audit log for HR write actions are built in.
+
+
+  On first visit an empty install shows a setup wizard to create the admin account —
+  no demo data.
+developer: Coworkee
+website: https://coworkee.de
+dependencies: []
+repo: https://github.com/fgilde/CoworkeeNextJs
+support: https://github.com/fgilde/CoworkeeNextJs/issues
+port: 3000
+gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+releaseNotes: >-
+  First Umbrel release of Coworkee. Ships the prebuilt image from GHCR
+  (ghcr.io/fgilde/coworkeenextjs:latest) with a bundled PostgreSQL 16 database.
+  First visit opens the setup wizard to create the admin account.
+submitter: Coworkee
+submission: https://github.com/fgilde/CoworkeeNextJs

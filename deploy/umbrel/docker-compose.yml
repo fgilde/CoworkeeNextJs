@@ -1,0 +1,38 @@
+services:
+  app_proxy:
+    # Umbrel injects this image itself at runtime; it is named here only so a
+    # plain `docker compose config` validates. On Umbrel the environment below
+    # is all that matters — it points the reverse proxy at the app.
+    image: getumbrel/app-proxy:latest
+    environment:
+      APP_HOST: coworkee_app_1
+      APP_PORT: 3000
+
+  app:
+    image: ghcr.io/fgilde/coworkeenextjs:latest
+    restart: on-failure
+    environment:
+      # db service is reachable as <appid>_db_1 on Umbrel's app network.
+      # The DB password is an internal-network-only secret, so it is fixed
+      # here (Umbrel convention for bundled multi-container apps).
+      DATABASE_URL: "postgresql://coworkee:moneyprintergobrrr@coworkee_db_1:5432/coworkee?schema=public"
+      # APP_SEED is a deterministic per-app secret Umbrel injects — perfect
+      # for signing Auth.js sessions without asking the user for a value.
+      AUTH_SECRET: ${APP_SEED}
+      AUTH_TRUST_HOST: "true"
+      NODE_ENV: production
+    volumes:
+      # Uploaded documents live here — must persist.
+      - ${APP_DATA_DIR}/data/storage:/app/storage
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: on-failure
+    environment:
+      POSTGRES_USER: coworkee
+      POSTGRES_PASSWORD: moneyprintergobrrr
+      POSTGRES_DB: coworkee
+    volumes:
+      - ${APP_DATA_DIR}/data/postgres:/var/lib/postgresql/data

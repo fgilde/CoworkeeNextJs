@@ -26,7 +26,9 @@ services:
       AUTH_SECRET: ${AUTH_SECRET}
       AUTH_TRUST_HOST: "true"
       NODE_ENV: production
-      DEMO: "1"
+      # Default 1 (this is the demo-instance pull file). Set DEMO=0 in the
+      # env file for a fresh production install (empty DB -> setup wizard).
+      DEMO: "${DEMO:-1}"
     depends_on:
       db:
         condition: service_healthy

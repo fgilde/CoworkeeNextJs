@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Coworkee</Name>
+  <Repository>ghcr.io/fgilde/coworkeenextjs:latest</Repository>
+  <Registry>https://github.com/fgilde/CoworkeeNextJs/pkgs/container/coworkeenextjs</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/fgilde/CoworkeeNextJs/issues</Support>
+  <Project>https://github.com/fgilde/CoworkeeNextJs</Project>
+  <Overview>Coworkee is a modern, self-hosted HR platform for a single company (single-tenant), in the spirit of Personio / HR-Works. Fully bilingual (English and German). Modules: employees + org chart, absence/leave with approval workflow, time tracking, secure document storage, onboarding checklists, performance reviews and goals, an HR analytics dashboard, recruiting pipeline and a news feed. Role-based access control (ADMIN / HR / MANAGER / EMPLOYEE), light/dark mode and an audit log are built in.&#xD;
+    &#xD;
+    IMPORTANT - Coworkee needs a PostgreSQL 16 database. This template only starts the app container. Before starting it, run a PostgreSQL 16 container (e.g. the &quot;postgres&quot; template from Community Applications) with a database and user, then point DATABASE_URL below at it, for example:&#xD;
+    postgresql://coworkee:YOURPASSWORD@POSTGRES_HOST:5432/coworkee?schema=public&#xD;
+    &#xD;
+    Set AUTH_SECRET to a random string (e.g. `openssl rand -base64 32`). Leave DEMO empty for a fresh install - the first visit shows a setup wizard to create the admin account. Set DEMO to 1 only if you want the app to seed demo data and show demo logins.&#xD;
+    &#xD;
+    Uploaded documents are stored in /app/storage - keep the mapped appdata path so they survive updates.
+  </Overview>
+  <Category>Productivity: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:3000]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/deploy/unraid/coworkee.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/public/favicon.ico</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <DonateText/>
+  <DonateLink/>
+  <Config Name="WebUI Port" Target="3000" Default="3000" Mode="tcp" Description="Container Port: 3000 (Coworkee web UI)" Type="Port" Display="always" Required="true" Mask="false">3000</Config>
+  <Config Name="DATABASE_URL" Target="DATABASE_URL" Default="postgresql://coworkee:CHANGEME@POSTGRES_HOST:5432/coworkee?schema=public" Description="PostgreSQL 16 connection string. Point this at your separate Postgres container." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="AUTH_SECRET" Target="AUTH_SECRET" Default="" Description="Auth.js session signing key. Generate with: openssl rand -base64 32" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="AUTH_TRUST_HOST" Target="AUTH_TRUST_HOST" Default="true" Description="Let Auth.js trust the reverse-proxy host header. Keep 'true' on Unraid." Type="Variable" Display="advanced" Required="true" Mask="false">true</Config>
+  <Config Name="DEMO (optional)" Target="DEMO" Default="" Description="Leave empty for a fresh install (setup wizard). Set to 1 to seed demo data and show demo logins on an empty DB." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Storage (uploads)" Target="/app/storage" Default="/mnt/user/appdata/coworkee/storage" Mode="rw" Description="Uploaded documents. Must persist across container updates." Type="Path" Display="always" Required="true" Mask="false"/>
+</Container>
