@@ -26,9 +26,10 @@ export async function updateAppearance(
     return { error: "validationError" };
   }
 
-  await db.companySettings.update({
+  await db.companySettings.upsert({
     where: { id: "singleton" },
-    data: { themePreset, accentColor },
+    update: { themePreset, accentColor },
+    create: { id: "singleton", companyName: "Coworkee", themePreset, accentColor },
   });
   await logAudit(session.user.id, "branding.appearance", "CompanySettings", "singleton", {
     themePreset,
@@ -60,7 +61,11 @@ export async function uploadLogo(
     where: { id: "singleton" },
     select: { logoPath: true },
   });
-  await db.companySettings.update({ where: { id: "singleton" }, data: { logoPath: storedName } });
+  await db.companySettings.upsert({
+    where: { id: "singleton" },
+    update: { logoPath: storedName },
+    create: { id: "singleton", companyName: "Coworkee", logoPath: storedName },
+  });
   if (prev?.logoPath) {
     try {
       await unlink(safeBrandingPath(prev.logoPath));
