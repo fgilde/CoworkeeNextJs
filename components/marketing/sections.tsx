@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import {
   ArrowRight,
@@ -552,7 +553,10 @@ export async function MarketingFooter() {
   return (
     <footer className="bg-slate-50">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-10 sm:flex-row sm:justify-between sm:px-6">
-        <span className="font-heading text-lg font-semibold tracking-tight text-slate-900">Coworkee</span>
+        <span className="flex items-center gap-2 font-heading text-lg font-semibold tracking-tight text-slate-900">
+          <Image src="/icon.png" alt="Coworkee" width={28} height={28} className="rounded-lg" />
+          Coworkee
+        </span>
 
         <nav className="flex flex-wrap items-center justify-center gap-6">
           {footerLinks.map((l) => (

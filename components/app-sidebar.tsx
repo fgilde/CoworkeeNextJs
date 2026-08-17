@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, Clock, FileText, Megaphone, ListChecks, Target, BarChart3, Briefcase, Bell, type LucideIcon } from "lucide-react";
@@ -127,9 +128,7 @@ export function AppSidebar({
           <img src="/api/branding/logo" alt={brandName} className="max-h-8 w-auto max-w-[180px] object-contain" />
         ) : (
           <>
-            <div className="flex size-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
-              {brandName.charAt(0)}
-            </div>
+            <Image src="/icon.png" alt={brandName} width={28} height={28} className="rounded-lg" />
             <span className="truncate text-lg font-semibold tracking-tight">{brandName}</span>
           </>
         )}

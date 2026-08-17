@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { LayoutGrid, Languages, ShieldCheck, Server, type LucideIcon } from "lucide-react";
@@ -68,7 +69,10 @@ export default async function LoginPage() {
           // eslint-disable-next-line @next/next/no-img-element
           <img src="/api/branding/logo" alt={branding.companyName ?? "Coworkee"} className="h-10 w-auto max-w-[220px] object-contain" />
         ) : (
-          <span className="font-heading text-2xl font-semibold tracking-tight lg:hidden">Coworkee</span>
+          <div className="flex items-center gap-2">
+            <Image src="/icon.png" alt={branding.companyName ?? "Coworkee"} width={32} height={32} className="rounded-lg" />
+            <span className="font-heading text-2xl font-semibold tracking-tight">Coworkee</span>
+          </div>
         )}
 
         <div className="w-full max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">

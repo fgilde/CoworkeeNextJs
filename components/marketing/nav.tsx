@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Menu, X } from "lucide-react";
 import { LocaleSwitch } from "@/components/locale-switch";
@@ -23,11 +24,11 @@ export function MarketingNav() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/70 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link
-          href="/"
-          className="font-heading text-xl font-semibold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-violet-600"
-        >
-          Coworkee
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/icon.png" alt="Coworkee" width={28} height={28} className="rounded-lg" />
+          <span className="font-heading text-xl font-semibold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-violet-600">
+            Coworkee
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

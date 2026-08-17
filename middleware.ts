@@ -14,5 +14,5 @@ export const config = {
   // screenshot into a 400 "not a valid image".
   // Each excluded path is followed by `(?:/|$)` so the match is segment-precise:
   // `login` excludes `/login` and `/login/…` but NOT `/loginhelp`.
-  matcher: ["/((?!(?:api/auth|api/v1|api/mcp|api/version|api/branding|login|setup|marketing|_next/static|_next/image|favicon\\.ico)(?:/|$)).*)"],
+  matcher: ["/((?!(?:api/auth|api/v1|api/mcp|api/version|api/branding|login|setup|marketing|_next/static|_next/image|favicon\\.ico|icon\\.png)(?:/|$)).*)"],
 };
