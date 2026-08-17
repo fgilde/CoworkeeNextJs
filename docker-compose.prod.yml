@@ -24,7 +24,8 @@ services:
       AUTH_SECRET: ${AUTH_SECRET}
       AUTH_TRUST_HOST: "true"
       NODE_ENV: production
-      DEMO: "1"
+      # Demo instance by default (this file runs the public demo); DEMO=0 for a real install.
+      DEMO: "${DEMO:-1}"
     depends_on:
       db:
         condition: service_healthy

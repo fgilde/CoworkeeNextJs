@@ -27,6 +27,8 @@ services:
       AUTH_SECRET: ${AUTH_SECRET}
       AUTH_TRUST_HOST: "true"
       NODE_ENV: production
+      # DEMO=1 seeds demo data on first boot and shows the demo logins; off for a real install.
+      DEMO: "${DEMO:-0}"
     depends_on:
       db:
         condition: service_healthy
