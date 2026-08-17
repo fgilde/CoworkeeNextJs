@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { auth } from "@/auth";
+import { needsSetup } from "@/lib/setup";
 import { MarketingNav } from "@/components/marketing/nav";
 import {
   Hero,
@@ -30,7 +33,15 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  // Marketing landing only exists on demo instances. A real install goes
+  // straight to setup (empty DB) or to the app/login.
+  if (process.env.DEMO !== "1") {
+    if (await needsSetup()) redirect("/setup");
+    const session = await auth();
+    redirect(session?.user ? "/dashboard" : "/login");
+  }
+
   return (
     <div className="min-h-screen bg-white text-slate-900">
       <RevealInit />
