@@ -29,6 +29,9 @@ services:
       # Default 1 (this is the demo-instance pull file). Set DEMO=0 in the
       # env file for a fresh production install (empty DB -> setup wizard).
       DEMO: "${DEMO:-1}"
+    # Container port for reverse proxies and importers (publishes nothing by itself).
+    expose:
+      - "3000"
     depends_on:
       db:
         condition: service_healthy

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fgilde/AspireUI/master/src/AspireUI.Server/catalog/presets/aspireui-app.schema.json",
+  "id": "coworkee",
+  "label": "Coworkee",
+  "group": "Tools",
+  "image": "ghcr.io/fgilde/coworkeenextjs:latest",
+  "port": 3000,
+  "icon": "coworkee",
+  "description": "Coworkee — the self-hosted HR platform for a whole team: employees and org chart, absence and leave approval, time tracking, documents, onboarding checklists, performance reviews, analytics, recruiting pipeline and announcements. German and English, light and dark, role-based permissions. A setup wizard creates the admin account on first visit; set DEMO to 1 to seed demo data and show the demo logins instead.",
+  "env": [
+    ["NODE_ENV", "production"],
+    ["AUTH_TRUST_HOST", "true"],
+    ["DATABASE_URL", "postgresql://coworkee:coworkee@${db}:5432/coworkee?schema=public"]
+  ],
+  "params": [
+    { "key": "auth-secret", "env": "AUTH_SECRET", "default": "", "secret": true },
+    { "key": "demo", "env": "DEMO", "default": "0" }
+  ],
+  "companions": [
+    {
+      "key": "db",
+      "addMethod": "AddContainer",
+      "resourceName": "coworkee-db",
+      "image": "postgres:16",
+      "role": "postgres",
+      "env": [
+        ["POSTGRES_USER", "coworkee"],
+        ["POSTGRES_PASSWORD", "coworkee"],
+        ["POSTGRES_DB", "coworkee"]
+      ],
+      "volumes": [["data", "/var/lib/postgresql/data"]]
+    }
+  ],
+  "volumes": [["storage", "/app/storage"]],
+  "tags": ["hr", "employees", "self-hosted", "nextjs"],
+  "website": "https://coworkee.de",
+  "github": "https://github.com/fgilde/CoworkeeNextJs",
+  "license": "MIT",
+  "language": "TypeScript",
+  "logo": "https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/public/marketing/app-icon.png",
+  "card": "https://coworkee.de/marketing/screens/dashboard-dark.png",
+  "screenshots": [
+    "https://coworkee.de/marketing/screens/employees-dark.png",
+    "https://coworkee.de/marketing/screens/absences-dark.png",
+    "https://coworkee.de/marketing/screens/org-dark.png",
+    "https://coworkee.de/marketing/screens/analytics-dark.png",
+    "https://coworkee.de/marketing/screens/recruiting-dark.png"
+  ]
+}

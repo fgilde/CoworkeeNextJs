@@ -26,6 +26,9 @@ services:
       NODE_ENV: production
       # Demo instance by default (this file runs the public demo); DEMO=0 for a real install.
       DEMO: "${DEMO:-1}"
+    # Container port for reverse proxies and importers (publishes nothing by itself).
+    expose:
+      - "3000"
     depends_on:
       db:
         condition: service_healthy

@@ -29,6 +29,9 @@ services:
       NODE_ENV: production
       # DEMO=1 seeds demo data on first boot and shows the demo logins; off for a real install.
       DEMO: "${DEMO:-0}"
+    # Container port for reverse proxies and importers (publishes nothing by itself).
+    expose:
+      - "3000"
     depends_on:
       db:
         condition: service_healthy
