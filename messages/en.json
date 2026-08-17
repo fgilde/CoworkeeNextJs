@@ -61,6 +61,33 @@
         "manager": "Manager",
         "employee": "Employee"
       }
+    },
+    "forgot": {
+      "link": "Forgot password?",
+      "title": "Reset password",
+      "description": "Enter your email address and we'll send you a reset link.",
+      "submit": "Send link",
+      "sent": "If an account with that email exists, a reset link has been sent.",
+      "backToLogin": "Back to sign in"
+    },
+    "reset": {
+      "title": "Set a new password",
+      "description": "Choose a new password for your account.",
+      "newPassword": "New password",
+      "confirm": "Confirm password",
+      "submit": "Save password",
+      "done": "Your password has been changed. You can sign in now.",
+      "requestNew": "Request a new link",
+      "errors": {
+        "invalidOrExpired": "This link is invalid or has expired.",
+        "passwordMismatch": "The passwords do not match.",
+        "weakPassword": "Password must be at least 8 characters."
+      }
+    },
+    "resetEmail": {
+      "subject": "Coworkee – reset your password",
+      "body": "You requested to reset your Coworkee password. Click the link below:",
+      "expiry": "This link is valid for one hour. If this wasn't you, ignore this email."
     }
   },
   "locale": {
@@ -859,5 +886,34 @@
       "by": "by",
       "demoInstance": "Demo instance"
     }
+  },
+  "mail": {
+    "title": "Email / SMTP",
+    "description": "Configure outbound email delivery (e.g. for password resets).",
+    "provider": "Provider",
+    "providers": {
+      "LOG": "No delivery (log only)",
+      "SMTP": "SMTP",
+      "SENDGRID": "SendGrid",
+      "SENDMAIL": "Sendmail (local MTA)"
+    },
+    "fromEmail": "From email",
+    "fromName": "From name",
+    "smtpHost": "SMTP host",
+    "smtpPort": "SMTP port",
+    "smtpSecure": "Use TLS/SSL (secure)",
+    "smtpUser": "SMTP user",
+    "smtpPass": "SMTP password",
+    "sendgridKey": "SendGrid API key",
+    "keepBlank": "Leave blank to keep",
+    "set": "set",
+    "notSet": "not set",
+    "saved": "Saved",
+    "sendTest": "Send test email",
+    "testSent": "Test email sent (or written to the log).",
+    "sendmailHint": "Only works if the host has an MTA/sendmail at /usr/sbin/sendmail.",
+    "logHint": "No email is sent; the message including links is only written to the server log.",
+    "sendFailed": "Sending failed. Check the configuration and the server log.",
+    "noEmail": "No email address is set for your account."
   }
 }

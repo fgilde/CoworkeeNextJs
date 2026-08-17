@@ -23,6 +23,7 @@ import {
   deleteLeaveType,
 } from "@/app/actions/leave-settings-actions";
 import { AppearanceSection } from "@/components/settings/appearance-section";
+import { MailSection } from "@/components/settings/mail-section";
 import { THEME_PRESETS, type ThemePreset } from "@/lib/theming";
 import { getBranding } from "@/lib/branding";
 
@@ -31,11 +32,58 @@ export default async function SettingsPage() {
   const t = await getTranslations("settings");
   const tCommon = await getTranslations("common");
   const tAppearance = await getTranslations("appearance");
+  const tMail = await getTranslations("mail");
   const canManageLeave = can(session.user.role, "leave:manage");
   const isAdmin = session.user.role === "ADMIN";
   const currentYear = new Date().getFullYear();
 
   const branding = isAdmin ? await getBranding() : null;
+
+  const mail = isAdmin ? await db.mailSettings.findUnique({ where: { id: "singleton" } }) : null;
+  const mailCurrent = isAdmin && {
+    provider: mail?.provider ?? "LOG",
+    fromEmail: mail?.fromEmail ?? "",
+    fromName: mail?.fromName ?? "",
+    smtpHost: mail?.smtpHost ?? "",
+    smtpPort: mail?.smtpPort != null ? String(mail.smtpPort) : "",
+    smtpSecure: mail?.smtpSecure ?? false,
+    smtpUser: mail?.smtpUser ?? "",
+    hasSmtpPass: !!mail?.smtpPassEnc,
+    hasSendgridKey: !!mail?.sendgridKeyEnc,
+  };
+  const mailLabels = isAdmin && {
+    title: tMail("title"),
+    description: tMail("description"),
+    provider: tMail("provider"),
+    providers: {
+      LOG: tMail("providers.LOG"),
+      SMTP: tMail("providers.SMTP"),
+      SENDGRID: tMail("providers.SENDGRID"),
+      SENDMAIL: tMail("providers.SENDMAIL"),
+    },
+    fromEmail: tMail("fromEmail"),
+    fromName: tMail("fromName"),
+    smtpHost: tMail("smtpHost"),
+    smtpPort: tMail("smtpPort"),
+    smtpSecure: tMail("smtpSecure"),
+    smtpUser: tMail("smtpUser"),
+    smtpPass: tMail("smtpPass"),
+    sendgridKey: tMail("sendgridKey"),
+    keepBlank: tMail("keepBlank"),
+    set: tMail("set"),
+    notSet: tMail("notSet"),
+    save: tCommon("save"),
+    saved: tMail("saved"),
+    sendTest: tMail("sendTest"),
+    testSent: tMail("testSent"),
+    sendmailHint: tMail("sendmailHint"),
+    logHint: tMail("logHint"),
+    errors: {
+      validationError: t("validationError"),
+      sendFailed: tMail("sendFailed"),
+      noEmail: tMail("noEmail"),
+    },
+  };
   const appearanceLabels = branding && {
     title: tAppearance("title"),
     description: tAppearance("description"),
@@ -141,6 +189,8 @@ export default async function SettingsPage() {
           labels={appearanceLabels}
         />
       )}
+
+      {mailCurrent && mailLabels && <MailSection current={mailCurrent} labels={mailLabels} />}
 
       <CrudSection
         title={t("departments")}

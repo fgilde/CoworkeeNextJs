@@ -84,6 +84,35 @@ model User {
   createdAt    DateTime @default(now())
   notifications Notification[]
   apiTokens    ApiToken[]
+  passwordResetTokens PasswordResetToken[]
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+// Singleton row (id is always "singleton") holding org-wide outbound mail config.
+// Secrets (smtpPassEnc, sendgridKeyEnc) are AES-256-GCM encrypted at rest (lib/crypto.ts).
+model MailSettings {
+  id            String   @id @default("singleton")
+  provider      String   @default("LOG") // SMTP | SENDGRID | SENDMAIL | LOG
+  fromEmail     String?
+  fromName      String?
+  smtpHost      String?
+  smtpPort      Int?
+  smtpSecure    Boolean  @default(false)
+  smtpUser      String?
+  smtpPassEnc   String?
+  sendgridKeyEnc String?
+  updatedAt     DateTime @updatedAt
 }
 
 model ApiToken {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
 import { loginAction } from "@/app/actions/auth-actions";
@@ -16,7 +17,7 @@ const DEMO_ACCOUNTS = [
   { roleKey: "employee", email: "employee@coworkee.test" },
 ] as const;
 
-export function LoginForm({ showDemo }: { showDemo: boolean }) {
+export function LoginForm({ showDemo, resetDone }: { showDemo: boolean; resetDone?: boolean }) {
   const t = useTranslations("auth");
   const tDemo = useTranslations("auth.demo");
   const [state, formAction, pending] = useActionState(loginAction, {});
@@ -25,6 +26,14 @@ export function LoginForm({ showDemo }: { showDemo: boolean }) {
 
   return (
     <div className="flex flex-col gap-6">
+      {resetDone && (
+        <p
+          className="rounded-lg border border-border bg-muted/40 px-3 py-2 text-sm text-muted-foreground"
+          role="status"
+        >
+          {t("reset.done")}
+        </p>
+      )}
       <form action={formAction} className="flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">
           <Label htmlFor="email">{t("email")}</Label>
@@ -66,6 +75,12 @@ export function LoginForm({ showDemo }: { showDemo: boolean }) {
           {pending && <Loader2 className="size-4 animate-spin" aria-hidden />}
           {pending ? t("submitting") : t("submit")}
         </Button>
+        <Link
+          href="/forgot-password"
+          className="text-center text-sm text-muted-foreground underline underline-offset-2 hover:text-foreground"
+        >
+          {t("forgot.link")}
+        </Link>
       </form>
 
       {showDemo && (

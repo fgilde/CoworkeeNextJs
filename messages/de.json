@@ -61,6 +61,33 @@
         "manager": "Manager",
         "employee": "Mitarbeiter"
       }
+    },
+    "forgot": {
+      "link": "Passwort vergessen?",
+      "title": "Passwort zurücksetzen",
+      "description": "Gib deine E-Mail-Adresse ein. Wir senden dir einen Link zum Zurücksetzen.",
+      "submit": "Link senden",
+      "sent": "Falls ein Konto mit dieser E-Mail existiert, wurde ein Link zum Zurücksetzen gesendet.",
+      "backToLogin": "Zurück zur Anmeldung"
+    },
+    "reset": {
+      "title": "Neues Passwort festlegen",
+      "description": "Wähle ein neues Passwort für dein Konto.",
+      "newPassword": "Neues Passwort",
+      "confirm": "Passwort bestätigen",
+      "submit": "Passwort speichern",
+      "done": "Dein Passwort wurde geändert. Du kannst dich jetzt anmelden.",
+      "requestNew": "Neuen Link anfordern",
+      "errors": {
+        "invalidOrExpired": "Dieser Link ist ungültig oder abgelaufen.",
+        "passwordMismatch": "Die Passwörter stimmen nicht überein.",
+        "weakPassword": "Das Passwort muss mindestens 8 Zeichen lang sein."
+      }
+    },
+    "resetEmail": {
+      "subject": "Coworkee – Passwort zurücksetzen",
+      "body": "Du hast angefordert, dein Coworkee-Passwort zurückzusetzen. Klicke auf den folgenden Link:",
+      "expiry": "Der Link ist eine Stunde gültig. Falls du das nicht warst, ignoriere diese E-Mail."
     }
   },
   "locale": {
@@ -859,5 +886,34 @@
       "by": "by",
       "demoInstance": "Demo-Instanz"
     }
+  },
+  "mail": {
+    "title": "E-Mail / SMTP",
+    "description": "Konfiguriere den ausgehenden E-Mail-Versand (z. B. für Passwort-Zurücksetzungen).",
+    "provider": "Anbieter",
+    "providers": {
+      "LOG": "Kein Versand (nur Log)",
+      "SMTP": "SMTP",
+      "SENDGRID": "SendGrid",
+      "SENDMAIL": "Sendmail (lokaler MTA)"
+    },
+    "fromEmail": "Absender-E-Mail",
+    "fromName": "Absender-Name",
+    "smtpHost": "SMTP-Host",
+    "smtpPort": "SMTP-Port",
+    "smtpSecure": "TLS/SSL verwenden (secure)",
+    "smtpUser": "SMTP-Benutzer",
+    "smtpPass": "SMTP-Passwort",
+    "sendgridKey": "SendGrid API-Key",
+    "keepBlank": "Leer lassen, um beizubehalten",
+    "set": "gesetzt",
+    "notSet": "nicht gesetzt",
+    "saved": "Gespeichert",
+    "sendTest": "Test-E-Mail senden",
+    "testSent": "Test-E-Mail gesendet (oder ins Log geschrieben).",
+    "sendmailHint": "Funktioniert nur, wenn auf dem Host ein MTA/sendmail unter /usr/sbin/sendmail vorhanden ist.",
+    "logHint": "Es wird keine E-Mail versendet; die Nachricht inkl. Links wird nur ins Server-Log geschrieben.",
+    "sendFailed": "Versand fehlgeschlagen. Prüfe die Konfiguration und das Server-Log.",
+    "noEmail": "Für dein Konto ist keine E-Mail-Adresse hinterlegt."
   }
 }

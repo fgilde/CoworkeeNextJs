@@ -15,9 +15,14 @@ const BULLETS: { key: string; icon: LucideIcon }[] = [
   { key: "selfHosted", icon: Server },
 ];
 
-export default async function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ reset?: string }>;
+}) {
   if (await needsSetup()) redirect("/setup");
 
+  const { reset } = await searchParams;
   const t = await getTranslations("auth");
   const branding = await getBranding();
 
@@ -82,7 +87,7 @@ export default async function LoginPage() {
               <CardDescription>{t("welcome")}</CardDescription>
             </CardHeader>
             <CardContent>
-              <LoginForm showDemo={process.env.DEMO === "1"} />
+              <LoginForm showDemo={process.env.DEMO === "1"} resetDone={reset === "1"} />
             </CardContent>
           </Card>
           <p className="mt-6 text-center text-xs text-muted-foreground" aria-label={t("versionAria")}>
