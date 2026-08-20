@@ -80,6 +80,7 @@ export default defineConfig({
       description: "Self-hosted, bilingual HR and personnel-management software — employees, absence, time, documents, onboarding, performance, analytics, recruiting and news, with a REST API and MCP server.",
       themeConfig: {
         nav: [
+          { text: "Website & Demo ↗", link: "https://www.coworkee.de" },
           { text: "Home", link: "/" },
           { text: "Documentation", link: "/docs/introduction" },
           { text: "Installation", link: "/docs/installation" },
@@ -92,7 +93,8 @@ export default defineConfig({
         },
         lastUpdatedText: "Last updated",
         footer: {
-          message: 'Released under a proprietary license.',
+          message:
+            'Released under a proprietary license. · <a href="https://www.coworkee.de" target="_blank" rel="noopener">coworkee.de</a> · Built by <a href="https://www.gilde.org" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.35em;vertical-align:middle"><img src="https://www.gilde.org/gilde/icon.svg" alt="" style="height:1.1em;width:auto;vertical-align:middle" />gilde.org</a>',
           copyright: "Copyright © 2026 Coworkee",
         },
       },
@@ -104,6 +106,7 @@ export default defineConfig({
       description: "Selbst gehostete, zweisprachige HR- und Personalverwaltungssoftware — Mitarbeitende, Abwesenheit, Zeiterfassung, Dokumente, Onboarding, Performance, Analytics, Recruiting und News, mit REST-API und MCP-Server.",
       themeConfig: {
         nav: [
+          { text: "Website & Demo ↗", link: "https://www.coworkee.de" },
           { text: "Start", link: "/de/" },
           { text: "Dokumentation", link: "/de/docs/introduction" },
           { text: "Installation", link: "/de/docs/installation" },
@@ -122,7 +125,8 @@ export default defineConfig({
         darkModeSwitchLabel: "Erscheinungsbild",
         langMenuLabel: "Sprache wechseln",
         footer: {
-          message: "Veröffentlicht unter einer proprietären Lizenz.",
+          message:
+            'Veröffentlicht unter einer proprietären Lizenz. · <a href="https://www.coworkee.de" target="_blank" rel="noopener">coworkee.de</a> · Erstellt von <a href="https://www.gilde.org" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.35em;vertical-align:middle"><img src="https://www.gilde.org/gilde/icon.svg" alt="" style="height:1.1em;width:auto;vertical-align:middle" />gilde.org</a>',
           copyright: "Copyright © 2026 Coworkee",
         },
       },
