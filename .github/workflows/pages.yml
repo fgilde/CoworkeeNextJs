@@ -32,7 +32,9 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: docs-site/package-lock.json
-      - run: npm ci
+      # npm install (not ci): the docs lockfile's optional search-insights dep
+      # trips `npm ci`'s strict sync check across npm versions/platforms.
+      - run: npm install --no-audit --no-fund
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
