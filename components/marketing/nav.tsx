@@ -7,6 +7,8 @@ import { useTranslations } from "next-intl";
 import { Menu, X } from "lucide-react";
 import { LocaleSwitch } from "@/components/locale-switch";
 
+const DOCS_URL = "https://fgilde.github.io/CoworkeeNextJs/docs";
+
 export function MarketingNav() {
   const [open, setOpen] = useState(false);
   const t = useTranslations("marketing");
@@ -41,6 +43,14 @@ export function MarketingNav() {
               {l.label}
             </a>
           ))}
+          <a
+            href={DOCS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+          >
+            {t("nav.docs")}
+          </a>
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
@@ -80,6 +90,15 @@ export function MarketingNav() {
                 {l.label}
               </a>
             ))}
+            <a
+              href={DOCS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+            >
+              {t("nav.docs")}
+            </a>
             <Link
               href="/login"
               className="mt-2 inline-flex items-center justify-center rounded-lg bg-linear-to-r from-indigo-600 to-violet-600 px-4 py-2 text-sm font-medium text-white shadow-sm"

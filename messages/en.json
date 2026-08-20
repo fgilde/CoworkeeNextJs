@@ -661,7 +661,8 @@
       "contact": "Contact",
       "login": "Log in",
       "menuOpen": "Open menu",
-      "menuClose": "Close menu"
+      "menuClose": "Close menu",
+      "docs": "Docs"
     },
     "meta": {
       "title": "Coworkee — The HR platform for your whole team",

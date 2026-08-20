@@ -564,6 +564,14 @@ export async function MarketingFooter() {
               {l.label}
             </a>
           ))}
+          <a
+            href="https://fgilde.github.io/CoworkeeNextJs/docs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-slate-600 hover:text-slate-900"
+          >
+            {t("nav.docs")}
+          </a>
         </nav>
 
         <div className="text-center text-sm text-slate-500 sm:text-right">
