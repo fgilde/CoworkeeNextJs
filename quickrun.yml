@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://fgilde.github.io/QuickRun/quickrun.schema.json
+name: Coworkee
+description: "Postgres in Docker, then the Prisma migrations and the Next.js dev server."
+
+requires:
+  - tool: node
+    version: ">=20.0"
+    install: https://nodejs.org
+  - tool: docker
+    install: https://docs.docker.com/get-docker/
+
+setup:
+  - run: npm ci
+
+tasks:
+  - name: db
+    run: docker compose up -d db
+    readyWhen: {port: 5433}
+  - name: web
+    run: npm run db:migrate && npm run dev
+    dependsOn: [db]
+    readyWhen: {http: "http://localhost:3000"}
+    open: true
+
+stop:
+  - docker compose down
