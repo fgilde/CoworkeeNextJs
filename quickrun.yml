@@ -9,15 +9,24 @@ requires:
   - tool: docker
     install: https://docs.docker.com/get-docker/
 
+env:
+  # Passend zu docker-compose.yml (POSTGRES_USER/PASSWORD/DB = coworkee, Port 5433 publiziert).
+  # lib/db.ts und prisma.config.ts lesen beide aus process.env, ein .env wird daher nicht gebraucht.
+  DATABASE_URL: "postgresql://coworkee:coworkee@localhost:5433/coworkee?schema=public"
+  AUTH_SECRET: "quickrun-local-dev-secret"
+
 setup:
   - run: npm ci
 
 tasks:
   - name: db
-    run: docker compose up -d db
+    # Auf die Datenbank warten, nicht auf den Socket: der publizierte Port antwortet, bevor
+    # Postgres die Erstinitialisierung abgeschlossen hat.
+    run: docker compose up -d db && docker compose exec -T db sh -c "until pg_isready -U coworkee -d coworkee; do sleep 1; done"
     readyWhen: {port: 5433}
   - name: web
-    run: npm run db:migrate && npm run dev
+    # migrate deploy statt migrate dev: wendet prisma/migrations an, ohne interaktiv zu fragen.
+    run: npx prisma migrate deploy && npm run dev
     dependsOn: [db]
     readyWhen: {http: "http://localhost:3000"}
     open: true
