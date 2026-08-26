@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://fgilde.github.io/QuickRun/quickrun.schema.json
 name: Coworkee
-description: "Postgres in Docker, then the Prisma migrations and the Next.js dev server."
+description: "Self-hosted HR software for a single company. Postgres in Docker, the Prisma schema and demo data, then the Next.js dev server."
 
 requires:
   - tool: node
@@ -10,23 +10,40 @@ requires:
     install: https://docs.docker.com/get-docker/
 
 env:
-  # Passend zu docker-compose.yml (POSTGRES_USER/PASSWORD/DB = coworkee, Port 5433 publiziert).
-  # lib/db.ts und prisma.config.ts lesen beide aus process.env, ein .env wird daher nicht gebraucht.
+  # The credentials docker-compose.yml creates: POSTGRES_USER, _PASSWORD and _DB are all
+  # "coworkee", and the container publishes 5433 on the host.
   DATABASE_URL: "postgresql://coworkee:coworkee@localhost:5433/coworkee?schema=public"
   AUTH_SECRET: "quickrun-local-dev-secret"
+  # A demo instance, which is what someone starting this from a repository link wants: it seeds the
+  # example company on an empty database and offers the logins on /login. Without it an empty
+  # database sends you to the setup wizard instead of into the application (app/page.tsx:39).
+  DEMO: "1"
 
 setup:
   - run: npm ci
 
+  # The README's second step. Everything reads process.env, which QuickRun sets above - but the
+  # Prisma CLI and the seed scripts start with `import "dotenv/config"`, and a repository that
+  # documents a .env should have one after setup, not a subtly different arrangement.
+  - run: >
+      node -e "require('fs').writeFileSync('.env',
+      'DATABASE_URL=\"' + process.env.DATABASE_URL + '\"\n' +
+      'AUTH_SECRET=\"' + process.env.AUTH_SECRET + '\"\n' +
+      'DEMO=1\n')"
+
 tasks:
   - name: db
-    # Auf die Datenbank warten, nicht auf den Socket: der publizierte Port antwortet, bevor
-    # Postgres die Erstinitialisierung abgeschlossen hat.
+    # Waiting on the database rather than on the socket: Docker accepts connections on the
+    # published port before Postgres has finished initialising a fresh volume, and the migration
+    # would then run against something that is not ready to answer.
     run: docker compose up -d db && docker compose exec -T db sh -c "until pg_isready -U coworkee -d coworkee; do sleep 1; done"
     readyWhen: {port: 5433}
+
   - name: web
-    # migrate deploy statt migrate dev: wendet prisma/migrations an, ohne interaktiv zu fragen.
-    run: npx prisma migrate deploy && npm run dev
+    # migrate deploy, not migrate dev: the interactive variant has no console to ask in here, and
+    # the migrations in prisma/migrations are what it would apply anyway. seed-if-empty rather than
+    # seed, so starting this a second time does not collide with the data from the first.
+    run: npx prisma migrate deploy && npm run db:seed-if-empty && npm run dev
     dependsOn: [db]
     readyWhen: {http: "http://localhost:3000"}
     open: true
