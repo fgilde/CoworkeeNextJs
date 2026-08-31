@@ -104,3 +104,24 @@ test("HR and ADMIN can manage recruiting, MANAGER and EMPLOYEE cannot", () => {
   expect(can("MANAGER", "recruiting:manage")).toBe(false);
   expect(can("EMPLOYEE", "recruiting:manage")).toBe(false);
 });
+
+test("MANAGER, HR, ADMIN can manage talks, EMPLOYEE cannot", () => {
+  expect(can("MANAGER", "talk:manage")).toBe(true);
+  expect(can("HR", "talk:manage")).toBe(true);
+  expect(can("ADMIN", "talk:manage")).toBe(true);
+  expect(can("EMPLOYEE", "talk:manage")).toBe(false);
+});
+
+test("only HR and ADMIN can manage surveys", () => {
+  expect(can("HR", "survey:manage")).toBe(true);
+  expect(can("ADMIN", "survey:manage")).toBe(true);
+  expect(can("MANAGER", "survey:manage")).toBe(false);
+  expect(can("EMPLOYEE", "survey:manage")).toBe(false);
+});
+
+test("MANAGER, HR, ADMIN can manage skills, EMPLOYEE cannot", () => {
+  expect(can("MANAGER", "skill:manage")).toBe(true);
+  expect(can("HR", "skill:manage")).toBe(true);
+  expect(can("ADMIN", "skill:manage")).toBe(true);
+  expect(can("EMPLOYEE", "skill:manage")).toBe(false);
+});
