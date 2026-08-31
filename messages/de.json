@@ -257,6 +257,7 @@
     "inUse": "Dieser Eintrag wird noch verwendet und kann nicht gelöscht werden.",
     "notFound": "Dieser Eintrag existiert nicht mehr. Möglicherweise wurde er bereits gelöscht.",
     "manageUsers": "Benutzer verwalten",
+    "auditLog": "Audit-Log",
     "users": {
       "title": "Benutzer",
       "email": "E-Mail",
@@ -647,6 +648,23 @@
     "templateNotFound": "Vorlage nicht gefunden.",
     "alreadyShared": "Dieses Gespräch wurde bereits freigegeben.",
     "alreadyCompleted": "Dieses Gespräch ist bereits abgeschlossen."
+  },
+  "audit": {
+    "title": "Audit-Log",
+    "intro": "Ein Protokoll, wer was geändert hat. Die neuesten Einträge stehen oben.",
+    "back": "Zurück zu den Einstellungen",
+    "searchPlaceholder": "Nach Aktion, Objekt oder ID filtern …",
+    "search": "Suchen",
+    "clear": "Zurücksetzen",
+    "empty": "Keine passenden Audit-Einträge.",
+    "when": "Wann",
+    "actor": "Akteur",
+    "action": "Aktion",
+    "entity": "Objekt",
+    "changes": "Änderungen",
+    "view": "Anzeigen",
+    "systemActor": "System / gelöschter Benutzer",
+    "limited": "Es werden die neuesten {limit} Einträge gezeigt. Filter verfeinern, um ältere zu sehen."
   },
   "analytics": {
     "title": "Analysen",

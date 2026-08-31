@@ -257,6 +257,7 @@
     "inUse": "This item is still in use and can't be deleted.",
     "notFound": "This item no longer exists. It may have been deleted already.",
     "manageUsers": "Manage users",
+    "auditLog": "Audit log",
     "users": {
       "title": "Users",
       "email": "Email",
@@ -647,6 +648,23 @@
     "templateNotFound": "Template not found.",
     "alreadyShared": "This conversation has already been released.",
     "alreadyCompleted": "This conversation is already completed."
+  },
+  "audit": {
+    "title": "Audit log",
+    "intro": "A record of who changed what. The most recent entries are shown first.",
+    "back": "Back to settings",
+    "searchPlaceholder": "Filter by action, entity or id…",
+    "search": "Search",
+    "clear": "Clear",
+    "empty": "No audit entries match.",
+    "when": "When",
+    "actor": "Actor",
+    "action": "Action",
+    "entity": "Entity",
+    "changes": "Changes",
+    "view": "View",
+    "systemActor": "System / deleted user",
+    "limited": "Showing the latest {limit} entries. Refine the filter to see older ones."
   },
   "analytics": {
     "title": "Analytics",
