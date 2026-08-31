@@ -95,6 +95,28 @@ enum TalkParty {
   EMPLOYEE
 }
 
+// ---- Engagement surveys / pulse ----
+
+enum SurveyStatus {
+  DRAFT
+  OPEN
+  CLOSED
+}
+
+enum SurveyQuestionType {
+  SCALE // 1..5 agreement
+  NPS   // 0..10 net promoter
+  TEXT  // free text
+}
+
+// ---- Skills matrix & succession planning ----
+
+enum Readiness {
+  READY_NOW
+  ONE_TO_TWO_YEARS
+  THREE_PLUS_YEARS
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -189,6 +211,9 @@ model Employee {
   talkTemplates TalkTemplate[] @relation("TalkTemplateOwner")
   talksAsSubject Talk[]     @relation("TalkSubject")
   talksAsManager Talk[]     @relation("TalkManager")
+  skills       EmployeeSkill[] @relation("EmployeeSkills")
+  successionRole SuccessionPlan? @relation("SuccessionRole")
+  successionCandidacies SuccessionCandidate[] @relation("SuccessionCandidate")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -521,6 +546,118 @@ model TalkAnswer {
 
   @@unique([itemId, party])
   @@index([talkId])
+}
+
+// An engagement/pulse survey. Answers are decoupled from identity: when
+// `anonymous`, responses carry no respondentId. A separate participation marker
+// still prevents double-submission without linking a person to their answers.
+model Survey {
+  id             String                @id @default(cuid())
+  title          String
+  description    String?
+  status         SurveyStatus          @default(DRAFT)
+  anonymous      Boolean               @default(true)
+  createdById    String
+  closesAt       DateTime?
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  questions      SurveyQuestion[]
+  responses      SurveyResponse[]
+  participations SurveyParticipation[]
+}
+
+model SurveyQuestion {
+  id       String             @id @default(cuid())
+  survey   Survey             @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  surveyId String
+  order    Int
+  type     SurveyQuestionType @default(SCALE)
+  prompt   String
+  required Boolean            @default(true)
+  answers  SurveyAnswer[]
+
+  @@index([surveyId, order])
+}
+
+model SurveyResponse {
+  id           String         @id @default(cuid())
+  survey       Survey         @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  surveyId     String
+  respondentId String? // null for anonymous surveys
+  submittedAt  DateTime       @default(now())
+  answers      SurveyAnswer[]
+
+  @@index([surveyId])
+}
+
+model SurveyAnswer {
+  id         String         @id @default(cuid())
+  response   SurveyResponse @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  responseId String
+  question   SurveyQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId String
+  value      Int?
+  text       String?
+
+  @@index([questionId])
+}
+
+// Records that an employee submitted a given survey — dedupe without revealing,
+// for anonymous surveys, what they answered.
+model SurveyParticipation {
+  id         String   @id @default(cuid())
+  survey     Survey   @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  surveyId   String
+  employeeId String
+  createdAt  DateTime @default(now())
+
+  @@unique([surveyId, employeeId])
+}
+
+// A named competency employees can be rated on.
+model Skill {
+  id             String          @id @default(cuid())
+  name           String          @unique
+  category       String?
+  createdAt      DateTime        @default(now())
+  employeeSkills EmployeeSkill[]
+}
+
+model EmployeeSkill {
+  id         String   @id @default(cuid())
+  employee   Employee @relation("EmployeeSkills", fields: [employeeId], references: [id], onDelete: Cascade)
+  employeeId String
+  skill      Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  skillId    String
+  level      Int // 1..5
+  updatedAt  DateTime @updatedAt
+
+  @@unique([employeeId, skillId])
+  @@index([skillId])
+}
+
+// Succession plan for one key role holder, with ranked internal candidates.
+model SuccessionPlan {
+  id           String                @id @default(cuid())
+  roleHolder   Employee              @relation("SuccessionRole", fields: [roleHolderId], references: [id], onDelete: Cascade)
+  roleHolderId String                @unique
+  notes        String?
+  createdById  String
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+  candidates   SuccessionCandidate[]
+}
+
+model SuccessionCandidate {
+  id          String         @id @default(cuid())
+  plan        SuccessionPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  planId      String
+  candidate   Employee       @relation("SuccessionCandidate", fields: [candidateId], references: [id], onDelete: Cascade)
+  candidateId String
+  readiness   Readiness      @default(ONE_TO_TWO_YEARS)
+  notes       String?
+
+  @@unique([planId, candidateId])
 }
 
 // Singleton row (id is always "singleton") holding org-wide branding set during first-run setup.

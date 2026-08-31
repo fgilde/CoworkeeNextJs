@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, Clock, FileText, Megaphone, ListChecks, Target, MessagesSquare, BarChart3, Briefcase, Bell, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, Clock, FileText, Megaphone, ListChecks, Target, MessagesSquare, ClipboardList, Award, BarChart3, Briefcase, Bell, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type NavKey =
@@ -21,6 +21,8 @@ type NavKey =
   | "onboarding"
   | "performance"
   | "talks"
+  | "surveys"
+  | "skills"
   | "analytics"
   | "recruiting"
   | "notifications"
@@ -48,6 +50,8 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/onboarding", labelKey: "onboarding", icon: ListChecks, group: "main" },
   { href: "/performance", labelKey: "performance", icon: Target, group: "main" },
   { href: "/talks", labelKey: "talks", icon: MessagesSquare, group: "main" },
+  { href: "/surveys", labelKey: "surveys", icon: ClipboardList, group: "main" },
+  { href: "/skills", labelKey: "skills", icon: Award, group: "main" },
   { href: "/analytics", labelKey: "analytics", icon: BarChart3, group: "main" },
   { href: "/recruiting", labelKey: "recruiting", icon: Briefcase, group: "main" },
   { href: "/notifications", labelKey: "notifications", icon: Bell, group: "account" },
