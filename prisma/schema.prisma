@@ -73,6 +73,28 @@ enum ApplicationStage {
   REJECTED
 }
 
+// ---- Employee conversations ("Mitarbeitergespräche" / 1:1s & annual talks) ----
+
+// Question kind inside a talk agenda. SECTION is a non-answerable heading.
+enum TalkItemType {
+  SECTION
+  TEXT
+  RATING
+  YESNO
+}
+
+enum TalkStatus {
+  DRAFT     // manager is still preparing; invisible to the employee
+  SHARED    // released to the employee; both sides prepare their answers
+  COMPLETED // talk held and locked
+}
+
+// Which side an answer belongs to — manager and employee prepare independently.
+enum TalkParty {
+  MANAGER
+  EMPLOYEE
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -164,6 +186,9 @@ model Employee {
   goals        Goal[]      @relation("EmployeeGoals")
   reviews      Review[]    @relation("EmployeeReviews")
   reviewsGiven Review[]    @relation("ReviewerReviews")
+  talkTemplates TalkTemplate[] @relation("TalkTemplateOwner")
+  talksAsSubject Talk[]     @relation("TalkSubject")
+  talksAsManager Talk[]     @relation("TalkManager")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -408,6 +433,94 @@ model Application {
   updatedAt    DateTime         @updatedAt
 
   @@index([jobPostingId, stage])
+}
+
+// A reusable talk agenda a manager (or HR/ADMIN) designs: how the conversation
+// runs. `shared` templates are offered to every manager when scheduling; a
+// non-shared template stays private to its owner.
+model TalkTemplate {
+  id          String             @id @default(cuid())
+  title       String
+  description String?
+  owner       Employee           @relation("TalkTemplateOwner", fields: [ownerId], references: [id])
+  ownerId     String
+  shared      Boolean            @default(false)
+  items       TalkTemplateItem[]
+  talks       Talk[]
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  @@index([ownerId])
+}
+
+model TalkTemplateItem {
+  id         String       @id @default(cuid())
+  template   TalkTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  templateId String
+  order      Int
+  type       TalkItemType @default(TEXT)
+  prompt     String
+  helpText   String?
+  required   Boolean      @default(false)
+
+  @@index([templateId, order])
+}
+
+// A scheduled/held conversation between an employee (subject) and their manager.
+// The agenda is snapshotted into TalkItem rows at creation, so later edits or
+// deletion of the source template never mutate a talk in flight.
+model Talk {
+  id          String        @id @default(cuid())
+  template    TalkTemplate? @relation(fields: [templateId], references: [id])
+  templateId  String?
+  employee    Employee      @relation("TalkSubject", fields: [employeeId], references: [id])
+  employeeId  String
+  manager     Employee      @relation("TalkManager", fields: [managerId], references: [id])
+  managerId   String
+  title       String
+  scheduledAt DateTime?
+  status      TalkStatus    @default(DRAFT)
+  summary     String?
+  items       TalkItem[]
+  answers     TalkAnswer[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  completedAt DateTime?
+
+  @@index([employeeId])
+  @@index([managerId])
+}
+
+model TalkItem {
+  id       String       @id @default(cuid())
+  talk     Talk         @relation(fields: [talkId], references: [id], onDelete: Cascade)
+  talkId   String
+  order    Int
+  type     TalkItemType
+  prompt   String
+  helpText String?
+  required Boolean      @default(false)
+  answers  TalkAnswer[]
+
+  @@index([talkId, order])
+}
+
+// One answer per (agenda item, side). Manager and employee fill their own
+// column independently, then compare them in the talk.
+model TalkAnswer {
+  id        String    @id @default(cuid())
+  talk      Talk      @relation(fields: [talkId], references: [id], onDelete: Cascade)
+  talkId    String
+  item      TalkItem  @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  itemId    String
+  party     TalkParty
+  text      String?
+  rating    Int?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([itemId, party])
+  @@index([talkId])
 }
 
 // Singleton row (id is always "singleton") holding org-wide branding set during first-run setup.

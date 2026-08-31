@@ -18,7 +18,8 @@ export type Action =
   | "goal:manage"
   | "review:manage"
   | "analytics:view"
-  | "recruiting:manage";
+  | "recruiting:manage"
+  | "talk:manage";
 export type Role = "ADMIN" | "HR" | "MANAGER" | "EMPLOYEE";
 
 const PERMISSIONS: Record<Role, Set<Action>> = {
@@ -40,6 +41,7 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "review:manage",
     "analytics:view",
     "recruiting:manage",
+    "talk:manage",
   ]),
   HR: new Set([
     "employee:read",
@@ -58,6 +60,7 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "review:manage",
     "analytics:view",
     "recruiting:manage",
+    "talk:manage",
   ]),
   MANAGER: new Set([
     "employee:read",
@@ -68,6 +71,7 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "document:read-own",
     "goal:manage",
     "review:manage",
+    "talk:manage",
   ]),
   EMPLOYEE: new Set(["employee:read", "leave:request", "time:track", "document:read-own"]),
 };
