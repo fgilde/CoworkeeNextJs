@@ -1185,7 +1185,7 @@
       }
     },
     "trust": {
-      "modules": "9 Module",
+      "modules": "21 Module",
       "languages": "DE / EN",
       "theme": "Hell & Dunkel",
       "rbac": "Rollenbasierte Rechte (RBAC)",
@@ -1193,7 +1193,13 @@
     },
     "modules": {
       "heading": "Alles, was HR braucht.",
-      "subheading": "Neun Module, eine Plattform. Kein Zusammensuchen zwischen Tools, die nicht miteinander sprechen.",
+      "subheading": "Über zwanzig Module, eine Plattform. Kein Zusammensuchen zwischen Tools, die nicht miteinander sprechen.",
+      "groups": {
+        "core": "Kern-HR",
+        "talent": "Talent & Entwicklung",
+        "ops": "Betrieb & Vergütung",
+        "platform": "Plattform"
+      },
       "items": {
         "employees": {
           "title": "Mitarbeiterverwaltung & Org-Chart",
@@ -1230,6 +1236,54 @@
         "news": {
           "title": "Neuigkeiten & Benachrichtigungen",
           "body": "Ankündigungen und Erinnerungen erreichen das Team, wo es hinschaut."
+        },
+        "talks": {
+          "title": "Mitarbeitergespräche & Reviews",
+          "body": "Eigene Gesprächsvorlagen bauen, freigeben und gemeinsam Seite an Seite vorbereiten."
+        },
+        "surveys": {
+          "title": "Umfragen & Pulse",
+          "body": "Anonyme Engagement- und eNPS-Umfragen mit aggregierten Ergebnissen."
+        },
+        "skills": {
+          "title": "Skills & Nachfolge",
+          "body": "Eine Skill-Matrix plus Nachfolgepläne für Ihre Schlüsselrollen."
+        },
+        "trainings": {
+          "title": "Schulungen",
+          "body": "Kurskatalog, Zuweisungen und Abschluss-Tracking."
+        },
+        "shifts": {
+          "title": "Schichtplanung",
+          "body": "Schichten fürs Team planen; jede/r sieht die eigenen bevorstehenden."
+        },
+        "expenses": {
+          "title": "Spesen",
+          "body": "Ausgaben einreichen, genehmigen und Erstattung verfolgen."
+        },
+        "benefits": {
+          "title": "Benefits",
+          "body": "Ein Benefits-Katalog mit Selbstanmeldung."
+        },
+        "assets": {
+          "title": "Betriebsmittel",
+          "body": "Ausstattung erfassen und Ihren Mitarbeitenden zuweisen."
+        },
+        "compensation": {
+          "title": "Vergütung",
+          "body": "Gehaltsverlauf pro Mitarbeiter/in, nur für HR und Admins sichtbar."
+        },
+        "signatures": {
+          "title": "E-Signaturen",
+          "body": "Dokumente zur schnellen, nachverfolgten Bestätigungsunterschrift senden."
+        },
+        "sso": {
+          "title": "SSO & Rollen",
+          "body": "Rollenbasierter Zugriff mit optionalem Single Sign-on via OIDC."
+        },
+        "api": {
+          "title": "REST-API & MCP",
+          "body": "Eine dokumentierte API und ein MCP-Server für KI-Clients."
         }
       }
     },

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import {
   ArrowRight,
+  Award,
   BarChart3,
   Bell,
   Blocks,
@@ -14,19 +15,27 @@ import {
   Cloud,
   Download,
   FileText,
+  Gift,
   Globe2,
+  GraduationCap,
+  Laptop,
   ListChecks,
   Mail,
+  MessagesSquare,
   Moon,
   Network,
+  PenLine,
+  Receipt,
   Rocket,
   Server,
   Settings2,
   ShieldCheck,
+  ClipboardList,
   Sparkles,
   Sun,
   Target,
   Users2,
+  Wallet,
   Zap,
 } from "lucide-react";
 import { BrowserFrame } from "@/components/marketing/browser-frame";
@@ -40,16 +49,48 @@ const GITHUB_REPO_URL = "https://github.com/fgilde/CoworkeeNextJs";
 
 const trustKeys = ["modules", "languages", "theme", "rbac", "hosting"] as const;
 
-const moduleItems = [
-  { key: "employees", icon: Users2 },
-  { key: "absences", icon: CalendarClock },
-  { key: "time", icon: Clock },
-  { key: "documents", icon: FileText },
-  { key: "onboarding", icon: ListChecks },
-  { key: "performance", icon: Target },
-  { key: "analytics", icon: BarChart3 },
-  { key: "recruiting", icon: Briefcase },
-  { key: "news", icon: Bell },
+const moduleGroups = [
+  {
+    key: "core",
+    items: [
+      { key: "employees", icon: Users2 },
+      { key: "absences", icon: CalendarClock },
+      { key: "time", icon: Clock },
+      { key: "documents", icon: FileText },
+      { key: "onboarding", icon: ListChecks },
+    ],
+  },
+  {
+    key: "talent",
+    items: [
+      { key: "performance", icon: Target },
+      { key: "talks", icon: MessagesSquare },
+      { key: "surveys", icon: ClipboardList },
+      { key: "skills", icon: Award },
+      { key: "trainings", icon: GraduationCap },
+      { key: "recruiting", icon: Briefcase },
+    ],
+  },
+  {
+    key: "ops",
+    items: [
+      { key: "shifts", icon: CalendarClock },
+      { key: "expenses", icon: Receipt },
+      { key: "benefits", icon: Gift },
+      { key: "assets", icon: Laptop },
+      { key: "compensation", icon: Wallet },
+      { key: "signatures", icon: PenLine },
+    ],
+  },
+  {
+    key: "platform",
+    items: [
+      { key: "analytics", icon: BarChart3 },
+      { key: "news", icon: Bell },
+      { key: "sso", icon: ShieldCheck },
+      { key: "api", icon: Blocks },
+    ],
+  },
 ] as const;
 
 const spotlightItems = [
@@ -165,17 +206,29 @@ export async function ModuleGrid() {
           <p className="mt-4 text-slate-600">{t("modules.subheading")}</p>
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {moduleItems.map(({ key, icon: Icon }) => (
-            <div
-              key={key}
-              className="reveal group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-500/10"
-            >
-              <div className="inline-flex size-11 items-center justify-center rounded-xl bg-linear-to-br from-indigo-600 to-violet-600 text-white">
-                <Icon className="size-5" aria-hidden />
+        <div className="mt-14 flex flex-col gap-12">
+          {moduleGroups.map((group) => (
+            <div key={group.key} className="reveal">
+              <div className="flex items-center gap-3">
+                <h3 className="text-sm font-semibold tracking-wide text-indigo-600 uppercase">
+                  {t(`modules.groups.${group.key}`)}
+                </h3>
+                <span className="h-px flex-1 bg-slate-200" />
               </div>
-              <h3 className="mt-4 font-semibold text-slate-900">{t(`modules.items.${key}.title`)}</h3>
-              <p className="mt-1.5 text-sm text-slate-600">{t(`modules.items.${key}.body`)}</p>
+              <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {group.items.map(({ key, icon: Icon }) => (
+                  <div
+                    key={key}
+                    className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-500/10"
+                  >
+                    <div className="inline-flex size-11 items-center justify-center rounded-xl bg-linear-to-br from-indigo-600 to-violet-600 text-white">
+                      <Icon className="size-5" aria-hidden />
+                    </div>
+                    <h4 className="mt-4 font-semibold text-slate-900">{t(`modules.items.${key}.title`)}</h4>
+                    <p className="mt-1.5 text-sm text-slate-600">{t(`modules.items.${key}.body`)}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

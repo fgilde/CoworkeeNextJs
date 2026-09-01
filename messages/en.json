@@ -1185,7 +1185,7 @@
       }
     },
     "trust": {
-      "modules": "9 modules",
+      "modules": "21 modules",
       "languages": "DE / EN",
       "theme": "Light & dark",
       "rbac": "Role-based access (RBAC)",
@@ -1193,7 +1193,13 @@
     },
     "modules": {
       "heading": "Everything HR needs.",
-      "subheading": "Nine modules, one platform. No more piecing things together from tools that don't talk to each other.",
+      "subheading": "Over twenty modules, one platform. No more piecing things together from tools that don't talk to each other.",
+      "groups": {
+        "core": "Core HR",
+        "talent": "Talent & growth",
+        "ops": "Operations & pay",
+        "platform": "Platform"
+      },
       "items": {
         "employees": {
           "title": "Employee management & org chart",
@@ -1230,6 +1236,54 @@
         "news": {
           "title": "News & notifications",
           "body": "Announcements and reminders reach the team wherever they look."
+        },
+        "talks": {
+          "title": "1:1s & reviews",
+          "body": "Design your own talk templates, share them, and prepare together side by side."
+        },
+        "surveys": {
+          "title": "Surveys & pulse",
+          "body": "Anonymous engagement and eNPS surveys with aggregated results."
+        },
+        "skills": {
+          "title": "Skills & succession",
+          "body": "A skills matrix plus succession plans for your key roles."
+        },
+        "trainings": {
+          "title": "Trainings",
+          "body": "A course catalog, assignments, and completion tracking."
+        },
+        "shifts": {
+          "title": "Shift scheduling",
+          "body": "Plan shifts for your team; everyone sees their upcoming ones."
+        },
+        "expenses": {
+          "title": "Expenses",
+          "body": "Submit expenses, approve them, and track reimbursement."
+        },
+        "benefits": {
+          "title": "Benefits",
+          "body": "A benefits catalog with self-service enrollment."
+        },
+        "assets": {
+          "title": "Assets & equipment",
+          "body": "Track equipment and assign it to your people."
+        },
+        "compensation": {
+          "title": "Compensation",
+          "body": "Salary history per employee, visible to HR and admins only."
+        },
+        "signatures": {
+          "title": "E-signatures",
+          "body": "Send documents for a quick, tracked acknowledgement signature."
+        },
+        "sso": {
+          "title": "SSO & roles",
+          "body": "Role-based access with optional single sign-on via OIDC."
+        },
+        "api": {
+          "title": "REST API & MCP",
+          "body": "A documented API and an MCP server for AI clients."
         }
       }
     },
