@@ -1,6 +1,6 @@
 # Module guides
 
-Coworkee is organised into nine modules, reachable from the sidebar after login. This page explains how to use each one. Visibility of actions depends on your [role](./configuration#users-roles).
+Coworkee is organised into a set of modules, reachable from the sidebar after login. This page explains how to use each one. Visibility of actions depends on your [role](./configuration#users-roles).
 
 ## Employees & org chart
 
@@ -81,3 +81,83 @@ Use it to spot trends — growth, attrition, absence load — at a glance.
 
 - **Announcement feed** — HR/Admin publish company news; everyone sees the feed.
 - **In-app notifications** — the **bell in the top bar** surfaces notifications (new announcements, absence decisions, etc.) without email.
+
+## Conversations (1:1s & annual talks)
+
+Configurable employee conversations (`/talks`), separate from the rigid performance review.
+
+- **Templates** — a manager (or HR/Admin) designs a reusable agenda: sections plus typed questions (free text, 1–5 rating, yes/no). HR/Admin can publish org-wide **shared** templates.
+- **Schedule & release** — a manager schedules a talk for one of their reports from a template; the agenda is **snapshotted** so later template edits never change a talk in flight. Releasing it makes it visible to the employee and notifies them.
+- **Prepare together** — manager and employee each fill in their own answers **side by side**, then the manager closes the talk with a shared summary.
+- **Visibility follows the roles** — you see a talk if you are its employee, its manager, or HR/Admin. So a manager who also reports to someone sees **both** their own talks (with their supervisor) and the ones they run. Employees never see a draft.
+
+## Surveys & pulse
+
+Engagement and pulse surveys (`/surveys`), HR/Admin.
+
+- **Build** — create a draft with **Scale (1–5)**, **eNPS (0–10)** and **free-text** questions.
+- **Open / close** — opening a survey invites everyone and locks editing; closing stops new responses.
+- **Anonymous by design** — anonymous responses carry no identity; a separate participation marker still prevents a second submission.
+- **Results** — aggregated per question: average and distribution for scales, an **eNPS score** for NPS, and the list of text answers.
+
+## Skills & succession
+
+- **Skills matrix** (`/skills`) — HR/Admin maintain a skill catalog. Everyone self-assesses their own skills (1–5); managers/HR rate their team, shown as a read-only matrix.
+- **Succession** (`/skills/succession`, HR/Admin) — build a plan for a key role holder and add internal candidates with a **readiness** (ready now / 1–2 years / 3+ years).
+
+## Trainings
+
+A lightweight LMS (`/trainings`).
+
+- **Course catalog** — managers/HR/Admin add courses (title, provider, link).
+- **Assign** — assign a course to an in-scope employee.
+- **Self status** — employees move their own enrollments through **Assigned → In progress → Completed**.
+
+## Shifts
+
+Shift scheduling (`/shifts`).
+
+- **Schedule** — managers/HR/Admin create shifts for their team (date, start/end time, role, location).
+- **My shifts** — everyone sees their own upcoming shifts.
+
+## Expenses
+
+Expense claims with an approval flow (`/expenses`).
+
+- **Submit** — an employee submits an expense (amount, category, date, note).
+- **Approve / reject** — the manager (or HR/Admin) decides; the employee is notified.
+- **Reimburse** — HR/Admin mark an approved expense as reimbursed.
+
+## Benefits
+
+- **Catalog** — HR/Admin maintain a benefits catalog (active/inactive).
+- **Self-service** — employees enroll in or leave active benefits themselves.
+
+## Assets & equipment
+
+Company equipment inventory (`/assets`, HR/Admin).
+
+- **Inventory** — add assets (name, category, serial number).
+- **Assign / return / retire** — assign an asset to an employee, take it back, or retire it. Employees see **My equipment** — what's currently assigned to them.
+
+## Compensation
+
+Salary tracking (`/compensation`) — **HR/Admin only**. Not a payroll engine (no tax, no payslip runs).
+
+- **Records** — add compensation entries per employee (amount, currency, frequency, effective date) — this builds a salary history.
+- **My compensation** — every employee sees their own current compensation and history; nobody else's.
+
+## E-signatures
+
+Lightweight acknowledgement signing (`/signatures`) — an acknowledgement record, **not** a cryptographic/qualified e-signature.
+
+- **Request** — a manager/HR/Admin sends a document text to a signer.
+- **Sign / decline** — the signer types their full name to sign, or declines; the requester is notified.
+
+## Single sign-on (SSO)
+
+Optional enterprise **OIDC** login (Keycloak, Entra ID, Okta, Authentik, Google Workspace, …). It is enabled only when the `SSO_*` environment variables are set; with none set, Coworkee uses email/password only. SSO **authenticates existing users by email — it never creates new accounts**. See [Configuration](./configuration) for the environment variables.
+
+## Audit log
+
+**HR/Admin** can browse the audit log at `/settings/audit` — who changed what, with a filter over action, entity and id.
