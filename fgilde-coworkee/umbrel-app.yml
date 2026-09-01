@@ -1,8 +1,8 @@
 manifestVersion: 1
-id: coworkee
+id: fgilde-coworkee
 category: productivity
 name: Coworkee
-version: "1.0.0"
+version: "1.1.2"
 tagline: Self-hosted HR software for your company
 description: >-
   Coworkee is a modern, self-hosted HR platform for a single company (single-tenant),
@@ -41,11 +41,12 @@ website: https://coworkee.de
 dependencies: []
 repo: https://github.com/fgilde/CoworkeeNextJs
 support: https://github.com/fgilde/CoworkeeNextJs/issues
-port: 3000
+icon: https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/public/icon.png
+port: 3220
 gallery:
-  - 1.jpg
-  - 2.jpg
-  - 3.jpg
+  - 1.png
+  - 2.png
+  - 3.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""
@@ -54,4 +55,4 @@ releaseNotes: >-
   (ghcr.io/fgilde/coworkeenextjs:latest) with a bundled PostgreSQL 16 database.
   First visit opens the setup wizard to create the admin account.
 submitter: Coworkee
-submission: https://github.com/fgilde/CoworkeeNextJs
+submission: ""

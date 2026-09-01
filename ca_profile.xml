@@ -1,0 +1,19 @@
+<CommunityApplications>
+  <Profile>
+    **Coworkee** - self-hosted HR software for one company.
+
+    Employees with a directory, profiles and an org chart; absence with leave balances and an
+    approval workflow; time tracking; documents in access-controlled storage; onboarding checklists;
+    performance goals and reviews; an HR analytics dashboard; a recruiting pipeline; and a news feed.
+    Role-based access (ADMIN, HR, MANAGER, EMPLOYEE), light and dark mode, an audit log, and the whole
+    interface in English and German.
+
+    It needs a PostgreSQL 16 database: install one from Community Applications and point DATABASE_URL
+    at it. Set AUTH_SECRET to a random value - it signs the login sessions. The first visit opens a
+    setup wizard that creates the administrator; there is no default account.
+
+    Support: https://github.com/fgilde/CoworkeeNextJs/issues
+  </Profile>
+  <Icon>https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/public/icon.png</Icon>
+  <WebPage>https://coworkee.de</WebPage>
+</CommunityApplications>

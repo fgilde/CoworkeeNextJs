@@ -87,13 +87,21 @@ CORES=4 RAM=4096 STORAGE=local-lvm bash -c "$(curl -fsSL .../deploy/proxmox/cowo
 
 Coworkee benötigt einen **separaten PostgreSQL-16-Container** (Unraid Community Applications ist pro Container). Starten Sie zuerst einen Postgres-16-Container (z. B. das `postgres`-CA-Template) mit Datenbank und Benutzer `coworkee`, und fügen Sie dann die Coworkee-App hinzu:
 
-1. Kopieren Sie `deploy/unraid/coworkee.xml` nach `/boot/config/plugins/dockerMan/templates-user/` auf Ihrem Unraid-Server (oder fügen Sie die rohe GitHub-URL als privates CA-Template-Repo unter **Apps → Settings** hinzu).
+1. Kopieren Sie `templates/coworkee.xml` nach `/boot/config/plugins/dockerMan/templates-user/` auf Ihrem Unraid-Server (oder fügen Sie die rohe GitHub-URL als privates CA-Template-Repo unter **Apps → Settings** hinzu).
 2. Setzen Sie im Template `DATABASE_URL` auf Ihren Postgres-Container, z. B. `postgresql://coworkee:PASSWORT@POSTGRES_HOST:5432/coworkee?schema=public`, setzen Sie `AUTH_SECRET` (`openssl rand -base64 32`), mappen Sie `/app/storage` auf appdata und lassen Sie `DEMO` für eine frische Installation leer.
 3. Öffnen Sie die WebUI unter `http://<unraid-ip>:3000`.
 
 ## 5. Umbrel
 
-Die App-Dateien liegen in `deploy/umbrel/` (`umbrel-app.yml` + `docker-compose.yml`, App plus PostgreSQL 16 gebündelt). Zum Sideloading während der Entwicklung legen Sie den Ordner `deploy/umbrel/` als `coworkee` in Ihr Community-App-Store-Repo und fügen dieses Repo in den Umbrel-App-Store-Einstellungen hinzu.
+Dieses Repository *ist* ein Community-App-Store: `umbrel-app-store.yml` im Wurzelverzeichnis benennt ihn, `fgilde-coworkee/` ist die App (`umbrel-app.yml` + `docker-compose.yml`, App plus PostgreSQL 16 gebündelt). In Umbrel unter **App Store → ⋯ → Community app stores** `https://github.com/fgilde/CoworkeeNextJs` hinzufügen.
+
+## 6. CasaOS
+
+**App Store → Add source** mit `https://github.com/fgilde/CoworkeeNextJs/releases/download/store/casaos-appstore.zip`. Das Archiv wird bei jedem Push aus `store/casaos/` neu gebaut. Die App bringt ihre eigene PostgreSQL mit; `AUTH_SECRET` im Installationsdialog ersetzen, denn der Wert im Paket ist öffentlich.
+
+## 7. Cosmos
+
+`store/cosmos/servapps/Coworkee/` ist eine ServApp mit eigener PostgreSQL. Das Installationsformular fragt das Session-Secret ab und erzeugt das Datenbank-Passwort — beides kommt also nicht aus einer öffentlichen Datei.
 
 Für ein offizielles Listing öffnen Sie einen PR gegen [getumbrel/umbrel-apps](https://github.com/getumbrel/umbrel-apps) mit einem `coworkee/`-Verzeichnis samt dieser beiden Dateien plus Galeriebildern.
 

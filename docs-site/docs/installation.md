@@ -87,13 +87,21 @@ CORES=4 RAM=4096 STORAGE=local-lvm bash -c "$(curl -fsSL .../deploy/proxmox/cowo
 
 Coworkee needs a **separate PostgreSQL 16 container** (Unraid Community Applications is per-container). First start a Postgres 16 container (e.g. the `postgres` CA template) with a `coworkee` database and user, then add the Coworkee app:
 
-1. Copy `deploy/unraid/coworkee.xml` to `/boot/config/plugins/dockerMan/templates-user/` on your Unraid server (or add its raw GitHub URL as a private CA template repo under **Apps → Settings**).
+1. Copy `templates/coworkee.xml` to `/boot/config/plugins/dockerMan/templates-user/` on your Unraid server (or add its raw GitHub URL as a private CA template repo under **Apps → Settings**).
 2. In the template set `DATABASE_URL` to your Postgres container, e.g. `postgresql://coworkee:PASSWORD@POSTGRES_HOST:5432/coworkee?schema=public`, set `AUTH_SECRET` (`openssl rand -base64 32`), map `/app/storage` to appdata, and leave `DEMO` empty for a fresh install.
 3. Open the WebUI at `http://<unraid-ip>:3000`.
 
 ## 5. Umbrel
 
-The app files live in `deploy/umbrel/` (`umbrel-app.yml` + `docker-compose.yml`, bundling the app plus PostgreSQL 16). To sideload during development, place the `deploy/umbrel/` folder as `coworkee` in your Community App Store repo and add that repo in the Umbrel App Store settings.
+This repository *is* a community app store: `umbrel-app-store.yml` at the root names it and `fgilde-coworkee/` is the app (`umbrel-app.yml` + `docker-compose.yml`, bundling the app plus PostgreSQL 16). In Umbrel, open **App Store → ⋯ → Community app stores** and add `https://github.com/fgilde/CoworkeeNextJs`.
+
+## 6. CasaOS
+
+**App Store → Add source** with `https://github.com/fgilde/CoworkeeNextJs/releases/download/store/casaos-appstore.zip`. The archive is rebuilt from `store/casaos/` on every push. The app brings its own PostgreSQL; replace `AUTH_SECRET` in the install dialog, because the value in the package is public.
+
+## 7. Cosmos
+
+`store/cosmos/servapps/Coworkee/` is a ServApp with its own PostgreSQL. Its installer form asks for the session secret and generates the database password, so neither comes out of a public file.
 
 For an official listing, open a PR against [getumbrel/umbrel-apps](https://github.com/getumbrel/umbrel-apps) adding a `coworkee/` directory with these two files plus gallery images.
 

@@ -20,10 +20,13 @@
   </Overview>
   <Category>Productivity: Tools:</Category>
   <WebUI>http://[IP]:[PORT:3000]</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/deploy/unraid/coworkee.xml</TemplateURL>
+  <TemplateURL>https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/templates/coworkee.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/public/icon.png</Icon>
   <ExtraParams/>
   <PostArgs/>
+  <ReadMe>https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/README.md</ReadMe>
+  <License>AGPL-3.0</License>
+  <ExtraSearchTerms>hr human resources employees absence leave time tracking onboarding recruiting performance</ExtraSearchTerms>
   <DonateText/>
   <DonateLink/>
   <Config Name="WebUI Port" Target="3000" Default="3000" Mode="tcp" Description="Container Port: 3000 (Coworkee web UI)" Type="Port" Display="always" Required="true" Mask="false">3000</Config>

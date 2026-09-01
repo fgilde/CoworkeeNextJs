@@ -5,7 +5,7 @@ services:
     # is all that matters — it points the reverse proxy at the app.
     image: getumbrel/app-proxy:latest
     environment:
-      APP_HOST: coworkee_app_1
+      APP_HOST: fgilde-coworkee_app_1
       APP_PORT: 3000
 
   app:
@@ -15,7 +15,7 @@ services:
       # db service is reachable as <appid>_db_1 on Umbrel's app network.
       # The DB password is an internal-network-only secret, so it is fixed
       # here (Umbrel convention for bundled multi-container apps).
-      DATABASE_URL: "postgresql://coworkee:moneyprintergobrrr@coworkee_db_1:5432/coworkee?schema=public"
+      DATABASE_URL: "postgresql://coworkee:moneyprintergobrrr@fgilde-coworkee_db_1:5432/coworkee?schema=public"
       # APP_SEED is a deterministic per-app secret Umbrel injects — perfect
       # for signing Auth.js sessions without asking the user for a value.
       AUTH_SECRET: ${APP_SEED}
