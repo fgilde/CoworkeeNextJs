@@ -125,3 +125,21 @@ test("MANAGER, HR, ADMIN can manage skills, EMPLOYEE cannot", () => {
   expect(can("ADMIN", "skill:manage")).toBe(true);
   expect(can("EMPLOYEE", "skill:manage")).toBe(false);
 });
+
+test("MANAGER/HR/ADMIN manage expenses, trainings, shifts, signatures; EMPLOYEE cannot", () => {
+  for (const action of ["expense:manage", "training:manage", "shift:manage", "signature:manage"] as const) {
+    expect(can("MANAGER", action)).toBe(true);
+    expect(can("HR", action)).toBe(true);
+    expect(can("ADMIN", action)).toBe(true);
+    expect(can("EMPLOYEE", action)).toBe(false);
+  }
+});
+
+test("only HR and ADMIN manage assets, benefits and compensation", () => {
+  for (const action of ["asset:manage", "benefit:manage", "compensation:manage"] as const) {
+    expect(can("HR", action)).toBe(true);
+    expect(can("ADMIN", action)).toBe(true);
+    expect(can("MANAGER", action)).toBe(false);
+    expect(can("EMPLOYEE", action)).toBe(false);
+  }
+});

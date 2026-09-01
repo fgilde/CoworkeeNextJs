@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, Clock, FileText, Megaphone, ListChecks, Target, MessagesSquare, ClipboardList, Award, BarChart3, Briefcase, Bell, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, Clock, FileText, Megaphone, ListChecks, Target, MessagesSquare, ClipboardList, Award, Receipt, Laptop, Gift, GraduationCap, CalendarClock, Wallet, PenLine, BarChart3, Briefcase, Bell, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type NavKey =
@@ -23,6 +23,13 @@ type NavKey =
   | "talks"
   | "surveys"
   | "skills"
+  | "expenses"
+  | "assets"
+  | "benefits"
+  | "trainings"
+  | "shifts"
+  | "compensation"
+  | "signatures"
   | "analytics"
   | "recruiting"
   | "notifications"
@@ -52,6 +59,13 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/talks", labelKey: "talks", icon: MessagesSquare, group: "main" },
   { href: "/surveys", labelKey: "surveys", icon: ClipboardList, group: "main" },
   { href: "/skills", labelKey: "skills", icon: Award, group: "main" },
+  { href: "/trainings", labelKey: "trainings", icon: GraduationCap, group: "main" },
+  { href: "/shifts", labelKey: "shifts", icon: CalendarClock, group: "main" },
+  { href: "/expenses", labelKey: "expenses", icon: Receipt, group: "main" },
+  { href: "/benefits", labelKey: "benefits", icon: Gift, group: "main" },
+  { href: "/assets", labelKey: "assets", icon: Laptop, group: "main" },
+  { href: "/compensation", labelKey: "compensation", icon: Wallet, group: "main" },
+  { href: "/signatures", labelKey: "signatures", icon: PenLine, group: "main" },
   { href: "/analytics", labelKey: "analytics", icon: BarChart3, group: "main" },
   { href: "/recruiting", labelKey: "recruiting", icon: Briefcase, group: "main" },
   { href: "/notifications", labelKey: "notifications", icon: Bell, group: "account" },

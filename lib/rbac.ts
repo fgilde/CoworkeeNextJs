@@ -21,7 +21,14 @@ export type Action =
   | "recruiting:manage"
   | "talk:manage"
   | "survey:manage"
-  | "skill:manage";
+  | "skill:manage"
+  | "expense:manage"
+  | "asset:manage"
+  | "benefit:manage"
+  | "training:manage"
+  | "shift:manage"
+  | "compensation:manage"
+  | "signature:manage";
 export type Role = "ADMIN" | "HR" | "MANAGER" | "EMPLOYEE";
 
 const PERMISSIONS: Record<Role, Set<Action>> = {
@@ -46,6 +53,13 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "talk:manage",
     "survey:manage",
     "skill:manage",
+    "expense:manage",
+    "asset:manage",
+    "benefit:manage",
+    "training:manage",
+    "shift:manage",
+    "compensation:manage",
+    "signature:manage",
   ]),
   HR: new Set([
     "employee:read",
@@ -67,6 +81,13 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "talk:manage",
     "survey:manage",
     "skill:manage",
+    "expense:manage",
+    "asset:manage",
+    "benefit:manage",
+    "training:manage",
+    "shift:manage",
+    "compensation:manage",
+    "signature:manage",
   ]),
   MANAGER: new Set([
     "employee:read",
@@ -79,6 +100,10 @@ const PERMISSIONS: Record<Role, Set<Action>> = {
     "review:manage",
     "talk:manage",
     "skill:manage",
+    "expense:manage",
+    "training:manage",
+    "shift:manage",
+    "signature:manage",
   ]),
   EMPLOYEE: new Set(["employee:read", "leave:request", "time:track", "document:read-own"]),
 };

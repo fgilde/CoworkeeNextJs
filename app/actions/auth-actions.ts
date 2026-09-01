@@ -39,3 +39,9 @@ export async function loginAction(
 
   return {};
 }
+
+// Kick off the OIDC/SSO redirect flow. Only wired up when SSO is configured
+// (see auth.ts `ssoEnabled`); the login page renders the button conditionally.
+export async function ssoLoginAction(): Promise<void> {
+  await signIn("sso", { redirectTo: "/dashboard" });
+}

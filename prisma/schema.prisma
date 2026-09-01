@@ -117,6 +117,42 @@ enum Readiness {
   THREE_PLUS_YEARS
 }
 
+// ---- Expenses ----
+enum ExpenseStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  REIMBURSED
+}
+
+// ---- Assets / equipment ----
+enum AssetStatus {
+  AVAILABLE
+  ASSIGNED
+  RETIRED
+}
+
+// ---- Trainings / LMS ----
+enum TrainingStatus {
+  ASSIGNED
+  IN_PROGRESS
+  COMPLETED
+}
+
+// ---- Compensation ----
+enum PayFrequency {
+  MONTHLY
+  YEARLY
+  HOURLY
+}
+
+// ---- E-signatures ----
+enum SignatureStatus {
+  PENDING
+  SIGNED
+  DECLINED
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -214,6 +250,14 @@ model Employee {
   skills       EmployeeSkill[] @relation("EmployeeSkills")
   successionRole SuccessionPlan? @relation("SuccessionRole")
   successionCandidacies SuccessionCandidate[] @relation("SuccessionCandidate")
+  expenses     Expense[]   @relation("EmployeeExpenses")
+  assets       Asset[]     @relation("EmployeeAssets")
+  benefits     BenefitEnrollment[] @relation("EmployeeBenefits")
+  trainings    TrainingEnrollment[] @relation("EmployeeTrainings")
+  shifts       Shift[]     @relation("EmployeeShifts")
+  compensation CompensationRecord[] @relation("EmployeeComp")
+  signatureRequests SignatureRequest[] @relation("SignatureRequester")
+  signaturesToSign  SignatureRequest[] @relation("SignatureSigner")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -658,6 +702,147 @@ model SuccessionCandidate {
   notes       String?
 
   @@unique([planId, candidateId])
+}
+
+// An expense claim an employee submits; a manager/HR approves or rejects, then
+// HR marks it reimbursed. Amounts are integer minor units (cents).
+model Expense {
+  id          String        @id @default(cuid())
+  employee    Employee      @relation("EmployeeExpenses", fields: [employeeId], references: [id], onDelete: Cascade)
+  employeeId  String
+  title       String
+  category    String?
+  amountCents Int
+  currency    String        @default("EUR")
+  spentAt     DateTime
+  status      ExpenseStatus @default(PENDING)
+  note        String?
+  decidedById String?
+  decidedAt   DateTime?
+  createdAt   DateTime      @default(now())
+
+  @@index([employeeId])
+  @@index([status])
+}
+
+// A company asset that can be assigned to an employee and later returned.
+model Asset {
+  id           String      @id @default(cuid())
+  name         String
+  category     String?
+  serialNumber String?
+  status       AssetStatus @default(AVAILABLE)
+  assignedTo   Employee?   @relation("EmployeeAssets", fields: [assignedToId], references: [id])
+  assignedToId String?
+  assignedAt   DateTime?
+  notes        String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@index([assignedToId])
+}
+
+model Benefit {
+  id          String              @id @default(cuid())
+  name        String
+  description String?
+  category    String?
+  active      Boolean             @default(true)
+  createdAt   DateTime            @default(now())
+  enrollments BenefitEnrollment[]
+}
+
+model BenefitEnrollment {
+  id         String   @id @default(cuid())
+  benefit    Benefit  @relation(fields: [benefitId], references: [id], onDelete: Cascade)
+  benefitId  String
+  employee   Employee @relation("EmployeeBenefits", fields: [employeeId], references: [id], onDelete: Cascade)
+  employeeId String
+  note       String?
+  enrolledAt DateTime @default(now())
+
+  @@unique([benefitId, employeeId])
+  @@index([employeeId])
+}
+
+model Course {
+  id          String               @id @default(cuid())
+  title       String
+  description String?
+  provider    String?
+  url         String?
+  createdAt   DateTime             @default(now())
+  enrollments TrainingEnrollment[]
+}
+
+model TrainingEnrollment {
+  id          String         @id @default(cuid())
+  course      Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId    String
+  employee    Employee       @relation("EmployeeTrainings", fields: [employeeId], references: [id], onDelete: Cascade)
+  employeeId  String
+  status      TrainingStatus @default(ASSIGNED)
+  assignedAt  DateTime       @default(now())
+  completedAt DateTime?
+
+  @@unique([courseId, employeeId])
+  @@index([employeeId])
+}
+
+// A scheduled shift for one employee. Times are minutes from midnight so a
+// shift is a plain (date, startMin, endMin) with no timezone math.
+model Shift {
+  id          String   @id @default(cuid())
+  employee    Employee @relation("EmployeeShifts", fields: [employeeId], references: [id], onDelete: Cascade)
+  employeeId  String
+  date        DateTime
+  startMin    Int
+  endMin      Int
+  role        String?
+  location    String?
+  note        String?
+  createdById String
+  createdAt   DateTime @default(now())
+
+  @@index([employeeId, date])
+  @@index([date])
+}
+
+// A compensation entry — the salary history per employee. HR/ADMIN only. Not a
+// payroll engine: no tax, no payslip runs.
+model CompensationRecord {
+  id            String       @id @default(cuid())
+  employee      Employee     @relation("EmployeeComp", fields: [employeeId], references: [id], onDelete: Cascade)
+  employeeId    String
+  amountCents   Int
+  currency      String       @default("EUR")
+  frequency     PayFrequency @default(MONTHLY)
+  effectiveDate DateTime
+  note          String?
+  createdById   String
+  createdAt     DateTime     @default(now())
+
+  @@index([employeeId, effectiveDate])
+}
+
+// A lightweight signature request: the signer types their name to sign. This is
+// an acknowledgement record, not a cryptographic / qualified e-signature.
+model SignatureRequest {
+  id          String          @id @default(cuid())
+  title       String
+  body        String
+  documentId  String?
+  requester   Employee        @relation("SignatureRequester", fields: [requesterId], references: [id])
+  requesterId String
+  signer      Employee        @relation("SignatureSigner", fields: [signerId], references: [id], onDelete: Cascade)
+  signerId    String
+  status      SignatureStatus @default(PENDING)
+  signedName  String?
+  signedAt    DateTime?
+  createdAt   DateTime        @default(now())
+
+  @@index([signerId])
+  @@index([requesterId])
 }
 
 // Singleton row (id is always "singleton") holding org-wide branding set during first-run setup.

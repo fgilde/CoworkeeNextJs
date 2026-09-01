@@ -3,7 +3,10 @@ import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { LayoutGrid, Languages, ShieldCheck, Server, type LucideIcon } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { LoginForm } from "@/components/login-form";
+import { ssoEnabled } from "@/auth";
+import { ssoLoginAction } from "@/app/actions/auth-actions";
 import { needsSetup } from "@/lib/setup";
 import { VERSION_LABEL } from "@/lib/version";
 import { getBranding } from "@/lib/branding";
@@ -86,8 +89,22 @@ export default async function LoginPage({
               <CardTitle className="text-xl">{t("loginTitle")}</CardTitle>
               <CardDescription>{t("welcome")}</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex flex-col gap-4">
               <LoginForm showDemo={process.env.DEMO === "1"} resetDone={reset === "1"} />
+              {ssoEnabled && (
+                <>
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                    <span className="h-px flex-1 bg-border" />
+                    {t("or")}
+                    <span className="h-px flex-1 bg-border" />
+                  </div>
+                  <form action={ssoLoginAction}>
+                    <Button type="submit" variant="outline" className="w-full">
+                      {t("ssoButton", { provider: process.env.SSO_NAME || "SSO" })}
+                    </Button>
+                  </form>
+                </>
+              )}
             </CardContent>
           </Card>
           <p className="mt-6 text-center text-xs text-muted-foreground" aria-label={t("versionAria")}>
