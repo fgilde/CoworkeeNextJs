@@ -1,143 +1,89 @@
 #!/usr/bin/env bash
-# Coworkee — Proxmox VE installer (run on the PVE HOST shell).
+# Coworkee on Proxmox VE: an unprivileged Debian container with PostgreSQL, Node and the app in it.
 #
+# Run it on the PVE host as root:
 #   bash -c "$(curl -fsSL https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/deploy/proxmox/coworkee.sh)"
 #
-# Creates a Debian 12 LXC container, installs Docker inside it, and deploys
-# Coworkee from the prebuilt GHCR image (pull-based — no local build, so it
-# stays light on RAM). Secrets are generated; the database starts empty, so
-# the first visit to the app shows the setup wizard to create the admin.
+# No Docker in the container. Docker inside an unprivileged LXC starts nothing on a current Proxmox:
+# runc writes net.ipv4.ip_unprivileged_port_start, and /proc/sys is read-only in there. A privileged
+# container would fix that by handing the container root on the host, which is a poor trade for two
+# processes Debian ships anyway. The container gets PostgreSQL and Node instead, and the app is built
+# from its newest tag inside it -- which is why it wants a little more RAM and disk than a container
+# that only unpacks a binary.
 #
-# TODO: submit to community-scripts.org (Proxmox VE Helper-Scripts). This
-# script is intentionally self-contained and does NOT depend on their
-# build.func framework, so it can also be run standalone.
+# Self-contained on purpose. The community helper scripts source a shared build.func from another
+# repository at run time, which is convenient right up to the day that file moves. This one needs
+# pct, which every PVE host has.
+#
+# Overridable: CTID, HOSTNAME_, DISK_GB, RAM_MB, CORES, BRIDGE, STORAGE, TEMPLATE_STORAGE, PORT
 set -euo pipefail
 
-# --- Config (override via env, e.g. `CORES=4 RAM=4096 bash coworkee.sh`) -----
-CTID="${CTID:-$(pvesh get /cluster/nextid)}"
-HOSTNAME="${HOSTNAME:-coworkee}"
+CTID="${CTID:-}"
+HOSTNAME_="${HOSTNAME_:-coworkee}"
+DISK_GB="${DISK_GB:-12}"
+RAM_MB="${RAM_MB:-4096}"
 CORES="${CORES:-2}"
-RAM="${RAM:-2048}"          # MB — build is skipped (pull image), so 2 GB is plenty
-SWAP="${SWAP:-512}"         # MB
-DISK="${DISK:-8}"           # GB
 BRIDGE="${BRIDGE:-vmbr0}"
-STORAGE="${STORAGE:-local-lvm}"      # rootfs storage
-TEMPLATE_STORAGE="${TEMPLATE_STORAGE:-local}"  # where the LXC template lives
-TEMPLATE="${TEMPLATE:-debian-12-standard}"
-IMAGE="${IMAGE:-ghcr.io/fgilde/coworkeenextjs:latest}"
+STORAGE="${STORAGE:-local-lvm}"
+TEMPLATE_STORAGE="${TEMPLATE_STORAGE:-local}"
+PORT="${PORT:-3020}"
+INSTALLER="${INSTALLER:-https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/deploy/proxmox/install.sh}"
 
-log()  { echo -e "\e[1;34m==>\e[0m $*"; }
-die()  { echo -e "\e[1;31mError:\e[0m $*" >&2; exit 1; }
+die() { echo "coworkee: $*" >&2; exit 1; }
+note() { echo "==> $*"; }
 
-command -v pct >/dev/null 2>&1 || die "run this on the Proxmox VE host (pct not found)."
-[ "$(id -u)" -eq 0 ] || die "run as root."
+command -v pct >/dev/null || die "this runs on a Proxmox VE host: pct was not found"
+[ "$(id -u)" -eq 0 ] || die "run as root"
 
-# --- 1. Ensure the Debian LXC template is present ----------------------------
-log "Refreshing appliance list..."
+[ -n "$CTID" ] || { CTID="$(pvesh get /cluster/nextid)"; note "no CTID given, taking the next free one: $CTID"; }
+
 pveam update >/dev/null 2>&1 || true
 
-TEMPLATE_FILE="$(pveam available --section system 2>/dev/null | awk -v t="$TEMPLATE" '$2 ~ t {print $2}' | sort -V | tail -n1)"
-[ -n "$TEMPLATE_FILE" ] || die "no '$TEMPLATE' template available via pveam."
+pick_template() {
+  pveam available --section system 2>/dev/null | awk -v pat="$1" '$2 ~ pat {print $2}' | sort -V | tail -1
+}
 
-if ! pveam list "$TEMPLATE_STORAGE" 2>/dev/null | grep -q "$TEMPLATE_FILE"; then
-  log "Downloading template $TEMPLATE_FILE to $TEMPLATE_STORAGE..."
-  pveam download "$TEMPLATE_STORAGE" "$TEMPLATE_FILE"
-fi
-TEMPLATE_REF="$TEMPLATE_STORAGE:vztmpl/$TEMPLATE_FILE"
-
-# --- 2. Create the container -------------------------------------------------
-# Unprivileged + nesting/keyctl so Docker runs inside the LXC.
-log "Creating LXC $CTID ($HOSTNAME): ${CORES} vCPU, ${RAM} MB RAM, ${DISK} GB disk..."
-pct create "$CTID" "$TEMPLATE_REF" \
-  --hostname "$HOSTNAME" \
-  --cores "$CORES" \
-  --memory "$RAM" \
-  --swap "$SWAP" \
-  --rootfs "${STORAGE}:${DISK}" \
-  --net0 "name=eth0,bridge=${BRIDGE},ip=dhcp" \
-  --features "nesting=1,keyctl=1" \
-  --unprivileged 1 \
-  --onboot 1
-
-log "Starting container..."
+# Newest first, but an older PVE refuses a newer Debian outright ("unsupported debian version") and
+# only says so at create time - so the fallback is a second create, not a cleverer check.
+CREATED=0
+for pattern in debian-13-standard debian-12-standard; do
+  TEMPLATE="$(pick_template "$pattern")"
+  [ -n "$TEMPLATE" ] || continue
+  if ! pveam list "$TEMPLATE_STORAGE" 2>/dev/null | grep -q "$TEMPLATE"; then
+    note "downloading the template $TEMPLATE"
+    pveam download "$TEMPLATE_STORAGE" "$TEMPLATE" >/dev/null
+  fi
+  note "creating the container $CTID from $TEMPLATE"
+  if pct create "$CTID" "${TEMPLATE_STORAGE}:vztmpl/${TEMPLATE}" \
+      --hostname "$HOSTNAME_" \
+      --cores "$CORES" --memory "$RAM_MB" --swap 512 \
+      --rootfs "${STORAGE}:${DISK_GB}" \
+      --net0 "name=eth0,bridge=${BRIDGE},ip=dhcp" \
+      --unprivileged 1 --onboot 1 >/dev/null 2>&1; then
+    CREATED=1
+    break
+  fi
+  note "this PVE will not create a container from $TEMPLATE, trying an older Debian"
+done
+[ "$CREATED" = "1" ] || die "no Debian template this PVE accepts"
 pct start "$CTID"
 
-# Wait for network (DHCP lease).
-log "Waiting for network..."
+note "waiting for the network"
+IP=""
 for _ in $(seq 1 30); do
-  pct exec "$CTID" -- sh -c 'command -v ip >/dev/null && ip route get 1.1.1.1' >/dev/null 2>&1 && break
+  IP="$(pct exec "$CTID" -- bash -c "hostname -I 2>/dev/null | awk '{print \$1}'" 2>/dev/null || true)"
+  [ -n "$IP" ] && break
   sleep 2
 done
+[ -n "$IP" ] || die "the container did not get an address"
 
-# --- 3. Install Docker inside the container ----------------------------------
-log "Installing Docker inside the container..."
-pct exec "$CTID" -- sh -c 'apt-get update -y && apt-get install -y curl ca-certificates openssl'
-pct exec "$CTID" -- sh -c 'command -v docker >/dev/null 2>&1 || curl -fsSL https://get.docker.com | sh'
-pct exec "$CTID" -- sh -c 'docker compose version >/dev/null 2>&1' || die "docker compose plugin missing in container."
+note "installing Coworkee"
+pct exec "$CTID" -- bash -lc "apt-get update -qq && apt-get install -y -qq --no-install-recommends curl ca-certificates >/dev/null"
+pct exec "$CTID" -- bash -lc "COWORKEE_PORT=${PORT} bash -c \"\$(curl -fsSL ${INSTALLER})\""
 
-# --- 4. Generate secrets + compose deployment --------------------------------
-POSTGRES_PASSWORD="$(openssl rand -hex 24)"
-AUTH_SECRET="$(openssl rand -hex 32)"
-
-log "Writing deployment to /opt/coworkee inside the container..."
-pct exec "$CTID" -- sh -c 'mkdir -p /opt/coworkee'
-
-# .env (kept private; secrets never touch the app image)
-pct exec "$CTID" -- sh -c "cat > /opt/coworkee/.env <<EOF
-POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-AUTH_SECRET=${AUTH_SECRET}
-EOF
-chmod 600 /opt/coworkee/.env"
-
-# Pull-based compose: GHCR image + Postgres 16, app published on :3000 (LAN).
-# No Caddy here — for a domain + HTTPS use deploy/docker-compose.ghcr.yml.
-# DEMO=0 -> empty DB -> setup wizard on first visit.
-pct exec "$CTID" -- sh -c "cat > /opt/coworkee/docker-compose.yml <<'EOF'
-services:
-  db:
-    image: postgres:16
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: coworkee
-      POSTGRES_PASSWORD: \${POSTGRES_PASSWORD}
-      POSTGRES_DB: coworkee
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: [\"CMD-SHELL\", \"pg_isready -U coworkee\"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  app:
-    image: ${IMAGE}
-    restart: unless-stopped
-    environment:
-      DATABASE_URL: \"postgresql://coworkee:\${POSTGRES_PASSWORD}@db:5432/coworkee?schema=public\"
-      AUTH_SECRET: \${AUTH_SECRET}
-      AUTH_TRUST_HOST: \"true\"
-      NODE_ENV: production
-      DEMO: \"0\"
-    depends_on:
-      db:
-        condition: service_healthy
-    ports:
-      - \"3000:3000\"
-    volumes:
-      - storage:/app/storage
-
-volumes:
-  pgdata: {}
-  storage: {}
-EOF"
-
-# --- 5. Pull + start ---------------------------------------------------------
-log "Pulling image + starting Coworkee..."
-pct exec "$CTID" -- sh -c 'cd /opt/coworkee && docker compose --env-file .env pull && docker compose --env-file .env up -d'
-
-# --- 6. Done -----------------------------------------------------------------
-IP="$(pct exec "$CTID" -- sh -c "hostname -I | awk '{print \$1}'" 2>/dev/null | tr -d '\r')"
-echo
-log "Done. Coworkee is starting in LXC $CTID."
-log "URL:  http://${IP:-<container-ip>}:3000"
-echo "First visit shows the setup wizard to create the admin account (no demo data)."
+echo ""
+note "done"
+echo "    URL:      http://${IP}:${PORT}"
+echo "    Account:  the first visit opens the setup wizard"
+echo "    Update:   pct exec ${CTID} -- bash -c \"\$(curl -fsSL ${INSTALLER})\""
+echo "    Config:   pct exec ${CTID} -- cat /etc/coworkee.env"

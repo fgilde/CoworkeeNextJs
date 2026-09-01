@@ -182,7 +182,9 @@ On the **Proxmox host shell** (not inside a container):
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/fgilde/CoworkeeNextJs/master/deploy/proxmox/coworkee.sh)"
 ```
 
-Creates a Debian 12 LXC (defaults: 2 vCPU, 2 GB RAM, 8 GB disk — the pull path avoids a local build), installs Docker inside it, deploys the GHCR image + PostgreSQL with generated secrets and an empty database, then prints the container IP and URL (`http://<ip>:3000`). Override defaults via env, e.g. `CORES=4 RAM=4096 STORAGE=local-lvm bash …`. Script: [`deploy/proxmox/coworkee.sh`](deploy/proxmox/coworkee.sh).
+Creates an unprivileged Debian LXC (defaults: 2 vCPU, 4 GB RAM, 12 GB disk), installs PostgreSQL and Node in it, builds Coworkee from its newest tag, generates the database password and the session secret, and leaves a systemd service behind — then prints the container IP and URL (`http://<ip>:3020`). Override defaults via env, e.g. `CORES=4 RAM_MB=8192 STORAGE=local-lvm bash …`. Scripts: [`deploy/proxmox/coworkee.sh`](deploy/proxmox/coworkee.sh) on the host, [`deploy/proxmox/install.sh`](deploy/proxmox/install.sh) inside — the second one works on any Debian machine and is also how you update: run it again.
+
+**No Docker in there, deliberately.** On a current Proxmox an unprivileged container runs no Docker container at all — runc writes `net.ipv4.ip_unprivileged_port_start` and `/proc/sys` is read-only — and a privileged container buys that back by handing the container root on the host. The database, the generated secrets and the uploaded documents survive an update.
 
 ### 4. Unraid
 
