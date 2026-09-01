@@ -2,6 +2,8 @@
 
 *Read this in [Deutsch 🇩🇪](README.de.md).*
 
+[![QuickRun](https://quickrun.org/badge.svg)](https://quickrun.org/run?repo=fgilde/CoworkeeNextJs)
+
 Modern, self-hosted HR / personnel-management software in the spirit of Personio / HR-Works — for **one** company (single-tenant). Fully available in **German and English**, and extensible.
 
 > "A workplace for everything human."
