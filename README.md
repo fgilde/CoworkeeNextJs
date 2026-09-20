@@ -211,5 +211,9 @@ This repository is itself a community app store: `umbrel-app-store.yml` names it
 For an official listing, open a PR against [getumbrel/umbrel-apps](https://github.com/getumbrel/umbrel-apps) adding a `coworkee/` directory with these two files plus gallery images.
 
 ## License
+Coworkee is **dual-licensed**: the open-source **GNU AGPLv3** (see [`LICENSE`](./LICENSE))
+or a **commercial license** for closed-source/proprietary use. Details and contact in
+[`LICENSING.md`](./LICENSING.md).
+
 
 Proprietary – © 2026 Coworkee.
