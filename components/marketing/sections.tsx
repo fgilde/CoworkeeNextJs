@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
+import { GildeWidget } from "@/components/gilde-widget";
 import {
   ArrowRight,
   Award,
@@ -571,22 +572,33 @@ export async function DemoSection() {
   );
 }
 
+const MARKETING_ACCENT = "#6366f1";
+
 export async function ContactSection() {
   const t = await getTranslations("marketing");
+  const locale = await getLocale();
 
   return (
     <section id="kontakt" className="bg-white py-24">
       <div className="reveal mx-auto max-w-2xl px-4 text-center sm:px-6">
         <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">{t("contact.heading")}</h2>
         <p className="mt-4 text-slate-600">{t("contact.body")}</p>
-        <a
-          href={`mailto:${CONTACT_EMAIL}`}
-          className="mt-8 inline-flex items-center gap-2 rounded-lg bg-linear-to-r from-indigo-600 to-violet-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-md hover:brightness-110 active:translate-y-px"
-        >
-          <Mail className="size-4" aria-hidden />
-          {t("contact.cta")}
-        </a>
-        <p className="mt-3 text-sm text-slate-500">{CONTACT_EMAIL}</p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <GildeWidget
+            type="contact"
+            accent={MARKETING_ACCENT}
+            language={locale}
+            title={t("contact.heading")}
+            label={t("contact.cta")}
+          />
+          <GildeWidget
+            type="support"
+            accent={MARKETING_ACCENT}
+            language={locale}
+            title={t("contact.supportCta")}
+            label={t("contact.supportCta")}
+          />
+        </div>
       </div>
     </section>
   );

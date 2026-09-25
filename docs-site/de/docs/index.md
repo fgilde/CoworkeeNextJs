@@ -18,3 +18,12 @@ Alles zum Installieren, Konfigurieren und Betreiben von Coworkee — der self-ho
 - [FAQ & Fehlerbehebung](./faq)
 
 > Prefer English? Sprache oben in der Navigation umschalten.
+
+## Kontakt & Support
+
+Fragen oder Lust, das Projekt zu unterstützen? Direkt hier melden oder Danke sagen.
+
+<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;margin-top:8px">
+<gilde-contact project="fgilde/CoworkeeNextJs" widget="contact" inline theme="light" accent="#6366f1" language="de" title="Kontakt" width="520" radius="18" padding="24" show-logo="true" show-description="false" show-homepage="true" show-preview-notice="false" show-footer="false"></gilde-contact>
+<gilde-support project="fgilde/CoworkeeNextJs" widget="support" inline theme="light" accent="#6366f1" language="de" title="Coworkee unterstützen" width="520" radius="18" padding="24" show-logo="true" show-description="false" show-homepage="true" show-preview-notice="false" show-footer="false" support-layout="rows" show-support-icons="true" show-support-qr="true" show-support-hint="false"></gilde-support>
+</div>

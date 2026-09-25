@@ -44,7 +44,25 @@ export default defineConfig({
   head: [
     ["link", { rel: "icon", type: "image/png", href: "/CoworkeeNextJs/icon.png" }],
     ["meta", { name: "theme-color", content: "#4f46e5" }],
+    // GildeConnect contact/support widgets.
+    ["script", { type: "module", src: "https://connect.gilde.org/widgets/v1.js?v=2" }],
+    // Keep the widget theme in sync with VitePress light/dark (SPA-safe).
+    [
+      "script",
+      {},
+      `(function(){function s(){var d=document.documentElement.classList.contains('dark');document.querySelectorAll('gilde-contact,gilde-support').forEach(function(e){e.setAttribute('theme',d?'dark':'light');});}function r(){s();new MutationObserver(s).observe(document.documentElement,{attributes:true,attributeFilter:['class']});new MutationObserver(s).observe(document.body,{childList:true,subtree:true});}if(document.readyState!=='loading')r();else document.addEventListener('DOMContentLoaded',r);})();`,
+    ],
   ],
+
+  // The widgets are framework-agnostic custom elements — stop Vue trying to
+  // resolve <gilde-*> as components.
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag: string) => tag.startsWith("gilde-"),
+      },
+    },
+  },
 
   themeConfig: {
     logo: "/icon.png",

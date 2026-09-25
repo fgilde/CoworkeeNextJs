@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, Clock, FileText, Megaphone, ListChecks, Target, MessagesSquare, ClipboardList, Award, Receipt, Laptop, Gift, GraduationCap, CalendarClock, Wallet, PenLine, BarChart3, Briefcase, Bell, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, Users, Network, Settings, CircleUser, CalendarDays, ClipboardCheck, CalendarRange, Clock, FileText, Megaphone, ListChecks, Target, MessagesSquare, ClipboardList, Award, Receipt, Laptop, Gift, GraduationCap, CalendarClock, Wallet, PenLine, BarChart3, Briefcase, Bell, Info, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type NavKey =
@@ -34,7 +34,8 @@ type NavKey =
   | "recruiting"
   | "notifications"
   | "settings"
-  | "account";
+  | "account"
+  | "about";
 
 type NavItem = {
   href: string;
@@ -71,6 +72,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/notifications", labelKey: "notifications", icon: Bell, group: "account" },
   { href: "/settings", labelKey: "settings", icon: Settings, group: "account" },
   { href: "/account", labelKey: "account", icon: CircleUser, group: "account" },
+  { href: "/about", labelKey: "about", icon: Info, group: "account" },
 ];
 
 function NavLink({ href, labelKey, icon: Icon, active, label }: NavItem & { active: boolean; label: string }) {

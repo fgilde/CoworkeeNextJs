@@ -42,7 +42,8 @@
     "signatures": "Signaturen",
     "analytics": "Analysen",
     "recruiting": "Recruiting",
-    "notifications": "Benachrichtigungen"
+    "notifications": "Benachrichtigungen",
+    "about": "Über"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -994,6 +995,13 @@
       "DECLINED": "Abgelehnt"
     }
   },
+  "about": {
+    "title": "Über Coworkee",
+    "tagline": "Selbst gehostete, zweisprachige HR- und Personalverwaltung — Mitarbeitende, Abwesenheit, Zeit, Dokumente, Performance und mehr, in einer Plattform.",
+    "version": "Version",
+    "contactHeading": "Kontakt",
+    "supportHeading": "Projekt unterstützen"
+  },
   "analytics": {
     "title": "Analysen",
     "totalEmployees": "Mitarbeitende gesamt",
@@ -1353,7 +1361,8 @@
     "contact": {
       "heading": "Fragen? Sprich mit uns.",
       "body": "Ob Feature-Wunsch, Preisfrage oder einfach Hallo sagen — wir antworten persönlich.",
-      "cta": "Schreib uns",
+      "cta": "Kontakt aufnehmen",
+      "supportCta": "Coworkee unterstützen",
       "email": "info@coworkee.de"
     },
     "demo": {
